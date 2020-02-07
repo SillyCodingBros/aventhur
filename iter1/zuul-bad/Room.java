@@ -71,6 +71,8 @@ public class Room
     }
 
     /**
+     * Return the room's description, of the form:
+     * You are in the kitchen.
      * @return The description of the room.
      */
     public String getDescription()

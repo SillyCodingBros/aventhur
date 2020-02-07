@@ -107,6 +107,9 @@ public class Game
         System.out.println("Thank you for playing.  Good bye.");
     }
 
+    /**
+     * Print out room's description and exists.
+     */
     private void printLocationInfo()
     {
       System.out.println(currentRoom.getLongDescription());
@@ -158,11 +161,11 @@ public class Game
             printHelp();
         }
         else if (commandWord.equals("go"))
-        {    
+        {
             goRoom(command);
         }
         else if (commandWord.equals("look"))
-        {    
+        {
             look();
         }
         else if (commandWord.equals("eat"))
@@ -252,7 +255,7 @@ public class Game
             */
         }
     }
-    
+
     /**
      * "Look" was entered, rewrite to terminal the description of current room
      */
