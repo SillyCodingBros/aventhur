@@ -101,6 +101,12 @@ public class Game
       if(currentRoom.westExit != null) {
         System.out.print("west ");
       }
+      if(currentRoom.upExit != null) {
+        System.out.print("up ");
+      }
+      if(currentRoom.downExit != null) {
+        System.out.print("down ");
+      }
       System.out.println();
     }
 
@@ -199,6 +205,13 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("up")) {
+            nextRoom = currentRoom.upExit;
+        }
+        if(direction.equals("down")) {
+            nextRoom = currentRoom.downExit;
+        }
+
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
