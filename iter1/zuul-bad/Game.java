@@ -165,6 +165,10 @@ public class Game
         {    
             look();
         }
+        else if (commandWord.equals("eat"))
+        {
+            eat();
+        }
         else if (commandWord.equals("quit"))
         {
             wantToQuit = quit(command);
@@ -248,6 +252,7 @@ public class Game
             */
         }
     }
+    
     /**
      * "Look" was entered, rewrite to terminal the description of current room
      */
@@ -256,6 +261,13 @@ public class Game
         System.out.println(currentRoom.getLongDescription());
     }
 
+    /**
+     * "eat" was entered, print dummy info about eating TODO
+     */
+    private void eat()
+    {
+        System.out.println("You eat part of you provisions and feel full.");
+    }
     /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
