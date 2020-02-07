@@ -53,38 +53,38 @@ public class Game
 
         // initialise room exits
         // attic exits
-        attic.setExits("down", farm);
+        attic.setExit("down", farm);
         //farm exists
-        farm.setExits("east", fountain);
-        farm.setExits("west", pigs);
-        farm.setExits("up", attic);
+        farm.setExit("east", fountain);
+        farm.setExit("west", pigs);
+        farm.setExit("up", attic);
         // pigs exits
-        pigs.setExits("north", farm);
+        pigs.setExit("north", farm);
         // pub exits
-        pub.setExits("east", storageRoom);
-        pub.setExits("south", fountain);
+        pub.setExit("east", storageRoom);
+        pub.setExit("south", fountain);
         // fountain exits
-        fountain.setExits("north", pub);
-        fountain.setExits("east", entrance);
-        fountain.setExits("south", market);
-        fountain.setExits("west", farm);
+        fountain.setExit("north", pub);
+        fountain.setExit("east", entrance);
+        fountain.setExit("south", market);
+        fountain.setExit("west", farm);
         // market exits
-        market.setExits("north", fountain);
-        market.setExits("east", abandonnedHouse);
-        market.setExits("south", home);
-        market.setExits("west", forge);
+        market.setExit("north", fountain);
+        market.setExit("east", abandonnedHouse);
+        market.setExit("south", home);
+        market.setExit("west", forge);
         // forge exits
-        forge.setExits("east", market);
+        forge.setExit("east", market);
         // home exits
-        home.setExits("north", market);
+        home.setExit("north", market);
         // entrance exits
-        entrance.setExits("west", fountain);
-        // entrance.setExits("east", greatRoad);
+        entrance.setExit("west", fountain);
+        // entrance.setExit("east", greatRoad);
         // abandonned house exists
-        abandonnedHouse.setExits("west", market);
-        abandonnedHouse.setExits("down", basement);
+        abandonnedHouse.setExit("west", market);
+        abandonnedHouse.setExit("down", basement);
         // basement exits
-        basement.setExits("up", abandonnedHouse);
+        basement.setExit("up", abandonnedHouse);
 
         currentRoom = home;  // start game outside
     }
