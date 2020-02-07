@@ -1,0 +1,38 @@
+7.1
+
+What does this application do?
+L'application ouvre un terminal dans lequel il est possible d'entrer différentes commandes afin d'effectuer certaines actions dans le jeu.
+
+What commands does the game accept?
+Les commandes disponibles et leur effets :
+	go		:	Pour se déplacer à completer avec un argument (north, east, west, south).
+	quit	:	Pour quitter le jeu.
+	help	:	Pour obtenir la liste des commandes.
+
+How many rooms are in the scenario?
+Il y a 5 localités dans l'histoire.
+
+Map:
+
+        North
+          |
+West  ----|----  East
+          |
+        South
+
+
+Pub -----  Outside  ----- Lecture Theatre
+              |
+	            |
+	            |
+        Computing Lab ----- Admin Office
+
+7.2 - Write down for each class the purpose of the class.
+
+Command					:		Vérifie la sémantique de la commande.
+CommandWords		:		Vérifie la syntaxe de la commande.
+Game						:		Créer et initiale les autres classes ainsi que les localités et le 'Parser' puis démarre le jeu. Évalue et exécute les commandes retournées par le 'Parser'.
+Parser					:		Découpe l'entrée utilisateur pour la passer à 'Command' et retourner le résultat.
+Room						:		Représente les informations d'une localité (description, voisins).
+
+
