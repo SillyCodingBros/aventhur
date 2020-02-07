@@ -252,7 +252,7 @@ public class Game
             */
         }
     }
-    
+
     /**
      * "Look" was entered, rewrite to terminal the description of current room
      */
