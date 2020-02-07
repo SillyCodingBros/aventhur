@@ -45,6 +45,11 @@ public class Room
         return returnString;
     }
 
+    /**
+     * Return the room associated to the given direction.
+     * @param direction The direction you wish to go to.
+     * @return the room associated to the given direction.
+     */
     public Room getExit(String direction)
     {
       return exits.get(direction);
