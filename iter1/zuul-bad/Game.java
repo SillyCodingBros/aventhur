@@ -34,14 +34,18 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
+        // rooms for village
+        Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, maisonAbandonnee, basement;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        attic = new Room("in the farm's attic. There is \n hay all over the floor.");
+        farm = new Room("inside the farm. There is a strong smell.");
+        pigs = new Room("in the pig's enclosure. You spot\n something shining on the ground.");
+        pub = new Room("in the pub. The barman greets you, but \n not the drunk customer on the left.");
+        storageRoom = new Room("in the pub's stroage room.\n You never loiked small spaces. There is something on the ground.");
+        fountain = new Room("in the village's square.\n Next to the fountain, the old Elibed is staring at you and a chicken is running around.");
+        market = new Room("in the village's market. Its a very busy place. \n You think you hear the clucking of a chicken");
+        forge = new Room("");
         
         // initialise room exits
         outside.setExits(null, theatre, lab, pub);
