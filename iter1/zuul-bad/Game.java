@@ -52,17 +52,17 @@ public class Game
         basement = new Room("in the house basement. It feels like a dim, red\nlight is coming off the walls, and a huge chicken is staring at you.\nYou can't tell if it's eyes are actually glowing red or if its just reflexion.");
 
         // initialise room exits
-        attic.setExits(null, null, farm, null);
-        farm.setExits(attic, fountain, pigs, null);
-        pigs.setExits(farm, null, null, null);
-        pub.setExits(null, storageRoom, fountain, null);
-        fountain.setExits(pub, entrance, market, farm);
-        market.setExits(fountain, abandonnedHouse, home, forge);
-        forge.setExits(null, market, null, null);
-        home.setExits(market, null, null, null);
-        entrance.setExits(null, null, null, fountain);
-        abandonnedHouse.setExits(null, null, basement, market);
-        basement.setExits(abandonnedHouse, null, null, null);
+        attic.setExits(null, null, null, null, null, farm);
+        farm.setExits(null, fountain, pigs, null, attic, null);
+        pigs.setExits(farm, null, null, null, null, null);
+        pub.setExits(null, storageRoom, fountain, null, null, null);
+        fountain.setExits(pub, entrance, market, farm, null, null);
+        market.setExits(fountain, abandonnedHouse, home, forge, null, null);
+        forge.setExits(null, market, null, null, null, null);
+        home.setExits(market, null, null, null, null, null);
+        entrance.setExits(null, null, null, fountain, null, null);
+        abandonnedHouse.setExits(null, null, null, market, null, basement);
+        basement.setExits(null, null, null, null, abandonnedHouse, null);
 
         currentRoom = home;  // start game outside
     }
