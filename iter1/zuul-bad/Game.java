@@ -154,12 +154,21 @@ public class Game
 
         String commandWord = command.getCommandWord();
         if (commandWord.equals("help"))
+        {
             printHelp();
+        }
         else if (commandWord.equals("go"))
+        {    
             goRoom(command);
+        }
+        else if (commandWord.equals("look"))
+        {    
+            look();
+        }
         else if (commandWord.equals("quit"))
+        {
             wantToQuit = quit(command);
-
+        }
         return wantToQuit;
     }
 
@@ -238,6 +247,13 @@ public class Game
             System.out.println();
             */
         }
+    }
+    /**
+     * "Look" was entered, rewrite to terminal the description of current room
+     */
+    private void look()
+    {
+        System.out.println(currentRoom.getLongDescription());
     }
 
     /**
