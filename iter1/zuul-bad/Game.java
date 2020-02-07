@@ -35,26 +35,36 @@ public class Game
     private void createRooms()
     {
         // rooms for village
-        Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, maisonAbandonnee, basement;
+        Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
       
         // create the rooms
-        attic = new Room("in the farm's attic. There is \n hay all over the floor.");
+        attic = new Room("in the farm's attic. There is \nhay all over the floor and a chicken looks at you as you climb the\nladder.");
         farm = new Room("inside the farm. There is a strong smell.");
-        pigs = new Room("in the pig's enclosure. You spot\n something shining on the ground.");
-        pub = new Room("in the pub. The barman greets you, but \n not the drunk customer on the left.");
-        storageRoom = new Room("in the pub's stroage room.\n You never loiked small spaces. There is something on the ground.");
-        fountain = new Room("in the village's square.\n Next to the fountain, the old Elibed is staring at you and a chicken is running around.");
-        market = new Room("in the village's market. Its a very busy place. \n You think you hear the clucking of a chicken");
-        forge = new Room("");
+        pigs = new Room("in the pig's enclosure. You spot\nsomething shining on the ground.");
+        pub = new Room("in the pub. The barman greets you, but \nnot the drunk customer on the left.");
+        storageRoom = new Room("in the pub's stroage room.\nYou never loiked small spaces. There is something on the ground.");
+        fountain = new Room("in the village's square.\nNext to the fountain, the old Elibed is staring at you and a chicken\nis running around.");
+        market = new Room("in the village's market. Its a very busy place. \nYou think you hear the clucking of a chicken");
+        forge = new Room("in the village's forge. The black-smith greets you.\nThere is an old rusty sword on the ground.");
+        home = new Room("in your parent's house. You mom is here, as allways.\nA tastefull cake is on the table.");
+        entrance = new Room("at the village entrance. The guard calls you out.\nBetter go see what he wants");
+        abandonnedHouse = new Room("inside a rotting house. For some reason,\nyou feel bad. There is a big, dirty, helmet on the ground.");
+        basement = new Room("in the house basement. It feels like a dim, red\nlight is coming off the walls, and a huge chicken is staring at you.\nYou can't tell if it's eyes are actually glowing red or if its just reflexion.");
         
         // initialise room exits
-        outside.setExits(null, theatre, lab, pub);
-        theatre.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        attic.setExits(null, null, farm, null);
+        farm.setExits(attic, fountain, pigs, null);
+        pigs.setExits(farm, null, null, null);
+        pub.setExits(null, storageRoom, fountain, null);
+        fountain.setExits(pub, entrance, market, farm);
+        market.setExits(fountain, abandonnedHouse, home, forge);
+        forge.setExits(null, market, null, null);
+        home.setExits(market, null, null, null);
+        entrance.setExits(null, null, null, fountain);
+        abandonnedHouse.setExits(null, null, basement, market);
+        basement.setExits(abandonnedHouse, null, null, null);
 
-        currentRoom = outside;  // start game outside
+        currentRoom = home;  // start game outside
     }
 
     /**
