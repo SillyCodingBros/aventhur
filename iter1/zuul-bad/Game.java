@@ -192,7 +192,9 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        Room nextRoom = null;
+        //Room nextRoom = null;
+        Room nextRoom = currentRoom.getExit(direction);
+        /*
         if(direction.equals("north")) {
             nextRoom = currentRoom.northExit;
         }
@@ -211,6 +213,7 @@ public class Game
         if(direction.equals("down")) {
             nextRoom = currentRoom.downExit;
         }
+        */
 
 
         if (nextRoom == null) {
