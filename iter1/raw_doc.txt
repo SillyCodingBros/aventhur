@@ -35,4 +35,20 @@ Game						:		Créer et initiale les autres classes ainsi que les localités et l
 Parser					:		Découpe l'entrée utilisateur pour la passer à 'Command' et retourner le résultat.
 Room						:		Représente les informations d'une localité (description, voisins).
 
+7.9 - Look up the keySet method in the documentation of HashMap. What does it do?
+'keySet' retourne un set de la vue sur les clés de la map.
+
+public String getExitString()
+{
+String returnString = "Exits:";
+Set<String> keys = exits.keySet();
+for(String exit : keys)
+returnString += " " + exit;
+return returnString;
+}
+
+7.10 - Explain, in detail and in writing, how the getExitString method shown in Code 7.7 works.
+La String 'returnString' est initialisé avec la valeur "Exits:" puis 'keys' avec la méthode 'keySet'.
+Les valeurs associées aux différentes clés sont ensuite ajoutées à 'returnString' en itérant sur 'keys'.
+'getExitString' termine en retournant 'returnString'.
 
