@@ -13,7 +13,8 @@
  * @version 2006.03.30
  */
 
- import java.util.*;
+import java.util.*;
+
 public class Room
 {
     private String description;
@@ -70,7 +71,7 @@ public class Room
      * @param down The down Exit;
      */
     public void setExits(String direction, Room neighbor)
-    {      
+    {
         exits.put(direction, neighbor);
     }
 
@@ -80,6 +81,19 @@ public class Room
     public String getDescription()
     {
         return description;
+    }
+
+    /**
+    * Return a long description of this room, of the form:
+    *
+    You are in the kitchen.
+    *
+    Exits: north west
+    * @return A description of the room, including exits.
+    */
+    public String getLongDescription()
+    {
+      return "You are " + description + ".\n" + getExitString();
     }
 
 }

@@ -52,39 +52,39 @@ public class Game
         basement = new Room("in the house basement. It feels like a dim, red\nlight is coming off the walls, and a huge chicken is staring at you.\nYou can't tell if it's eyes are actually glowing red or if its just reflexion.");
 
         // initialise room exits
-            // attic exits
-            attic.setExits("down", farm);
-            //farm exists
-            farm.setExits("east", fountain);
-            farm.setExits("west", pigs);
-            farm.setExits("up", attic);
-            // pigs exits
-            pigs.setExits("north", farm);
-            // pub exits
-            pub.setExits("east", storageRoom);
-            pub.setExits("south", fountain);
-            // fountain exits
-            fountain.setExits("north", pub);
-            fountain.setExits("east", entrance);
-            fountain.setExits("south", market);
-            fountain.setExits("west", farm);
-            // market exits
-            market.setExits("north", fountain);
-            market.setExits("east", abandonnedHouse);
-            market.setExits("south", home);
-            market.setExits("west", forge);
-            // forge exits
-            forge.setExits("east", market);
-            // home exits
-            home.setExits("north", market);
-            // entrance exits
-            entrance.setExits("west", fountain);
-            // entrance.setExits("east", greatRoad);
-            // abandonned house exists
-            abandonnedHouse.setExits("west", market);
-            abandonnedHouse.setExits("down", basement);
-            // basement exits
-            basement.setExits("up", abandonnedHouse);
+        // attic exits
+        attic.setExits("down", farm);
+        //farm exists
+        farm.setExits("east", fountain);
+        farm.setExits("west", pigs);
+        farm.setExits("up", attic);
+        // pigs exits
+        pigs.setExits("north", farm);
+        // pub exits
+        pub.setExits("east", storageRoom);
+        pub.setExits("south", fountain);
+        // fountain exits
+        fountain.setExits("north", pub);
+        fountain.setExits("east", entrance);
+        fountain.setExits("south", market);
+        fountain.setExits("west", farm);
+        // market exits
+        market.setExits("north", fountain);
+        market.setExits("east", abandonnedHouse);
+        market.setExits("south", home);
+        market.setExits("west", forge);
+        // forge exits
+        forge.setExits("east", market);
+        // home exits
+        home.setExits("north", market);
+        // entrance exits
+        entrance.setExits("west", fountain);
+        // entrance.setExits("east", greatRoad);
+        // abandonned house exists
+        abandonnedHouse.setExits("west", market);
+        abandonnedHouse.setExits("down", basement);
+        // basement exits
+        basement.setExits("up", abandonnedHouse);
 
         currentRoom = home;  // start game outside
     }
