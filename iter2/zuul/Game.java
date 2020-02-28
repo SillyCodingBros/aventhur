@@ -122,8 +122,8 @@ public class Game
     private void printWelcome()
     {
         String welcomeMessage = "\n"+
-                                "Welcome to the World of Zuul!\n"+
-                                "World of Zuul is a new, incredibly boring adventure game.\n"+
+                                "Welcome to Aventhür!\n"+
+                                "The Ultimate Adventure Game.\n"+
                                 "\n"+
                                 "Type 'help' if you need help.\n"+
                                 "\n";
