@@ -4,9 +4,17 @@
 
 7.18.1 - Plus d'affichage direct les affichages sont maintenant encapsulés dans des 'String'.
 
+    Insert Example Code //Game
+
 7.18.2 - Utilisation de 'StringBuilder' à la place des boucles de concaténation de 'String'.
 
     Insert Code //Room: getExitString() & CommandWords: getCommandList()
 
 7.18.4 - Changement du message d’accueil.
+
+    Insert Code //Game
+
+7.18.5 - Ajout d'une 'HashMap' contenant chaque 'Room'.
+
+    Insert Code //game
 

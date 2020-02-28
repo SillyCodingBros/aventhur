@@ -13,12 +13,15 @@
  * @version 2006.03.30
  */
 
-import java.util.*;
+//import java.util.*;
+import java.util.HashMap;
+import java.util.Set;
 
 public class Room
 {
     private String description;
     private HashMap <String, Room> exits;
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or

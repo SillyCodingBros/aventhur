@@ -15,10 +15,14 @@
  * @version 2006.03.30
  */
 
+//import java.util.*;
+import java.util.HashMap;
+
 public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private HashMap <String, Room> roomMap;
 
     /**
      * Create the game and initialise its internal map.
@@ -50,6 +54,20 @@ public class Game
         entrance = new Room("at the village entrance. The guard calls you out.\nBetter go see what he wants");
         abandonnedHouse = new Room("inside a rotting house. For some reason,\nyou feel bad. There is a big, dirty, helmet on the ground.");
         basement = new Room("in the house basement. It feels like a dim, red\nlight is coming off the walls, and a huge chicken is staring at you.\nYou can't tell if it's eyes are actually glowing red or if its just reflexion.");
+
+        //add them to the roomMap
+        roomMap.put("attic", attic);
+        roomMap.put("farm", farm);
+        roomMap.put("pigs", pigs);
+        roomMap.put("pub", pub);
+        roomMap.put("storageRoom", storageRoom);
+        roomMap.put("fountain", fountain);
+        roomMap.put("market", market);
+        roomMap.put("forge", forge);
+        roomMap.put("home", home);
+        roomMap.put("entrance", entrance);
+        roomMap.put("abandonnedHouse", abandonnedHouse);
+        roomMap.put("basement", basement);
 
         // initialise room exits
         // attic exits
