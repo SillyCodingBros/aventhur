@@ -4,3 +4,7 @@
 
 7.18.1 - Plus d'affichage direct les affichages sont maintenant encapsulés dans des 'String'.
 
+7.18.2 - Utilisation de 'StringBuilder' à la place des boucles de concaténation de 'String'
+
+    Insert Code //Room: getExitString() & CommandWords: getCommandList()
+

@@ -44,12 +44,23 @@ public class CommandWords
      */
     public String getCommandList()
     {
-      String commandList = "";
+      /*
+      StringBuilder sb = new StringBuilder();
+      for (String s : hugeArray) {
+          sb.append(s);
+      }
+      String result = sb.toString();
+      */
+      StringBuilder sb = new StringBuilder("");
+      //String commandList = "";
         for(String command : validCommands) {
-          commandList += (command + " ");
+          //commandList += (command + " ");
+          sb.append(command);
+          sb.append(" ");
           //System.out.print(command + " ");
         }
-        return commandList;
+        //return commandList;
+        return sb.toString();
         //System.out.println();
     }
 }
