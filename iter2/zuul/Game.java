@@ -104,7 +104,8 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        String byeMessage = "Thank you for playing.\nGood bye.";
+        System.out.println(byeMessage);
     }
 
     /**
@@ -120,11 +121,17 @@ public class Game
      */
     private void printWelcome()
     {
-        System.out.println();
-        System.out.println("Welcome to the World of Zuul!");
-        System.out.println("World of Zuul is a new, incredibly boring adventure game.");
-        System.out.println("Type 'help' if you need help.");
-        System.out.println();
+        String welcomeMessage = "\n"+
+                                "Welcome to the World of Zuul!\n"+
+                                "World of Zuul is a new, incredibly boring adventure game.\n"+
+                                "\n"+
+                                "Type 'help' if you need help.\n"+
+                                "\n";
+        System.out.println(welcomeMessage);
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println();
         printLocationInfo();
         /*
         System.out.println("You are " + currentRoom.getDescription());
@@ -151,8 +158,9 @@ public class Game
         boolean wantToQuit = false;
 
         if(command.isUnknown()) {
-            System.out.println("I don't know what you mean...");
-            return false;
+          String unknownCommand = "I don't know what you mean...";
+          System.out.println(unknownCommand);
+          return false;
         }
 
         String commandWord = command.getCommandWord();
@@ -188,8 +196,8 @@ public class Game
      */
     private void printHelp()
     {
-        System.out.println("Your commands are : ");
-        System.out.println(parser.showCommands());
+      String helpString = "Your commands are : \n" + parser.showCommands();
+      System.out.println(helpString);
     }
 
     /**
@@ -198,9 +206,11 @@ public class Game
      */
     private void goRoom(Command command)
     {
+        String errorMessage;
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
+            errorMessage = "Go where?";
+            System.out.println(errorMessage);
             return;
         }
 
@@ -232,7 +242,8 @@ public class Game
 
 
         if (nextRoom == null) {
-            System.out.println("There is no door!");
+            errorMessage = "There is no door!";
+            System.out.println(errorMessage);
         }
         else {
             currentRoom = nextRoom;
@@ -266,7 +277,8 @@ public class Game
      */
     private void eat()
     {
-        System.out.println("You eat part of you provisions and feel full.");
+        String eatMessage = "You eat part of you provisions and feel full.";
+        System.out.println(eatMessage);
     }
     /**
      * "Quit" was entered. Check the rest of the command to see
@@ -276,7 +288,8 @@ public class Game
     private boolean quit(Command command)
     {
         if(command.hasSecondWord()) {
-            System.out.println("Quit what?");
+            String quitMessage = "Quit what?";
+            System.out.println(quitMessage);
             return false;
         }
         else {
