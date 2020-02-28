@@ -189,7 +189,7 @@ public class Game
     private void printHelp()
     {
         System.out.println("Your commands are : ");
-        parser.showCommands();
+        System.out.println(parser.showCommands());
     }
 
     /**

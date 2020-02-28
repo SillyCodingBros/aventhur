@@ -1,1 +1,5 @@
-7.18 - Insert Code
+7.18 - Help commands now return as a String
+
+    Insert Code //CommandWords: getCommandList() & Parser: showCommands()
+
+7.19 -
