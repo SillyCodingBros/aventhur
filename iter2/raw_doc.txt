@@ -1,10 +1,10 @@
-7.18 - Help commands now return as a String
+7.18 - La liste des commandes est maintenant retourné dans une 'String'.
 
     Insert Code //CommandWords: getCommandList() & Parser: showCommands()
 
 7.18.1 - Plus d'affichage direct les affichages sont maintenant encapsulés dans des 'String'.
 
-7.18.2 - Utilisation de 'StringBuilder' à la place des boucles de concaténation de 'String'
+7.18.2 - Utilisation de 'StringBuilder' à la place des boucles de concaténation de 'String'.
 
     Insert Code //Room: getExitString() & CommandWords: getCommandList()
 
