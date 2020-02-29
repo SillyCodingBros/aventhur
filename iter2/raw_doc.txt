@@ -18,3 +18,10 @@
 
     Insert Code //game
 
+7.18.6 - Utilisation de l'architecture de zuul-with-images
+
+    Insert Code // Nouveaux fichiers GameEngine & UserInterface
+
+    À Corriger
+    Régression : 7.18.5 - Plus de 'HashMap' contenant chaque 'Room'.
+

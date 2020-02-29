@@ -21,6 +21,8 @@ public class Room
 {
     private String description;
     private HashMap <String, Room> exits;
+    private String imageName;
+
 
     /**
      * Create a room described "description". Initially, it has
@@ -28,10 +30,11 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description)
+    public Room(String description, String image)
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        imageName = image;
     }
 
     /**
@@ -92,6 +95,14 @@ public class Room
     public String getLongDescription()
     {
       return "You are " + description + ".\n" + getExitString();
+    }
+
+    /**
+     * Return a string describing the room's image name
+     */
+    public String getImageName()
+    {
+     return imageName;
     }
 
 }

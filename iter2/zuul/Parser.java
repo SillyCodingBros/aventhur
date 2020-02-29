@@ -1,4 +1,4 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
 public class Parser
 {
     private CommandWords commands;  // holds all valid command words
-    private Scanner reader;         // source of command input
+    //private Scanner reader;         // source of command input
 
     /**
      * Create a parser to read from the terminal window.
@@ -28,25 +28,40 @@ public class Parser
     public Parser()
     {
         commands = new CommandWords();
-        reader = new Scanner(System.in);
+        //reader = new Scanner(System.in);
     }
 
     /**
      * @return The next command from the user.
      */
-    public Command getCommand()
+    public Command getCommand(String inputLine)
     {
-        String inputLine;   // will hold the full input line
-        String word1 = null;
-        String word2 = null;
+        //String inputLine;   // will hold the full input line
+        String word1 ;//= null;
+        String word2 ;//= null;
 
-        String promptString = "> ";
-        System.out.print(promptString);     // print prompt
+        //String promptString = "> ";
+        //System.out.print(promptString);     // print prompt
 
-        inputLine = reader.nextLine();
+        //inputLine = reader.nextLine();
 
         // Find up to two words on the line.
-        Scanner tokenizer = new Scanner(inputLine);
+        StringTokenizer tokenizer = new StringTokenizer(inputLine);
+        if(tokenizer.hasMoreTokens())
+        word1 = tokenizer.nextToken();
+
+        // get first word
+        else
+        word1 = null;
+        if(tokenizer.hasMoreTokens())
+        word2 = tokenizer.nextToken();
+
+        // get second word
+        else
+        word2 = null;
+
+
+        /*
         if(tokenizer.hasNext()) {
             word1 = tokenizer.next();      // get first word
             if(tokenizer.hasNext()) {
@@ -54,6 +69,7 @@ public class Parser
                 // note: we just ignore the rest of the input line.
             }
         }
+        */
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
