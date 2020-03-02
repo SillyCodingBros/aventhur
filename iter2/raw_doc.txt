@@ -25,3 +25,7 @@
     À Corriger
     Régression : 7.18.5 - Plus de 'HashMap' contenant chaque 'Room'.
 
+7.18.7
+
+	actionPerformed se contente d'appeller processCommand(). Cette dernière pourra, a priori, capturer du texte dans une zone de texte puis envoyer ce dernier au moteur du jeu.
+	addActionListener() ??? elle est ou ?
