@@ -11,12 +11,14 @@
  */
 
 import java.util.HashMap;
+import java.util.Stack;
 
 public class GameEngine
 {
     private Parser parser;
     private Room currentRoom;
     public HashMap <String, Room> roomMap;
+    public Stack <Command> history;
     private UserInterface gui;
 
     /**
@@ -27,7 +29,7 @@ public class GameEngine
     {
         createRooms();
         parser = new Parser();
-
+        history = new Stack<Command>();
     }
 
 
@@ -180,9 +182,13 @@ public class GameEngine
         {
             printHelp();
         }
+        else if (commandWord.equals("back"))
+        {
+            goBack(command);
+        }
         else if (commandWord.equals("go"))
         {
-            goRoom(command);
+            goRoom(command, false);
         }
         else if (commandWord.equals("look"))
         {
@@ -219,10 +225,47 @@ public class GameEngine
     }
 
     /**
+     * Try to go back to the previous room
+     *
+     */
+    private void goBack(Command command)
+    {
+        String errorMessage;
+        Command tmp, newCommand;
+        if(command.hasSecondWord()){
+            // the user gave a second word. Not good.
+            errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
+            gui.println(errorMessage);
+            return;
+        }
+        if(history.size() == 0){
+            // no history
+            errorMessage = "Can't go back anymore, you are allready where you started !";
+            gui.println(errorMessage);
+            return;
+        }
+        tmp = history.get(history.size() - 1);
+        history.pop();
+
+        if(tmp.getSecondWord().equals("north"))
+            newCommand = new Command("go", "south");
+        else if(tmp.getSecondWord().equals("south"))
+            newCommand = new Command("go", "north");
+        else if(tmp.getSecondWord().equals("east"))
+            newCommand = new Command("go", "west");
+        else if(tmp.getSecondWord().equals("west"))
+            newCommand = new Command("go", "east");
+        else if(tmp.getSecondWord().equals("up"))
+            newCommand = new Command("go", "down");
+        else
+            newCommand = new Command("go", "up");
+        goRoom(newCommand, true);
+    }
+    /**
      * Try to go to one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    private void goRoom(Command command)
+    private void goRoom(Command command, Boolean fromBack)
     {
         String errorMessage;
         if(!command.hasSecondWord()) {
@@ -264,6 +307,8 @@ public class GameEngine
             gui.println(errorMessage);
         }
         else {
+            if(!fromBack)
+                history.push(command);
             currentRoom = nextRoom;
             printLocationInfo();
 
