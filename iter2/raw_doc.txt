@@ -27,7 +27,29 @@
 
 7.18.7
 
-	actionPerformed () se contente d'appeller processCommand(). Cette dernière pourra, a priori, capturer du texte dans une zone de texte puis envoyer ce dernier au moteur du jeu.
-	addActionListener() est une fonction de la classe JTextField qui ajoute un eventListener à la liste des eventListeners. Son paramètre est l'eventLsitener qu'on souhaite ajouter, et elle s'applique à un élément textfield.
+	actionPerformed () se contente d'appeller processCommand().
+    Cette dernière pourra, a priori, capturer du texte dans une zone de texte puis
+    envoyer ce dernier au moteur du jeu.
 
-	  
+	addActionListener() est une fonction de la classe JTextField qui ajoute
+    un eventListener à la liste des eventListeners.
+    Son paramètre est l'eventLsitener qu'on souhaite ajouter,
+    et elle s'applique à un élément textfield.
+
+7.18.8
+
+    TODO
+
+7.18.9
+
+    TODO
+
+7.19 - ????????
+
+7.19.1 - Je vois pas l'intérêt de cette implémentation
+
+7.19.2 - Jeu avec les images pour chaque rooms.
+
+
+
+
