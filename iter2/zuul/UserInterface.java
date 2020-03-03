@@ -17,7 +17,7 @@ public class UserInterface implements ActionListener {
     private JTextField entryField;
     private JTextArea log;
     private JLabel image;
-
+    private JButton lookBtn; 
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
      * (an object processing and executing the game commands) is
@@ -90,18 +90,24 @@ public class UserInterface implements ActionListener {
 
         JPanel panel = new JPanel();
         image = new JLabel();
+        lookBtn = new JButton("Look around");
+
 
         panel.setLayout(new BorderLayout());
         panel.add(image, BorderLayout.NORTH);
         panel.add(listScroller, BorderLayout.CENTER);
         panel.add(entryField, BorderLayout.SOUTH);
+        panel.add(lookBtn, BorderLayout.SOUTH);
 
         myFrame.getContentPane().add(panel, BorderLayout.CENTER);
+
 
         // add some event listeners to some components
         myFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {System.exit(0);}
         });
+
+        lookBtn.addActionListener(this);
 
         entryField.addActionListener(this);
 
