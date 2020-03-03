@@ -135,6 +135,14 @@ public class GameEngine
 
         currentRoom = home;  // start game outside
 
+        //add item to some room
+        Item necklace;
+        necklace = new Item();
+        necklace.setPrice(50);
+        necklace.setDescription("It looks magical!\n");
+        necklace.setLongDescription("But I ain't no witcher after all!\n");
+        necklace.setCommment("Oh! What's shining over there?\n");
+        pigs.addItem(necklace);
         //add them to the roomMap
         /*
         roomMap.put("attic", attic);
@@ -339,7 +347,7 @@ public class GameEngine
      */
     private void look()
     {
-        gui.println(currentRoom.getLongDescription());
+        gui.println(currentRoom.looking());
     }
 
     /**
