@@ -97,7 +97,7 @@ public class UserInterface implements ActionListener {
         panel.add(image, BorderLayout.NORTH);
         panel.add(listScroller, BorderLayout.CENTER);
         panel.add(entryField, BorderLayout.SOUTH);
-        panel.add(lookBtn, BorderLayout.SOUTH);
+        panel.add(lookBtn, BorderLayout.WEST);
 
         myFrame.getContentPane().add(panel, BorderLayout.CENTER);
 
@@ -107,7 +107,11 @@ public class UserInterface implements ActionListener {
             public void windowClosing(WindowEvent e) {System.exit(0);}
         });
 
-        lookBtn.addActionListener(this);
+        lookBtn.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                processCommand("look");
+            }
+        });
 
         entryField.addActionListener(this);
 
@@ -123,19 +127,23 @@ public class UserInterface implements ActionListener {
     {
         // no need to check the type of action at the moment.
         // there is only one possible action: text entry
-        processCommand();
+        processCommand(null);
     }
 
     /**
      * A command has been entered. Read the command and do whatever is
      * necessary to process it.
      */
-    private void processCommand()
+    private void processCommand(String str)
     {
+        String input;
         boolean finished = false;
-        String input = entryField.getText();
-        entryField.setText("");
-
+        if(str != null){
+            input = str;
+        } else {
+            input = entryField.getText();
+            entryField.setText("");
+        }
         engine.interpretCommand(input);
     }
 }
