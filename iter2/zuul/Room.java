@@ -16,12 +16,15 @@
 //import java.util.*;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.Collection;
+import java.util.ArrayList;
 
 public class Room
 {
     private String description;
     private HashMap <String, Room> exits;
     private String imageName;
+    private Collection <Item> items;
 
 
     /**
@@ -34,7 +37,16 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        items = new ArrayList<Item>();
         imageName = image;
+    }
+
+    /**
+    * Adds an item to the room
+    * @param item The item to be added.
+    */
+    public void addItem(Item item){
+      items.add(item);
     }
 
     /**
@@ -98,7 +110,29 @@ public class Room
     }
 
     /**
+     * Return your feeling after inspection of the room.
+     * @return Unusal things who might notice in a string.
+     */
+    public String looking()
+    {
+      if (items.isEmpty()){
+        return "Nothing particular in here";
+      }
+      else {
+        String found;
+        StringBuilder sb = new StringBuilder("");
+        for (Item item : items) {
+          sb.append(item.getComment());
+          sb.append(item.getLongDescription());
+        }
+        return sb.toString();
+      }
+
+    }
+
+    /**
      * Return a string describing the room's image name
+     * @return the name of room's image.
      */
     public String getImageName()
     {

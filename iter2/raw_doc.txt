@@ -50,6 +50,18 @@
 
 7.19.2 - Jeu avec les images pour chaque rooms.
 
+7.20 - Ajout de la classe 'Item' et d'un objet dans une pièce
+
+  Insert Code //Item & GameEngine: createRooms()
+
+7.22 - Ajout de la 'Collection' pour les items d'une 'Room'
+
+  Insert Code //Room: addItem()
+
+7.22.2 -
+
+
+
 
 
 
