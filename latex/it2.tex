@@ -1,0 +1,322 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\author{LEGOUEIX Nicolas - ORNIACKI Thomas\\ COTREZ Leo - QUERICK Yann\\~\\ Groupe 3}
+\title{Jeu d'aventure BlueJ - itération 1}
+\begin{document}
+\maketitle
+\chapter{Itération 1}
+\section{Notre jeu}
+\paragraph{Intrigue}
+Notre jeu d'avanture se déroule dans un monde fantastique dont le nom reste a déterminer. Le jeu commence dans un village, chez ses parents. Sa mère lui fais alors part de l'inquétante disparition du grand père Meurlin. Le vieillard se serait encore enfui de la maison de retraite en hurlant que la fin était proche. Le protagoniste est donc chargé de retrouver son grand père. Il s'averera que ce dernier est en fait le légendaire magicien Khöskîk et qu'il a besoin de votre aide dans le mont Knee pour refermer le portail démonique qui menace de faire déferler les légions du mal sur notre monde.\\~\\
+\paragraph{Quetes secondaires}
+Deux quètes secondaires sont pour le moment prévues : Dans le village, le vieux Elibed a vu toutes ses poules prendre la fuite. On doit alors retrouver 5 poules a travers le vilage, dont une ayant été appercue proche de cette maison dont il émane quelque chose d'inquiétant...
+\paragraph{}
+A l'entrée du village, le garde vous propose également d'aller retrouver une flèche magique dans le mont Knee. Cette flèche serait la même qui l'a blessé des années plus tôt, le condamnant a boiter de la jambe gauche pour le reste de sa vie.
+\paragraph{Fonctionalités prévues}
+\begin{itemize}
+\item Combat
+\item Inventaire
+\item Stats et bonus (apportées par certains objets et inmpactant le gameplay)
+\item Points de vie
+\item Energie (un déplacement coute de l'énergie, le joueur doit se reposer)
+\item Pièges (par trigger et pourcentage de chance de s'activer)
+\item Sales cachées
+\item Commerce
+\end{itemize}
+\paragraph{Carte de la zone de jeu}
+Nous avons pour l'instant 3 zones de jeu : le village, les plaines, et le Mont Knee dont voici les plans (faits via genMyModel)
+\centerline{\includegraphics[scale=0.55]{../../village.png}}
+\paragraph{Le Village}
+En vert figurent les endroits où on peut trouver des quêtes. En rouge figurent les potentielles zones dangereuses, c'est à dire les combats. Certains sont évitables, d'autres non. Les rectangles blancs décrivent les éléments des salles. On peut voir les 5 poules dont une servira d'introduction au combat : la poule du chaos dans la maison abandonnée. Quelques objets sont répartis pour encourager à l'exploration. Le forgeron proposera des armes et armures a vendre, et le barman des objets permetant de regenerer de la vie. Le grenier est en hauteur par raport a la ferme, et la cave inquiétante sous la maison.
+\centerline{\includegraphics[scale=0.5]{../../plaines.png}}
+\paragraph{Les Plaines}
+Comme pour le village, en rouge figurent les dangers : un camp de bandits occupé, des ronces qui risquent de vous lacérer les pieds a chaque visite de cette salle (probabilité a determiner) ou un Troll qui essaye de vous racketer (perte d'un objet au choix ou combat difficile). Les losanges représentent les choix qui s'offrent au joueur a certains endroits. Il peut ici se baigner dans la rivière pour se regenerer de la vie (peut etre à changer pour des points d'énergie). Il peut aussi, si il est assez malin trouver le bouton dans la grotte des bandits pour découvrir une pièce secrete renfermant du butin utile par exemple pour se battre contre le troll plus loin...
+\centerline{\includegraphics[scale=0.5]{../../knee.png}}
+\paragraph{Le mont Knee}
+Notre "donjon". Encore une fois, le rouge représente les dangers : une salle où habitent des gobelins, un autre Troll (celon le résultat de la rencontre avec le précédent, celui ci aura un comportement différent), un escalier glissant et obscur (chance de tomber à déterminer et qui diminue si le joueur a ramassé la torche), un orc et le Boss. En vert figure l'objet de quete pour le garde. En losange figurent les salles qui s'ouvrent sous certaines conditions.
+
+\section{Autres questions}
+\paragraph{7.1 - What does this application do?}
+L'application ouvre un terminal dans lequel il est possible d'entrer différentes commandes afin d'effectuer certaines actions dans le jeu.
+\paragraph{    - What commands does the game accept?}
+\begin{itemize}
+\item go	:	Pour se déplacer à completer avec un argument (north, east, west, south).
+\item quit	:	Pour quitter le jeu.
+\item help	:	Pour obtenir la liste des commandes.
+\end{itemize}
+\paragraph{    - How many rooms are in the scenario?}
+Il y a 5 localités dans l'histoire.
+\paragraph{    - Carte du jeu et directions}
+Directions :\\
+\centerline{\includegraphics[scale=0.8]{../../dir.png}}
+Carte :\\
+\centerline{\includegraphics[scale=0.8]{../../old_map.png}}
+\paragraph{7.2 - Write down for each class the purpose of the class.}
+\begin{itemize}
+\item Command				:		Vérifie la sémantique de la commande.
+\item CommandWords		:		Vérifie la syntaxe de la commande.
+\item Game				:		Créer et initiale les autres classes ainsi que les localités et le 'Parser' puis démarre le jeu. Évalue et exécute les commandes retournées par le 'Parser'.
+\item Parser				:		Découpe l'entrée utilisateur pour la passer à 'Command' et retourner le résultat.
+\item Room				:		Représente les informations d'une localité (description, voisins).
+
+\end{itemize}
+\paragraph{7.17 - Adding commands}
+Une nouvelle commande ne demande plus aucune modification hormis l'ajout dans le tableau dans CommandWords et l'action correspondant dans Game. C'est parceque les appels necessaire sont faits par le parser qui appelle le listing des commandes dans CommandWords
+
+\chapter{Itération 2}
+\section{Questions}
+\paragraph{7.18}
+La liste des commandes est maintenant returnée dans une String.
+\begin{lstlisting}[language = java]
+public String getCommandList()
+    {
+      /*
+      StringBuilder sb = new StringBuilder();
+      for (String s : hugeArray) {
+          sb.append(s);
+      }
+      String result = sb.toString();
+      */
+      StringBuilder sb = new StringBuilder("");
+      //String commandList = "";
+        for(String command : validCommands) {
+          //commandList += (command + " ");
+          sb.append(command);
+          sb.append(" ");
+          //System.out.print(command + " ");
+        }
+        //return commandList;
+        return sb.toString();
+        //System.out.println();
+    }
+\end{lstlisting}
+
+\begin{lstlisting} [language = java]
+    /**
+     * Returns a list of valid command words as String.
+     */
+    public String showCommands()
+    {
+    return commands.getCommandList();
+
+    }
+\end{lstlisting}
+
+\paragraph{7.18.1}
+Il n'y a plus d'affichage direct : les affichages sont maintenant encapsulés dans des 'String'.
+\begin{lstlisting}[language = java]
+errorMessage = "Can't go back anymore, 
+	you are allready where you started !";
+gui.println(errorMessage);
+\end{lstlisting}
+
+\paragraph{7.18.2}
+Utilisation de 'StringBuilder' à la place des boucles de concaténation de 'String'.
+\begin{lstlisting}
+   /**
+    * Return a description of the room's exits,
+    * for example, "Exits: north west".
+    * @return A description of the available exits.
+    */
+    public String getExitString()
+    {
+        StringBuilder sb = new StringBuilder("Exits:");
+        //String returnString = "Exits:";
+        Set<String> keys = exits.keySet();
+        for(String exit : keys ) {
+            sb.append(" ");
+            sb.append(exit);
+            //returnString += " " + exit;
+        }
+        //return returnString;
+        return sb.toString();
+    }
+\end{lstlisting}
+\begin{lstlisting}
+   /**
+     * Return all valid commands as a String.
+     */
+    public String getCommandList()
+    {
+      StringBuilder sb = new StringBuilder("");
+      //String commandList = "";
+        for(String command : validCommands) {
+          //commandList += (command + " ");
+          sb.append(command);
+          sb.append(" ");
+          //System.out.print(command + " ");
+        }
+        //return commandList;
+        return sb.toString();
+        //System.out.println();
+    }
+\end{lstlisting}
+
+\paragraph{7.18.4}
+Changement du message d’accueil.
+\begin{lstlisting}
+/**
+     * Print out the opening message for the player.
+     */
+    private void printWelcome()
+    {
+        String welcomeMessage = "\n"+
+                                "Welcome to Aventhur !\n"+
+                                "The Ultimate Adventure Game.\n"+
+                                "\n"+
+                                "Type 'help' if you need help.\n"+
+                                "\n";
+        gui.println(welcomeMessage);
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println();
+        printLocationInfo();
+        gui.showImage(currentRoom.getImageName());
+        /*
+        System.out.println("You are " + currentRoom.getDescription());
+        System.out.print("Exits: ");
+        if(currentRoom.northExit != null)
+            System.out.print("north ");
+        if(currentRoom.eastExit != null)
+            System.out.print("east ");
+        if(currentRoom.southExit != null)
+            System.out.print("south ");
+        if(currentRoom.westExit != null)
+            System.out.print("west ");
+        System.out.println();
+        */
+    }
+\end{lstlisting}
+
+\paragraph{7.18.5}
+Ajout d'une 'HashMap' contenant chaque 'Room'.
+
+\begin{lstlisting}
+    public HashMap <String, Room> roomMap;
+    	...
+    roomMap = new HashMap<String, Room>();
+    roomMap.put("attic", attic);
+	[idem pour les autres room...]
+\end{lstlisting}
+
+\paragraph{7.18.6}
+
+On passe à une nouvelle architecture avec les nouveau fichiers GameEngine et UserInterface.
+
+\paragraph{7.18.7}
+actionPerformed () se contente d'appeller processCommand().
+Cette dernière pourra, a priori, capturer du texte dans une zone de texte puis envoyer ce dernier au moteur du jeu.\\
+
+addActionListener() est une fonction de la classe JTextField qui ajoute
+    un eventListener à la liste des eventListeners.
+    Son paramètre est l'eventLsitener qu'on souhaite ajouter,
+    et elle s'applique à un élément textfield.
+    
+\paragraph{7.18.8}
+\begin{lstlisting}
+    private JButton lookBtn;
+	[puis, dans createGUI()]
+    lookBtn = new JButton("Look around");
+    btn_panel.add(lookBtn, BorderLayout.CENTER);
+    lookBtn.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            processCommand("look");
+        }
+    });
+\end{lstlisting}    
+
+\paragraph{7.19.1}
+Nous n'avons pas vu l'interet de cette implémentation avec l'architecture actuelle...
+
+\paragraph{7.19.2}
+Chaque room a désormais son image (qui redimensionne toute la fenêtre au lieu de s'adapter à celle ci).
+\newpage 
+\begin{lstlisting}
+    [dans GameEngine, methode goRoom()]
+    if(currentRoom.getImageName() != null) {
+    	gui.showImage(currentRoom.getImageName());
+    }
+    [dans UserInterface]
+    public void showImage(String imageName)
+    {
+        URL imageURL = this.getClass().getClassLoader()
+        		.getResource(imageName);
+        if(imageURL == null)
+            System.out.println("image not found");
+        else {
+            ImageIcon icon = new ImageIcon(imageURL);
+            image.setIcon(icon);
+            myFrame.pack();
+        }
+    }
+\end{lstlisting}
+
+\paragraph{7.20 \& 7.21}
+Ajout de la classe Item qui permet d'ajouter des objets, et ajout d'un objet dans une pièce (dans l'enclos à cochons)
+\begin{lstlisting}
+    [dans GameEngine, methode createRooms()]
+    Item necklace;
+    necklace = new Item();
+    necklace.setPrice(50);
+    necklace.setDescription("It looks magical!\n");
+    necklace.setLongDescription("But I ain't no witcher after all!\n");
+    necklace.setCommment("Oh! What's shining over there?\n");
+    pigs.addItem(necklace);
+\end{lstlisting}
+
+\paragraph{7.22}
+
+Ajout de la 'Collection' pour les items d'une 'Room'
+\begin{lstlisting}
+    [dans Room]
+    private Collection <Item> items;
+    [dans le constructeur Room()]
+    items = new ArrayList<Item>();
+		...
+    public void addItem(Item item){
+      items.add(item);
+    }
+\end{lstlisting}
+
+\paragraph{7.23 à  7.26}
+goRoom(), quand elle appelée normalement (donc par l'utilisateur directement) push dans une Stack la commande entrée.\\
+Ensuite, la commande "back" est ajoutée comme toutes les autres commandes, et elle appelle goBack(). Cette dernière se charge de vérifier que la commande a été entrée sans second argument et que l'on essaye de de revenir en arrière sans avoir d'historique.
+\begin{lstlisting}
+private void goBack(Command command)
+    {
+        String errorMessage;
+        Command tmp, newCommand;
+        if(command.hasSecondWord()){
+            // the user gave a second word. Not good.
+            errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
+            gui.println(errorMessage);
+            return;
+        }
+        if(history.size() == 0){
+            // no history
+            errorMessage = "Can't go back anymore, you are allready where you started !";
+            gui.println(errorMessage);
+            return;
+        }
+\end{lstlisting}
+Ensuite, on prend la dernière commande qui a été push dans la pile, et on "l'inverse", c'est à dire qu'une commande "go north" est convertie en "go south" etc. Cette commande est pop de la pile puis on appelle goRoom avec la commande ainsi formée.
+\begin{lstlisting}
+    tmp = history.get(history.size() - 1);
+    history.pop();
+    if(tmp.getSecondWord().equals("north"))
+        newCommand = new Command("go", "south");
+    else if(tmp.getSecondWord().equals("south"))
+        newCommand = new Command("go", "north");
+    [etc]
+    goRoom(newCommand, true);
+\end{lstlisting}
+Le booléen permet de ne pas re push la commande dans la stack (on back, on a donc pas besoin de garder ces commandes en historique).
+\end{document}

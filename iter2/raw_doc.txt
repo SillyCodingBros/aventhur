@@ -1,6 +1,7 @@
 7.18 - La liste des commandes est maintenant retourné dans une 'String'.
 
     Insert Code //CommandWords: getCommandList() & Parser: showCommands()
+    
 
 7.18.1 - Plus d'affichage direct les affichages sont maintenant encapsulés dans des 'String'.
 

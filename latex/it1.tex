@@ -1,0 +1,70 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{LEGOUEIX Nicolas - ORNIACKI Thomas\\ COTREZ Leo - QUERICK Yann\\~\\ Groupe 3}
+\title{Jeu d'aventure BlueJ - itération 1}
+\begin{document}
+\maketitle
+\chapter{Notre jeu}
+\paragraph{Intrigue}
+Notre jeu d'avanture se déroule dans un monde fantastique dont le nom reste a déterminer. Le jeu commence dans un village, chez ses parents. Sa mère lui fais alors part de l'inquétante disparition du grand père Meurlin. Le vieillard se serait encore enfui de la maison de retraite en hurlant que la fin était proche. Le protagoniste est donc chargé de retrouver son grand père. Il s'averera que ce dernier est en fait le légendaire magicien Khöskîk et qu'il a besoin de votre aide dans le mont Knee pour refermer le portail démonique qui menace de faire déferler les légions du mal sur notre monde.\\~\\
+\paragraph{Quetes secondaires}
+Deux quètes secondaires sont pour le moment prévues : Dans le village, le vieux Elibed a vu toutes ses poules prendre la fuite. On doit alors retrouver 5 poules a travers le vilage, dont une ayant été appercue proche de cette maison dont il émane quelque chose d'inquiétant...
+\paragraph{}
+A l'entrée du village, le garde vous propose également d'aller retrouver une flèche magique dans le mont Knee. Cette flèche serait la même qui l'a blessé des années plus tôt, le condamnant a boiter de la jambe gauche pour le reste de sa vie.
+\paragraph{Fonctionalités prévues}
+\begin{itemize}
+\item Combat
+\item Inventaire
+\item Stats et bonus (apportées par certains objets et inmpactant le gameplay)
+\item Points de vie
+\item Energie (un déplacement coute de l'énergie, le joueur doit se reposer)
+\item Pièges (par trigger et pourcentage de chance de s'activer)
+\item Sales cachées
+\item Commerce
+\end{itemize}
+\paragraph{Carte de la zone de jeu}
+Nous avons pour l'instant 3 zones de jeu : le village, les plaines, et le Mont Knee dont voici les plans (faits via genMyModel)
+\centerline{\includegraphics[scale=0.55]{village.png}}
+\paragraph{Le Village}
+En vert figurent les endroits où on peut trouver des quêtes. En rouge figurent les potentielles zones dangereuses, c'est à dire les combats. Certains sont évitables, d'autres non. Les rectangles blancs décrivent les éléments des salles. On peut voir les 5 poules dont une servira d'introduction au combat : la poule du chaos dans la maison abandonnée. Quelques objets sont répartis pour encourager à l'exploration. Le forgeron proposera des armes et armures a vendre, et le barman des objets permetant de regenerer de la vie. Le grenier est en hauteur par raport a la ferme, et la cave inquiétante sous la maison.
+\centerline{\includegraphics[scale=0.5]{plaines.png}}
+\paragraph{Les Plaines}
+Comme pour le village, en rouge figurent les dangers : un camp de bandits occupé, des ronces qui risquent de vous lacérer les pieds a chaque visite de cette salle (probabilité a determiner) ou un Troll qui essaye de vous racketer (perte d'un objet au choix ou combat difficile). Les losanges représentent les choix qui s'offrent au joueur a certains endroits. Il peut ici se baigner dans la rivière pour se regenerer de la vie (peut etre à changer pour des points d'énergie). Il peut aussi, si il est assez malin trouver le bouton dans la grotte des bandits pour découvrir une pièce secrete renfermant du butin utile par exemple pour se battre contre le troll plus loin...
+\centerline{\includegraphics[scale=0.5]{knee.png}}
+\paragraph{Le mont Knee}
+Notre "donjon". Encore une fois, le rouge représente les dangers : une salle où habitent des gobelins, un autre Troll (celon le résultat de la rencontre avec le précédent, celui ci aura un comportement différent), un escalier glissant et obscur (chance de tomber à déterminer et qui diminue si le joueur a ramassé la torche), un orc et le Boss. En vert figure l'objet de quete pour le garde. En losange figurent les salles qui s'ouvrent sous certaines conditions.
+
+\chapter{Autres questions}
+\paragraph{7.1 - What does this application do?}
+L'application ouvre un terminal dans lequel il est possible d'entrer différentes commandes afin d'effectuer certaines actions dans le jeu.
+\paragraph{    - What commands does the game accept?}
+\begin{itemize}
+\item go	:	Pour se déplacer à completer avec un argument (north, east, west, south).
+\item quit	:	Pour quitter le jeu.
+\item help	:	Pour obtenir la liste des commandes.
+\end{itemize}
+\paragraph{    - How many rooms are in the scenario?}
+Il y a 5 localités dans l'histoire.
+\paragraph{    - Carte du jeu et directions}
+Directions :\\
+\centerline{\includegraphics[scale=0.8]{dir.png}}
+Carte :\\
+\centerline{\includegraphics[scale=0.8]{old_map.png}}
+\paragraph{7.2 - Write down for each class the purpose of the class.}
+\begin{itemize}
+\item Command				:		Vérifie la sémantique de la commande.
+\item CommandWords		:		Vérifie la syntaxe de la commande.
+\item Game				:		Créer et initiale les autres classes ainsi que les localités et le 'Parser' puis démarre le jeu. Évalue et exécute les commandes retournées par le 'Parser'.
+\item Parser				:		Découpe l'entrée utilisateur pour la passer à 'Command' et retourner le résultat.
+\item Room				:		Représente les informations d'une localité (description, voisins).
+
+\end{itemize}
+\paragraph{7.17 - Adding commands}
+Une nouvelle commande ne demande plus aucune modification hormis l'ajout dans le tableau dans CommandWords et l'action correspondant dans Game. C'est parceque les appels necessaire sont faits par le parser qui appelle le listing des commandes dans CommandWords
+\end{document}
