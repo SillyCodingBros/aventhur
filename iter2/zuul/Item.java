@@ -16,10 +16,6 @@ public class Item
   private Integer price = -1;
   private Integer weight = -1;
 
-  public Item(){
-    this.description = "Wow";
-  }
-
   /**
   * Return the description of the item.
   * @return The description of the item.
