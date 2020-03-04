@@ -144,7 +144,7 @@ public class GameEngine
         necklace.setCommment("Oh! What's shining over there?\n");
         pigs.addItem(necklace);
         //add them to the roomMap
-        /*
+        roomMap = new HashMap<String, Room>();
         roomMap.put("attic", attic);
         roomMap.put("farm", farm);
         roomMap.put("pigs", pigs);
@@ -157,7 +157,7 @@ public class GameEngine
         roomMap.put("entrance", entrance);
         roomMap.put("abandonnedHouse", abandonnedHouse);
         roomMap.put("basement", basement);
-        */
+        
     }
 
     /**
