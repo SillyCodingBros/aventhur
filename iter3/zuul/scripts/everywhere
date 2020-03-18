@@ -1,0 +1,20 @@
+go north //Marché
+go west //Forge
+back
+go east //Maison abandonné
+go down //Cave
+back
+back
+go north //Fontaine
+go west //Grange
+go up //Grenier
+back
+go south  //Enclos
+back
+back
+go north  //Pub
+go east //Remise
+back
+back
+go east //Entrée
+quit
