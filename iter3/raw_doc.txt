@@ -1,1 +1,5 @@
-7.28.1 -
+7.28.1 - Ajout de la commande test qui exécute le commande d'un script
+
+    Insert Code //CommandWords: ajout de "test" & GameEngine: test_with_script()
+
+7.28.2 - 
