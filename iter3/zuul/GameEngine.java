@@ -16,7 +16,6 @@ import java.util.Stack;
 public class GameEngine
 {
     private Parser parser;
-    private Room currentRoom;
     public HashMap <String, Room> roomMap;
     public Stack <Command> history;
     private UserInterface gui;
@@ -58,7 +57,7 @@ public class GameEngine
         //System.out.println("");
         //System.out.println();
         printLocationInfo();
-        gui.showImage(currentRoom.getImageName());
+        gui.showImage(player.getCurrentRoom.getImageName());
         /*
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
@@ -165,7 +164,7 @@ public class GameEngine
      */
     private void printLocationInfo()
     {
-      gui.println(currentRoom.getLongDescription());
+      gui.println(player.getCurrentRoom.getLongDescription());
     }
 
     /**
@@ -215,6 +214,26 @@ public class GameEngine
           else {
               endGame();
           }
+        }
+        else if (commandWord.equals("pick"))
+        {
+            if(command.hasSecondWord()){
+                // pick it up
+            }
+            else{
+                String message = "What should I pick up ?";
+                gui.println(message);
+            }
+        }
+        else if (commandWord.equals("drop"))
+        {
+            if(command.hasSecondWord()){
+                // pick it up
+            }
+            else{
+                String message = "What should I drop ?";
+                gui.println(message);
+            }
         }
         //return wantToQuit;
     }
@@ -287,7 +306,7 @@ public class GameEngine
 
         // Try to leave current room.
         //Room nextRoom = null;
-        Room nextRoom = currentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom.getExit(direction);
         /*
         if(direction.equals("north")) {
             nextRoom = currentRoom.northExit;
@@ -317,11 +336,11 @@ public class GameEngine
         else {
             if(!fromBack)
                 history.push(command);
-            currentRoom = nextRoom;
+            player.setCurrentRoom(nextRoom);
             printLocationInfo();
 
-            if(currentRoom.getImageName() != null) {
-                gui.showImage(currentRoom.getImageName());
+            if(player.getCurrentRoom.getImageName() != null) {
+                gui.showImage(player.getCurrentRoom.getImageName());
             }
 
 
@@ -347,7 +366,7 @@ public class GameEngine
      */
     private void look()
     {
-        gui.println(currentRoom.looking());
+        gui.println(player.getCurrentRoom.looking());
     }
 
     /**
