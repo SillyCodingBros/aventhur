@@ -12,6 +12,11 @@
 
 import java.util.HashMap;
 import java.util.Stack;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.FileSystems;
+import java.util.stream.Stream;
+import java.io.IOException;
 
 public class GameEngine
 {
@@ -156,7 +161,7 @@ public class GameEngine
         roomMap.put("entrance", entrance);
         roomMap.put("abandonnedHouse", abandonnedHouse);
         roomMap.put("basement", basement);
-        
+
     }
 
     /**
@@ -204,6 +209,9 @@ public class GameEngine
         else if (commandWord.equals("eat"))
         {
             eat();
+        }
+        else if (commandWord.equals("test")) {
+            test_with_script(command);
         }
         else if (commandWord.equals("quit"))
         {
@@ -362,7 +370,7 @@ public class GameEngine
     }
 
     /**
-     * "Look" was entered, rewrite to terminal the description of current room
+     * "look" was entered, rewrite to terminal the description of current room
      */
     private void look()
     {
@@ -376,6 +384,40 @@ public class GameEngine
     {
         String eatMessage = "You eat part of you provisions and feel full.";
         gui.println(eatMessage);
+    }
+
+    /**
+     * Execute command in given script
+     */
+    private void test_with_script(Command command)
+    {
+        //Path filePath = Paths.get("", command.getSecondWord());
+        Path filePath = FileSystems.getDefault().getPath("scripts", command.getSecondWord());
+        try (Stream<String> lines = Files.lines( filePath ))
+        {
+        	//lines.forEachOrdered(item->gui.println(item));
+          lines.forEachOrdered(item->interpretCommand(item));
+        }
+        catch (IOException e)
+        {
+        	//e.printStackTrace();
+          gui.println(e.toString());
+        }
+        //lines(command.getSecondWord()).forEachOrdered(item->gui.println(item));
+        /*
+        Path filePath = Paths.get("c:/temp", "data.txt");
+
+        //try-with-resources
+        try (Stream<String> lines = Files.lines( filePath ))
+        {
+        	lines.forEach(System.out::println);
+        }
+        catch (IOException e)
+        {
+        	e.printStackTrace();
+        }
+        */
+        //gui.println(currentRoom.looking());
     }
 
     /**
