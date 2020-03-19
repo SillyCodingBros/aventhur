@@ -24,6 +24,7 @@ public class CommandWords
     {
       //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop"
       validCommands = new HashMap<String, CommandWord>();
+      //English
       validCommands.put("go", CommandWord.GO);
       validCommands.put("quit", CommandWord.QUIT);
       validCommands.put("help", CommandWord.HELP);
@@ -33,6 +34,15 @@ public class CommandWords
       validCommands.put("test", CommandWord.TEST);
       validCommands.put("pick", CommandWord.PICK);
       validCommands.put("drop", CommandWord.DROP);
+      //French
+      validCommands.put("aller", CommandWord.GO);
+      validCommands.put("quitter", CommandWord.QUIT);
+      validCommands.put("aide", CommandWord.HELP);
+      validCommands.put("observer", CommandWord.LOOK);
+      validCommands.put("manger", CommandWord.EAT);
+      validCommands.put("retour", CommandWord.BACK);
+      validCommands.put("prendre", CommandWord.PICK);
+      validCommands.put("lacher", CommandWord.DROP);
     }
 
     /**

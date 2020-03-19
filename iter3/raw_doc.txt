@@ -30,4 +30,10 @@
 
     Insert Code //GameEngine: interpretCommand()
 
-7.36 - 
+7.36 - Déjà faite ?
+
+7.37 - Seuls ajouts nécessaires pour le support d'une nouvelle langue se trouvent dans CommandWords
+
+    Insert Code //CommandWords: CommandWords()
+
+7.38 -
