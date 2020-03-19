@@ -143,6 +143,7 @@ public class GameEngine
         //add item to some room
         Item necklace;
         necklace = new Item();
+        necklace.setName("Necklace");
         necklace.setPrice(50);
         necklace.setDescription("It looks magical!\n");
         necklace.setLongDescription("But I ain't no witcher after all!\n");

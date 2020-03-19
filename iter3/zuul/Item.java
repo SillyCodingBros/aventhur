@@ -10,11 +10,20 @@
 public class Item
 {
 
+  private String name;
   private String description;
   private String longDescription;
   private String comment;
   private Integer price = -1;
   private Integer weight = -1;
+
+  /**
+  * Return the name of the item.
+  * @return The name of the item.
+  */
+  public String getName(){
+    return name;
+  }
 
   /**
   * Return the description of the item.
@@ -62,6 +71,14 @@ public class Item
    */
   public void setDescription(String description){
     this.description = description;
+  }
+
+  /**
+   * Set the name of the given item.
+   * @param name The name for the item.
+   */
+  public void setName(String name){
+    this.name = name;
   }
 
   /**
