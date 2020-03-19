@@ -40,4 +40,6 @@
 
     Insert Code //GameEngine: printWelcome() & UserInterface: createGUI()
 
-7.39 - 
+7.39 - Quel est l'intérêt... tO bE cOnTiNuEd
+
+7.40 - Inutile et/ou déjà fait
