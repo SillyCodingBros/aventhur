@@ -36,4 +36,8 @@
 
     Insert Code //CommandWords: CommandWords()
 
-7.38 -
+7.38 - L'affichage d'accueil et le bouton ne sont pas mis à jour selon la langue choisi
+
+    Insert Code //GameEngine: printWelcome() & UserInterface: createGUI()
+
+7.39 - 

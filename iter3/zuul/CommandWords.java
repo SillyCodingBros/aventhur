@@ -19,30 +19,36 @@ public class CommandWords
 
     /**
      * Constructor - initialise the command words.
+     * @param language The language "en" or "fr".
      */
-    public CommandWords()
+    public CommandWords(String language)
     {
       //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop"
       validCommands = new HashMap<String, CommandWord>();
-      //English
-      validCommands.put("go", CommandWord.GO);
-      validCommands.put("quit", CommandWord.QUIT);
-      validCommands.put("help", CommandWord.HELP);
-      validCommands.put("look", CommandWord.LOOK);
-      validCommands.put("eat", CommandWord.EAT);
-      validCommands.put("back", CommandWord.BACK);
-      validCommands.put("test", CommandWord.TEST);
-      validCommands.put("pick", CommandWord.PICK);
-      validCommands.put("drop", CommandWord.DROP);
-      //French
-      validCommands.put("aller", CommandWord.GO);
-      validCommands.put("quitter", CommandWord.QUIT);
-      validCommands.put("aide", CommandWord.HELP);
-      validCommands.put("observer", CommandWord.LOOK);
-      validCommands.put("manger", CommandWord.EAT);
-      validCommands.put("retour", CommandWord.BACK);
-      validCommands.put("prendre", CommandWord.PICK);
-      validCommands.put("lacher", CommandWord.DROP);
+      if (language.equals("en")){
+        //English
+        validCommands.put("go", CommandWord.GO);
+        validCommands.put("quit", CommandWord.QUIT);
+        validCommands.put("help", CommandWord.HELP);
+        validCommands.put("look", CommandWord.LOOK);
+        validCommands.put("eat", CommandWord.EAT);
+        validCommands.put("back", CommandWord.BACK);
+        validCommands.put("test", CommandWord.TEST);
+        validCommands.put("pick", CommandWord.PICK);
+        validCommands.put("drop", CommandWord.DROP);
+      }
+      else if (language.equals("fr")) {
+        //French
+        validCommands.put("aller", CommandWord.GO);
+        validCommands.put("quitter", CommandWord.QUIT);
+        validCommands.put("aide", CommandWord.HELP);
+        validCommands.put("observer", CommandWord.LOOK);
+        validCommands.put("manger", CommandWord.EAT);
+        validCommands.put("retour", CommandWord.BACK);
+        validCommands.put("tester", CommandWord.TEST);
+        validCommands.put("prendre", CommandWord.PICK);
+        validCommands.put("lacher", CommandWord.DROP);
+      }
     }
 
     /**
@@ -73,14 +79,32 @@ public class CommandWords
 
     /**
      * Return all valid commands as a String.
+     * @return all valid commands as a String.
      */
     public String getCommandList()
     {
-      StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder("");
         for(String command : validCommands.keySet()) {
           sb.append(command);
           sb.append(" ");
         }
         return sb.toString();
+    }
+
+    /**
+    * Get String for a CommandWord.
+    * @param cw The CommandWord.
+    * @return String of the given CommandWord.
+    */
+    public String commandWordToString(CommandWord cw)
+    {
+        StringBuilder result = new StringBuilder("commandWordToString Error: Wrong Agument");
+        validCommands.forEach((k,v)->{
+          if (v == cw){
+            result.delete(0, result.length());
+            result.append(k);
+          }
+        });
+        return result.toString();
     }
 }

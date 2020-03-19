@@ -25,16 +25,19 @@ public class GameEngine
     public Stack <Command> history;
     private UserInterface gui;
     private Player player;
+    private String language;
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
+     * @param language The language "en" or "fr".
      */
-    public GameEngine()
+    public GameEngine(String language)
     {
         player = new Player();
         createRooms();
-        parser = new Parser();
+        parser = new Parser(language);
         history = new Stack<Command>();
+        this.language = language;
     }
 
 
@@ -51,12 +54,12 @@ public class GameEngine
      */
     private void printWelcome()
     {
+        CommandWords help = new CommandWords(language);
         String welcomeMessage = "\n"+
                                 "Welcome to Aventhür!\n"+
                                 "The Ultimate Adventure Game.\n"+
                                 "\n"+
-                                "Type 'help' if you need help.\n"+
-                                "\n";
+                                "Type '"+ help.commandWordToString(CommandWord.HELP)+"' anytime to see commands.\n";
         gui.println(welcomeMessage);
         printLocationInfo();
         gui.showImage(player.getCurrentRoom().getImageName());

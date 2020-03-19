@@ -18,16 +18,19 @@ public class UserInterface implements ActionListener {
     private JTextArea log;
     private JLabel image;
     private JButton lookBtn;
+    private String language;
     /**
      * Construct a UserInterface. As a parameter, a Game Engine
      * (an object processing and executing the game commands) is
      * needed.
      *
      * @param gameEngine  The GameEngine object implementing the game logic.
+     * @param language The language "en" or "fr".
      */
-    public UserInterface(GameEngine gameEngine)
+    public UserInterface(GameEngine gameEngine, String language)
     {
         engine = gameEngine;
+        this.language = language;
         createGUI();
     }
 
@@ -92,6 +95,7 @@ public class UserInterface implements ActionListener {
         JPanel btn_panel = new JPanel();
         image = new JLabel();
         lookBtn = new JButton("Look around");
+        CommandWords cmdWord = new CommandWords(language);
 
 
         panel.setLayout(new BorderLayout());
@@ -111,7 +115,7 @@ public class UserInterface implements ActionListener {
 
         lookBtn.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
-                processCommand("look");
+                processCommand(cmdWord.commandWordToString(CommandWord.LOOK));
             }
         });
 

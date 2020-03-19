@@ -1,4 +1,3 @@
-//import java.util.Scanner;
 import java.util.StringTokenizer;
 
 /**
@@ -24,10 +23,11 @@ public class Parser
 
     /**
      * Create a parser to read from the terminal window.
+     * @param language The language "en" or "fr".
      */
-    public Parser()
+    public Parser(String language)
     {
-        commands = new CommandWords();
+        commands = new CommandWords(language);
     }
 
     /**
