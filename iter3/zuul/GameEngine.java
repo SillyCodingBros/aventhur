@@ -1,3 +1,11 @@
+import java.util.HashMap;
+import java.util.Stack;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.FileSystems;
+import java.util.stream.Stream;
+import java.io.IOException;
+
 /**
  *  This class is part of the "World of Zuul" application.
  *  "World of Zuul" is a very simple, text based adventure game.
@@ -9,14 +17,6 @@
  * @author  Michael Kolling and David J. Barnes
  * @version 1.0 (Jan 2003)
  */
-
-import java.util.HashMap;
-import java.util.Stack;
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.nio.file.FileSystems;
-import java.util.stream.Stream;
-import java.io.IOException;
 
 public class GameEngine
 {
@@ -58,25 +58,8 @@ public class GameEngine
                                 "Type 'help' if you need help.\n"+
                                 "\n";
         gui.println(welcomeMessage);
-        //System.out.println("");
-        //System.out.println("");
-        //System.out.println("");
-        //System.out.println();
         printLocationInfo();
         gui.showImage(player.getCurrentRoom().getImageName());
-        /*
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: ");
-        if(currentRoom.northExit != null)
-            System.out.print("north ");
-        if(currentRoom.eastExit != null)
-            System.out.print("east ");
-        if(currentRoom.southExit != null)
-            System.out.print("south ");
-        if(currentRoom.westExit != null)
-            System.out.print("west ");
-        System.out.println();
-        */
     }
 
     /**
@@ -96,7 +79,7 @@ public class GameEngine
         fountain = new Room("in the village's square.\nNext to the fountain, the old Elibed is staring at you and a chicken\nis runnin, around.", "pictures/village/fountain.jpg");
         market = new Room("in the village's market. Its a very busy place. \nYou think you hear the clucking of a chicken", "pictures/village/market.jpg");
         forge = new Room("in the village's forge. The black-smith greets you.\nThere is an old rusty sword on the ground.", "pictures/village/forge.png");
-        home = new Room("in your parent's house. You mom is here, as allways.\nA tastefull cake is on the table.", "pictures/village/home.jpg");
+        home = new Room("in your parent's house. You mom is here, as allways.\nA tastefull cake is on the table.", "pictures/village/market.jpg");
         entrance = new Room("at the village entrance. The guard calls you out.\nBetter go see what he wants", "pictures/village/entrance.jpeg");
         abandonnedHouse = new Room("inside a rotting house. For some reason,\nyou feel bad. There is a big, dirty, helmet on the ground.", "pictures/village/abandonnedHouse.jpg");
         basement = new Room("in the house basement. It feels like a dim, red\nlight is coming off the walls, and a huge chicken is staring at you.\nYou can't tell if it's eyes are actually glowing red or if its just reflexion.", "pictures/village/basement.jpg");
@@ -149,6 +132,7 @@ public class GameEngine
         necklace.setLongDescription("But I ain't no witcher after all!\n");
         necklace.setCommment("Oh! What's shining over there?\n");
         pigs.addItem(necklace);
+
         //add them to the roomMap
         roomMap = new HashMap<String, Room>();
         roomMap.put("attic", attic);
@@ -163,7 +147,6 @@ public class GameEngine
         roomMap.put("entrance", entrance);
         roomMap.put("abandonnedHouse", abandonnedHouse);
         roomMap.put("basement", basement);
-
     }
 
     /**
@@ -181,71 +164,62 @@ public class GameEngine
      */
     public void interpretCommand(String commandLine)
     {
-        //boolean wantToQuit = false;
         gui.println(commandLine);
         Command command = parser.getCommand(commandLine);
 
-        if(command.isUnknown()) {
+        CommandWord commandWord = command.getCommandWord();
+
+        if(command.isUnknown() || commandWord == CommandWord.UNKNOWN) {
           String unknownCommand = "I don't know what you mean...";
           gui.println(unknownCommand);
-          return ;//false;
+          return;
         }
 
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("help"))
-        {
-            printHelp();
+        switch(commandWord){
+            case HELP:
+                printHelp(); return;
+            case BACK:
+                goBack(command); return;
+            case GO:
+                goRoom(command, false); return;
+            case LOOK:
+                look(); return;
+            case EAT:
+                eat(); return;
+            case TEST:
+                test_with_script(command); return;
+            case QUIT:
+                if(command.hasSecondWord()) {
+                    String quitMessage = "Quit what?";
+                    gui.println(quitMessage);
+                    return;
+                  }
+                  else {
+                    endGame(); return;
+                  }
+            case PICK:
+                if(command.hasSecondWord()){
+                    // pick it up
+                    return;
+                  }
+                  else{
+                    String message = "What should I pick up ?";
+                    gui.println(message);
+                    return;
+                  }
+            case DROP:
+                if(command.hasSecondWord()){
+                    // pick it up
+                    return;
+                  }
+                  else{
+                    String message = "What should I drop ?";
+                    gui.println(message);
+                    return;
+                  }
+            default:
+                return;
         }
-        else if (commandWord.equals("back"))
-        {
-            goBack(command);
-        }
-        else if (commandWord.equals("go"))
-        {
-            goRoom(command, false);
-        }
-        else if (commandWord.equals("look"))
-        {
-            look();
-        }
-        else if (commandWord.equals("eat"))
-        {
-            eat();
-        }
-        else if (commandWord.equals("test")) {
-            test_with_script(command);
-        }
-        else if (commandWord.equals("quit"))
-        {
-          if(command.hasSecondWord()) {
-              String quitMessage = "Quit what?";
-              gui.println(quitMessage);
-          }
-          else {
-              endGame();
-          }
-        }
-        else if (commandWord.equals("pick"))
-        {
-            if(command.hasSecondWord()){
-                // pick it up
-            }
-            else{
-                String message = "What should I pick up ?";
-                gui.println(message);
-            }
-        }
-        else if (commandWord.equals("drop"))
-        {
-            if(command.hasSecondWord()){
-                // pick it up
-            }
-            else{
-                String message = "What should I drop ?";
-                gui.println(message);
-            }
-        }
-        //return wantToQuit;
     }
 
     // implementations of user commands:
@@ -285,17 +259,17 @@ public class GameEngine
         history.pop();
 
         if(tmp.getSecondWord().equals("north"))
-            newCommand = new Command("go", "south");
+            newCommand = new Command(CommandWord.GO, "south");
         else if(tmp.getSecondWord().equals("south"))
-            newCommand = new Command("go", "north");
+            newCommand = new Command(CommandWord.GO, "north");
         else if(tmp.getSecondWord().equals("east"))
-            newCommand = new Command("go", "west");
+            newCommand = new Command(CommandWord.GO, "west");
         else if(tmp.getSecondWord().equals("west"))
-            newCommand = new Command("go", "east");
+            newCommand = new Command(CommandWord.GO, "east");
         else if(tmp.getSecondWord().equals("up"))
-            newCommand = new Command("go", "down");
+            newCommand = new Command(CommandWord.GO, "down");
         else
-            newCommand = new Command("go", "up");
+            newCommand = new Command(CommandWord.GO, "up");
         goRoom(newCommand, true);
     }
     /**
@@ -315,29 +289,7 @@ public class GameEngine
         String direction = command.getSecondWord();
 
         // Try to leave current room.
-        //Room nextRoom = null;
         Room nextRoom = player.getCurrentRoom().getExit(direction);
-        /*
-        if(direction.equals("north")) {
-            nextRoom = currentRoom.northExit;
-        }
-        if(direction.equals("east")) {
-            nextRoom = currentRoom.eastExit;
-        }
-        if(direction.equals("south")) {
-            nextRoom = currentRoom.southExit;
-        }
-        if(direction.equals("west")) {
-            nextRoom = currentRoom.westExit;
-        }
-        if(direction.equals("up")) {
-            nextRoom = currentRoom.upExit;
-        }
-        if(direction.equals("down")) {
-            nextRoom = currentRoom.downExit;
-        }
-        */
-
 
         if (nextRoom == null) {
             errorMessage = "There is no door!";
@@ -352,22 +304,6 @@ public class GameEngine
             if(player.getCurrentRoom().getImageName() != null) {
                 gui.showImage(player.getCurrentRoom().getImageName());
             }
-
-
-
-            /*
-            System.out.println("You are " + currentRoom.getDescription());
-            System.out.print("Exits: ");
-            if(currentRoom.northExit != null)
-                System.out.print("north ");
-            if(currentRoom.eastExit != null)
-                System.out.print("east ");
-            if(currentRoom.southExit != null)
-                System.out.print("south ");
-            if(currentRoom.westExit != null)
-                System.out.print("west ");
-            System.out.println();
-            */
         }
     }
 
@@ -393,33 +329,15 @@ public class GameEngine
      */
     private void test_with_script(Command command)
     {
-        //Path filePath = Paths.get("", command.getSecondWord());
         Path filePath = FileSystems.getDefault().getPath("scripts", command.getSecondWord());
         try (Stream<String> lines = Files.lines( filePath ))
         {
-        	//lines.forEachOrdered(item->gui.println(item));
-          lines.forEachOrdered(item->interpretCommand(item));
+        	lines.forEachOrdered(item->interpretCommand(item));
         }
         catch (IOException e)
         {
-        	//e.printStackTrace();
-          gui.println(e.toString());
+        	gui.println(e.toString());
         }
-        //lines(command.getSecondWord()).forEachOrdered(item->gui.println(item));
-        /*
-        Path filePath = Paths.get("c:/temp", "data.txt");
-
-        //try-with-resources
-        try (Stream<String> lines = Files.lines( filePath ))
-        {
-        	lines.forEach(System.out::println);
-        }
-        catch (IOException e)
-        {
-        	e.printStackTrace();
-        }
-        */
-        //gui.println(currentRoom.looking());
     }
 
     /**
@@ -431,7 +349,7 @@ public class GameEngine
     {
         if(command.hasSecondWord()) {
             String quitMessage = "Quit what?";
-            System.out.println(quitMessage);
+            gui.println(quitMessage);
             return false;
         }
         else {

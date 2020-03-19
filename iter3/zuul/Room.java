@@ -1,3 +1,8 @@
+import java.util.HashMap;
+import java.util.Set;
+import java.util.Collection;
+import java.util.ArrayList;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -12,12 +17,6 @@
  * @author  Michael Kolling and David J. Barnes
  * @version 2006.03.30
  */
-
-//import java.util.*;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.Collection;
-import java.util.ArrayList;
 
 public class Room
 {
@@ -56,14 +55,11 @@ public class Room
     public String getExitString()
     {
         StringBuilder sb = new StringBuilder("Exits:");
-        //String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for(String exit : keys ) {
             sb.append(" ");
             sb.append(exit);
-            //returnString += " " + exit;
         }
-        //return returnString;
         return sb.toString();
     }
 
@@ -126,7 +122,6 @@ public class Room
         }
         return sb.toString();
       }
-
     }
 
     /**
@@ -137,5 +132,4 @@ public class Room
     {
      return imageName;
     }
-
 }

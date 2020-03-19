@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 /**
  * This class is part of the "World of Zuul" application.
  * "World of Zuul" is a very simple, text based adventure game.
@@ -11,32 +13,52 @@
 
 public class CommandWords
 {
-    // a constant array that holds all valid command words
-    private static final String[] validCommands = {
-        "go", "quit", "help", "look", "eat", "back", "test", "pick", "drop"
-    };
+    // A mapping between a command word and the CommandWord
+    // associated with it.
+    private HashMap<String, CommandWord> validCommands;
 
     /**
      * Constructor - initialise the command words.
      */
     public CommandWords()
     {
-        // nothing to do at the moment...
+      //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop"
+      validCommands = new HashMap<String, CommandWord>();
+      validCommands.put("go", CommandWord.GO);
+      validCommands.put("quit", CommandWord.QUIT);
+      validCommands.put("help", CommandWord.HELP);
+      validCommands.put("look", CommandWord.LOOK);
+      validCommands.put("eat", CommandWord.EAT);
+      validCommands.put("back", CommandWord.BACK);
+      validCommands.put("test", CommandWord.TEST);
+      validCommands.put("pick", CommandWord.PICK);
+      validCommands.put("drop", CommandWord.DROP);
+    }
+
+    /**
+     * Find the CommandWord associated with a command word.
+     * @param commandWord The word to look up.
+     * @return The CommandWord correspondng to commandWord, or UNKNOWN
+     *         if it is not a valid command word.
+     */
+    public CommandWord getCommandWord(String commandWord)
+    {
+        CommandWord command = validCommands.get(commandWord);
+        if(command != null) {
+            return command;
+        }
+        else {
+            return CommandWord.UNKNOWN;
+        }
     }
 
     /**
      * Check whether a given String is a valid command word.
-     * @return true if a given string is a valid command,
-     * false if it isn't.
+     * @return true if it is, false if it isn't.
      */
     public boolean isCommand(String aString)
     {
-        for(int i = 0; i < validCommands.length; i++) {
-            if(validCommands[i].equals(aString))
-                return true;
-        }
-        // if we get here, the string was not found in the commands
-        return false;
+        return validCommands.containsKey(aString);
     }
 
     /**
@@ -44,23 +66,11 @@ public class CommandWords
      */
     public String getCommandList()
     {
-      /*
-      StringBuilder sb = new StringBuilder();
-      for (String s : hugeArray) {
-          sb.append(s);
-      }
-      String result = sb.toString();
-      */
       StringBuilder sb = new StringBuilder("");
-      //String commandList = "";
-        for(String command : validCommands) {
-          //commandList += (command + " ");
+        for(String command : validCommands.keySet()) {
           sb.append(command);
           sb.append(" ");
-          //System.out.print(command + " ");
         }
-        //return commandList;
         return sb.toString();
-        //System.out.println();
     }
 }

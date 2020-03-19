@@ -4,7 +4,30 @@
 
 7.28.2 - Ajout du script everywhere
 
+7.29 -
+
+7.30 -
+
+7.31 -
+
 7.31.1 - Ajout de la Class ItemList
 
     Insert Code //ItemList
 
+7.32 -
+
+7.33 -
+
+7.34 -
+
+7.34.1 -
+
+7.35/7.35.1 - Ajout/Utilisation de la Classe CommandWord
+
+    Insert Code //CommandWord & Utilisation de CommandWord dans Command, CommandWords, GameEngine, Parser
+
+7.35.2 - Utilisation d'un switch
+
+    Insert Code //GameEngine: interpretCommand()
+
+7.36 - 
