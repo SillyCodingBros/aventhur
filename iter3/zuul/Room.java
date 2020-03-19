@@ -26,7 +26,6 @@ public class Room
     private String imageName;
     private Collection <Item> items;
 
-
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or

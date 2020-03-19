@@ -16,6 +16,7 @@ public class Item
   private String comment;
   private Integer price = -1;
   private Integer weight = -1;
+  private Boolean canPick = false;
 
   /**
   * Return the name of the item.
@@ -64,6 +65,13 @@ public class Item
   public Integer getWeight(){
     return weight;
   }
+  /**
+   * Return if the item can be picked up or not
+   * @return A boolean representing the state of the item
+   */
+  public Boolean getPickable(){
+    return canPick;
+  }
 
   /**
    * Set the description of the given item.
@@ -111,6 +119,14 @@ public class Item
    */
   public void setWeight(Integer weight){
     this.weight = weight;
+  }
+
+  /**
+   * Set if an item can be picked up.
+   * @param canPick boolean representing the new state of the item.
+   */
+  public void setPickable(Boolean canPick){
+    this.canPick = canPick;
   }
 
 }

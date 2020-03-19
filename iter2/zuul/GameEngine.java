@@ -242,7 +242,7 @@ public class GameEngine
         Command tmp, newCommand;
         if(command.hasSecondWord()){
             // the user gave a second word. Not good.
-            errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
+            errorMessage = "You can't go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
             gui.println(errorMessage);
             return;
         }
