@@ -15,7 +15,7 @@ public class Item
   private String comment;
   private Integer price = -1;
   private Integer weight = -1;
-  private Boolean canPick = 0;
+  private Boolean canPick = false;
 
   /**
   * Return the description of the item.

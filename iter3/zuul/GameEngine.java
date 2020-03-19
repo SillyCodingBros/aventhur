@@ -24,13 +24,14 @@ public class GameEngine
     public HashMap <String, Room> roomMap;
     public Stack <Command> history;
     private UserInterface gui;
-
+    private Player player;
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
      */
     public GameEngine()
     {
+        player = new Player();
         createRooms();
         parser = new Parser();
         history = new Stack<Command>();
@@ -62,7 +63,7 @@ public class GameEngine
         //System.out.println("");
         //System.out.println();
         printLocationInfo();
-        gui.showImage(player.getCurrentRoom.getImageName());
+        gui.showImage(player.getCurrentRoom().getImageName());
         /*
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
@@ -137,7 +138,7 @@ public class GameEngine
         // basement exits
         basement.setExit("up", abandonnedHouse);
 
-        currentRoom = home;  // start game outside
+        player.setCurrentRoom(home);  // start game outside
 
         //add item to some room
         Item necklace;
@@ -169,7 +170,7 @@ public class GameEngine
      */
     private void printLocationInfo()
     {
-      gui.println(player.getCurrentRoom.getLongDescription());
+      gui.println(player.getCurrentRoom().getLongDescription());
     }
 
     /**
@@ -314,7 +315,7 @@ public class GameEngine
 
         // Try to leave current room.
         //Room nextRoom = null;
-        Room nextRoom = player.getCurrentRoom.getExit(direction);
+        Room nextRoom = player.getCurrentRoom().getExit(direction);
         /*
         if(direction.equals("north")) {
             nextRoom = currentRoom.northExit;
@@ -347,8 +348,8 @@ public class GameEngine
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
 
-            if(player.getCurrentRoom.getImageName() != null) {
-                gui.showImage(player.getCurrentRoom.getImageName());
+            if(player.getCurrentRoom().getImageName() != null) {
+                gui.showImage(player.getCurrentRoom().getImageName());
             }
 
 
@@ -374,7 +375,7 @@ public class GameEngine
      */
     private void look()
     {
-        gui.println(player.getCurrentRoom.looking());
+        gui.println(player.getCurrentRoom().looking());
     }
 
     /**

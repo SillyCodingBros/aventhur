@@ -17,13 +17,13 @@ public class Game
 {
   private UserInterface gui;
   private GameEngine engine;
-  private Player player;
+  //private Player player;
   /**
    * Create the game and initialise its internal map.
    */
   public Game()
   {
-    player = new Player();
+    //player = new Player();
     engine = new GameEngine();
     gui = new UserInterface(engine);
     engine.setGUI(gui);

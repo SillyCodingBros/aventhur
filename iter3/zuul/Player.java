@@ -6,11 +6,15 @@
  *
  **/
 
-public class player{
+public class Player{
     private Integer maxWeight;
     private Integer currentWeight;
     private Integer hp;
     private Room currentRoom;
+
+    public Player(){
+
+    }
 
     /**
     * Return the current room.
