@@ -23,7 +23,8 @@ public class Room
     private String description;
     private HashMap <String, Room> exits;
     private String imageName;
-    private Collection <Item> items;
+    //private Collection <Item> items;
+    private ItemList items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -35,16 +36,27 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
-        items = new ArrayList<Item>();
+        //items = new ArrayList<Item>();
+        items = new ItemList();
         imageName = image;
     }
+
+
 
     /**
     * Adds an item to the room
     * @param item The item to be added.
     */
-    public void addItem(Item item){
-      items.add(item);
+    //public void addItem(Item item){
+    //  items.add(item);
+    //}
+
+    /**
+     * return the room's itemlist
+     * @return the itemlist
+     */
+    public ItemList getItemList(){
+      return this.items;
     }
 
     /**
@@ -108,7 +120,7 @@ public class Room
      * Return your feeling after inspection of the room.
      * @return Unusal things who might notice in a string.
      */
-    public String looking()
+    /*public String looking()
     {
       if (items.isEmpty()){
         return "Nothing particular in here";
@@ -122,7 +134,7 @@ public class Room
         }
         return sb.toString();
       }
-    }
+    }*/
 
     /**
      * Return a string describing the room's image name

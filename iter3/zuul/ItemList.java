@@ -22,6 +22,19 @@ public class ItemList
     }
 
     /**
+     * Makes sure the input item name exists in this room
+     * @param name : the common name of the item
+     * @return boolean representing if the item is in the room
+     */
+    public Item hasItem(String name){
+      for(Item item : items){
+        if(item.getName().equals(name))
+          return item;
+      }
+      return null;
+    }
+
+    /**
      * Adds an item to the room
      * @param item The item to be added.
      */

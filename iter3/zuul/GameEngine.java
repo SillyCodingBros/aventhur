@@ -72,6 +72,7 @@ public class GameEngine
     {
         // rooms for village
         Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
+        //ItemList atticItems, farmItems, pigsItems, pubItemsItems, storageRoomItems, fountainItems, market, forge, home, entrance, abandonnedHouse, basement;
 
         // create the rooms
         attic = new Room("in the farm's attic. There is \nhay all over the floor and a chicken looks at you as you climb the\nladder.", "pictures/village/attic.jpg");
@@ -134,7 +135,8 @@ public class GameEngine
         necklace.setDescription("It looks magical!\n");
         necklace.setLongDescription("But I ain't no witcher after all!\n");
         necklace.setCommment("Oh! What's shining over there?\n");
-        pigs.addItem(necklace);
+        //pigs.addItem(necklace);
+        pigs.getItemList().addItem(necklace);
 
         //add them to the roomMap
         roomMap = new HashMap<String, Room>();
@@ -202,7 +204,17 @@ public class GameEngine
                   }
             case PICK:
                 if(command.hasSecondWord()){
-                    // pick it up
+                    Item toPick = player.getCurrentRoom().getItemList().hasItem(command.getSecondWord());
+                    if(toPick == null){
+                        String message = "No such item here...";
+                        gui.println(message);
+                        return;
+                    }
+
+                    player.getInventory().addItem(toPick);
+                    player.getCurrentRoom().getItemList().removeItem(toPick);
+                    String message = "You pick up the " + command.getSecondWord() + " and put it in your backpack.";
+                    gui.println(message);
                     return;
                   }
                   else{
@@ -212,7 +224,16 @@ public class GameEngine
                   }
             case DROP:
                 if(command.hasSecondWord()){
-                    // pick it up
+                    Item toDrop = player.getInventory().hasItem(command.getSecondWord());
+                    if(toDrop == null){
+                        String message = "I dont own such a thing...";
+                        gui.println(message);
+                        return;
+                    }
+                    player.getCurrentRoom().getItemList().addItem(toDrop);
+                    player.getInventory().removeItem(toDrop);
+                    String message = "The " + command.getSecondWord() + " is now on the ground.";
+                    gui.println(message);
                     return;
                   }
                   else{
@@ -315,7 +336,7 @@ public class GameEngine
      */
     private void look()
     {
-        gui.println(player.getCurrentRoom().looking());
+        gui.println(player.getCurrentRoom().getItemList().looking());
     }
 
     /**
