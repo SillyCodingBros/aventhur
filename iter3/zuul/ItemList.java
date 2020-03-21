@@ -64,7 +64,10 @@ public class ItemList
         StringBuilder sb = new StringBuilder("");
         for (Item item : items) {
           sb.append(item.getComment());
+          sb.append(item.getName());
+          sb.append("\n");
           sb.append(item.getLongDescription());
+
         }
         return sb.toString();
       }
