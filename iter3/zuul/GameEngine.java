@@ -35,6 +35,7 @@ public class GameEngine
     {
         player = new Player();
         player.setMaxWeight(25);
+        player.setCurrentWeight(0);
         createRooms();
         parser = new Parser(language);
         history = new Stack<Command>();
