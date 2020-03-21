@@ -36,6 +36,7 @@ public class CommandWords
         validCommands.put("test", CommandWord.TEST);
         validCommands.put("pick", CommandWord.PICK);
         validCommands.put("drop", CommandWord.DROP);
+        validCommands.put("items", CommandWord.ITEMS);
       }
       else if (language.equals("fr")) {
         //French
@@ -48,6 +49,7 @@ public class CommandWords
         validCommands.put("tester", CommandWord.TEST);
         validCommands.put("prendre", CommandWord.PICK);
         validCommands.put("lacher", CommandWord.DROP);
+        validCommands.put("objets", CommandWord.ITEMS);
       }
     }
 

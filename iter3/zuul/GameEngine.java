@@ -249,6 +249,9 @@ public class GameEngine
                     gui.println(message);
                     return;
                   }
+            case ITEMS:
+                  gui.println(player.getInventory().inventoryToString());
+                  return;
             default:
                 return;
         }
