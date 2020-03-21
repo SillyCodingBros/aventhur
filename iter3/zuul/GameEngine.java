@@ -34,8 +34,6 @@ public class GameEngine
     public GameEngine(String language)
     {
         player = new Player();
-        player.setMaxWeight(25);
-        player.setCurrentWeight(0);
         createRooms();
         parser = new Parser(language);
         history = new Stack<Command>();
@@ -131,23 +129,24 @@ public class GameEngine
         //add item to some room
         Item necklace;
         necklace = new Item();
-        necklace.setName("Necklace");
         necklace.setWeight(1);
         necklace.setPrice(50);
+        necklace.setCommment("Oh! What's shining over there?\n");
+        necklace.setName("Necklace");
         necklace.setDescription("It looks magical!\n");
         necklace.setLongDescription("But I ain't no witcher after all!\n");
-        necklace.setCommment("Oh! What's shining over there?\n");
         //pigs.addItem(necklace);
         pigs.getItemList().addItem(necklace);
 
-        Item cookie;
-        cookie = new Item();
-        cookie.setName("Cookie");
+        Item cookie = new Item();
+        cookie.setEatable();
         cookie.setWeight(1);
         cookie.setPrice(0);
-        cookie.setDescription("Its a cookie !\n");
-        necklace.setLongDescription("Mom is the best at making cookies.\n");
-        necklace.setCommment("Maybe I'll get stronger if I eat it ?\n");
+        cookie.setBuffWeight(10);
+        cookie.setCommment("Its a ");
+        cookie.setName("Cookie");
+        cookie.setDescription("Mom is the best at making cookies.\n");
+        cookie.setLongDescription("Maybe I'll get stronger if I eat it ?\n");
         home.getItemList().addItem(cookie);
 
         //add them to the roomMap
@@ -202,8 +201,13 @@ public class GameEngine
             case LOOK:
                 look(); return;
             case EAT:
-                if(command.hasSecondWord() && command.getSecondWord().equalsIgnoreCase("cookie")){
-                    eat();
+                if(command.hasSecondWord()){
+                    Item toEat = player.getInventory().hasItem(command.getSecondWord());
+                    if(toEat == null){
+                        gui.println("Cant eat something you don't have !");
+                        return;
+                    }
+                    gui.println(player.eat(toEat));
                 }
                 return;
             case TEST:
@@ -361,18 +365,6 @@ public class GameEngine
     private void look()
     {
         gui.println(player.getCurrentRoom().getItemList().looking());
-    }
-
-    /**
-     * "eat" was entered, print dummy info about eating
-     */
-    private void eat()
-    {
-        if(player.getInventory().hasItem("cookie") != null || player.getCurrentRoom().getItemList().hasItem("cookie") != null){
-            String message = "You eat the cookie and feel stronger (maximum carry weight + 5)";
-            gui.println(message);
-            player.setMaxWeight(player.getMaxWeight() + 5);
-        }
     }
 
     /**

@@ -17,6 +17,11 @@ public class Item
   private Integer price = -1;
   private Integer weight = -1;
   private Boolean canPick = false;
+  private Boolean eatable = false;
+  private Integer buffWeight = 0;
+  private Integer buffHp = 0;
+  private Integer buffArmor = 0;
+  private Integer buffAttack = 0;
 
   /**
   * Return the name of the item.
@@ -74,6 +79,46 @@ public class Item
   }
 
   /**
+     * return the weight carry buff of the item
+     * @return the weight buff
+     */
+    public Integer getBuffWeight(){
+      return buffWeight;
+  }
+
+  /**
+   *  return the health bonus of an item
+   * @return the health buff
+   */
+  public Integer getBuffHp(){
+      return buffHp;
+  }
+
+  /**
+   * return the amror bonus of an item
+   * @return the armor buff
+   */
+  public Integer getBuffArmor(){
+      return buffArmor;
+  }
+
+  /**
+   * return the attack bonus of the item
+   * @return the attack buff
+   */
+  public Integer getBuffAttack(){
+      return buffAttack;
+  }
+
+  /**
+   * return if you can eat the item
+   * @return boolean
+   */
+  public Boolean getEatable(){
+    return eatable;
+  }
+
+  /**
    * Set the description of the given item.
    * @param description The description for the item.
    */
@@ -128,5 +173,42 @@ public class Item
   public void setPickable(Boolean canPick){
     this.canPick = canPick;
   }
+
+  /**
+     * Set the weight buff of the item
+     * @param buff the value of the buff
+     */
+    public void setBuffWeight(Integer buff){
+      buffWeight = buff;
+  }
+
+  /**
+   * Set the health buff of the item
+   * @param buff the value of the buff
+   */
+  public void setBuffHp(Integer buff){
+      buffHp = buff;
+  }
+
+  /**
+   * Set the armor buff of the item
+   * @param buff the value of the buff
+   */
+  public void setBuffArmor(Integer buff){
+      buffArmor = buff;
+  }
+
+  /**
+   * Set the attack buff of the item
+   * @param buff the value of the buff
+   */
+  public void setBuffAttack(Integer buff){
+      buffAttack = buff;
+  }
+
+  public void setEatable(){
+    eatable = true;
+  }
+
 
 }
