@@ -74,7 +74,6 @@ public class GameEngine
     {
         // rooms for village
         Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
-        //ItemList atticItems, farmItems, pigsItems, pubItemsItems, storageRoomItems, fountainItems, market, forge, home, entrance, abandonnedHouse, basement;
 
         // create the rooms
         attic = new Room("in the farm's attic. There is \nhay all over the floor and a chicken looks at you as you climb the\nladder.", "pictures/village/attic.jpg");
@@ -141,6 +140,16 @@ public class GameEngine
         //pigs.addItem(necklace);
         pigs.getItemList().addItem(necklace);
 
+        Item cookie;
+        cookie = new Item();
+        cookie.setName("Cookie");
+        cookie.setWeight(1);
+        cookie.setPrice(0);
+        cookie.setDescription("Its a cookie !\n");
+        necklace.setLongDescription("Mom is the best at making cookies.\n");
+        necklace.setCommment("Maybe I'll get stronger if I eat it ?\n");
+        home.getItemList().addItem(cookie);
+
         //add them to the roomMap
         roomMap = new HashMap<String, Room>();
         roomMap.put("attic", attic);
@@ -193,7 +202,10 @@ public class GameEngine
             case LOOK:
                 look(); return;
             case EAT:
-                eat(); return;
+                if(command.hasSecondWord() && command.getSecondWord().equalsIgnoreCase("cookie")){
+                    eat();
+                }
+                return;
             case TEST:
                 test_with_script(command); return;
             case QUIT:
@@ -352,12 +364,15 @@ public class GameEngine
     }
 
     /**
-     * "eat" was entered, print dummy info about eating TODO
+     * "eat" was entered, print dummy info about eating
      */
     private void eat()
     {
-        String eatMessage = "You eat part of you provisions and feel full.";
-        gui.println(eatMessage);
+        if(player.getInventory().hasItem("cookie") != null || player.getCurrentRoom().getItemList().hasItem("cookie") != null){
+            String message = "You eat the cookie and feel stronger (maximum carry weight + 5)";
+            gui.println(message);
+            player.setMaxWeight(player.getMaxWeight() + 5);
+        }
     }
 
     /**
