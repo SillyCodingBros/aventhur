@@ -28,7 +28,7 @@ public class ItemList
      */
     public Item hasItem(String name){
       for(Item item : items){
-        if(item.getName().equals(name))
+        if(item.getName().equalsIgnoreCase(name))
           return item;
       }
       return null;
