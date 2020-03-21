@@ -69,7 +69,7 @@ public class Player{
     * Set the current weight carried by player.
     * @param newWeight The new weight of the player.
     */
-    public void setCurrentRoom(Integer newWeight){
+    public void setCurrentWeight(Integer newWeight){
         this.currentWeight = newWeight;
     }
 

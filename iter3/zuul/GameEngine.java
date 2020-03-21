@@ -34,6 +34,7 @@ public class GameEngine
     public GameEngine(String language)
     {
         player = new Player();
+        player.setMaxWeight(25);
         createRooms();
         parser = new Parser(language);
         history = new Stack<Command>();
@@ -131,6 +132,7 @@ public class GameEngine
         Item necklace;
         necklace = new Item();
         necklace.setName("Necklace");
+        necklace.setWeight(1);
         necklace.setPrice(50);
         necklace.setDescription("It looks magical!\n");
         necklace.setLongDescription("But I ain't no witcher after all!\n");
@@ -210,8 +212,13 @@ public class GameEngine
                         gui.println(message);
                         return;
                     }
-
+                    if(player.getCurrentWeight() + toPick.getWeight() > player.getMaxWeight()){
+                        String message = "Can't take it, its too heavy !";
+                        gui.println(message);
+                        return;
+                    }
                     player.getInventory().addItem(toPick);
+                    player.setCurrentWeight(player.getCurrentWeight() + toPick.getWeight());
                     player.getCurrentRoom().getItemList().removeItem(toPick);
                     String message = "You pick up the " + command.getSecondWord() + " and put it in your backpack.";
                     gui.println(message);
@@ -231,6 +238,7 @@ public class GameEngine
                         return;
                     }
                     player.getCurrentRoom().getItemList().addItem(toDrop);
+                    player.setCurrentWeight(player.getCurrentWeight() - toDrop.getWeight());
                     player.getInventory().removeItem(toDrop);
                     String message = "The " + command.getSecondWord() + " is now on the ground.";
                     gui.println(message);
