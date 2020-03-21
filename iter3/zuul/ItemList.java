@@ -87,7 +87,9 @@ public class ItemList
         StringBuilder sb = new StringBuilder("");
         for (Item item : items) {
           sb.append(item.getName());
-          sb.append("\n");
+          sb.append(" - ");
+          sb.append(item.getWeight());
+          sb.append(" kg\n");
         }
         return sb.toString();
       }
