@@ -279,17 +279,19 @@ public class GameEngine
             case USE :
                   if(command.hasSecondWord()){
                     if(command.getSecondWord().equals("beamer")){
-                        history.push(command);
-                        gui.println(player.useBeamer());
-                        if(player.getCurrentRoom().getImageName() != null) {
-                            gui.showImage(player.getCurrentRoom().getImageName());
-                        }
-                        return;
+                      history.push(command);
+                      gui.println(player.useBeamer());
+                      if(player.getCurrentRoom().getImageName() != null) {
+                        gui.showImage(player.getCurrentRoom().getImageName());
+                      }
+                      return;
                     }
-                  } else{
+                    return;
+                  }
+                  else{
                     String message = "What should I use ?";
                     gui.println(message);
-                      return;
+                    return;
                   }
             default:
                 return;
