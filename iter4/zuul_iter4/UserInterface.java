@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.awt.image.*;
+//import java.lang.Math.round;
 
 /**
  * This class implements a simple graphical user interface with a text entry
@@ -62,7 +63,28 @@ public class UserInterface implements ActionListener {
             System.out.println("image not found");
         else {
             ImageIcon icon = new ImageIcon(imageURL);
-            image.setIcon(icon);
+            //image.setIcon(icon);
+            //image.setSize(250,250);
+            int sizeX = icon.getIconWidth();
+            int sizeY = icon.getIconHeight();
+            float big;
+            float newX = sizeX;
+            float newY = sizeY;
+            if (sizeX > sizeY){
+              big = sizeX;
+            }
+            else{
+              big = sizeY;
+            }
+            if (big > 800){
+              //System.out.println((big - (big - 800)+" "+big / (big - (big - 800))));
+              big = big / (big - (big - 800));
+              newX = newX / big;
+              newY = newY / big;
+              //System.out.println(sizeX + ":" + sizeY + " --> "+ Math.round(newX) + ":" + Math.round(newY) + " le resize");
+            }
+
+            image.setIcon(new ImageIcon(new ImageIcon(imageName).getImage().getScaledInstance(Math.round(newX), Math.round(newY), Image.SCALE_DEFAULT)));
             myFrame.pack();
         }
     }
