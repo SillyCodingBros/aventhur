@@ -47,8 +47,6 @@ public class GameEngine
         printWelcome();
     }
 
-
-
     /**
      * Print out the opening message for the player.
      */
@@ -366,6 +364,7 @@ public class GameEngine
 
             if(!fromBack)
                 history.push(command);
+            
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
 
