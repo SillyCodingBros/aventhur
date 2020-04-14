@@ -2,7 +2,7 @@
 
   // insert code : go room + getHistoryLenght(GameEngine) +getWinState (Player)
 
-7.43 -
+7.43 - trap door : deja implémentée : une room A ayant une exit vers B alors que B n'a pas d'exit vers A est au final, une port a sens unique et donc une trap door
 
 7.44 - beamer
 	// insert code : GameEngine : interpret command -> use

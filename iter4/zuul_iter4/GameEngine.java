@@ -26,6 +26,9 @@ public class GameEngine
     private UserInterface gui;
     private Player player;
     private String language;
+    private Boolean warned = false;
+    private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
+
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
@@ -68,8 +71,6 @@ public class GameEngine
      */
     private void createRooms()
     {
-        // rooms for village
-        Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
 
         // create the rooms
         attic = new Room("in the farm's attic. There is \nhay all over the floor and a chicken looks at you as you climb the\nladder.", "pictures/village/attic.jpg");
@@ -120,8 +121,6 @@ public class GameEngine
         // abandonned house exists
         abandonnedHouse.setExit("west", market);
         abandonnedHouse.setExit("down", basement);
-        // basement exits
-        basement.setExit("up", abandonnedHouse);
 
         player.setCurrentRoom(home);  // start game outside
 
@@ -196,6 +195,16 @@ public class GameEngine
           String unknownCommand = "I don't know what you mean...";
           gui.println(unknownCommand);
           return;
+        }
+
+        // Special basement handler
+        if(player.getCurrentRoom() == basement && warned){
+            // if user was warned
+            // next command isnt to use the beamer or player doesnt own it. Beamer is charged
+            if(!(commandWord == CommandWord.USE && command.hasSecondWord() && command.getSecondWord().equals("beamer") && player.getInventory().hasItem(command.getSecondWord()) != null && player.getInventory().hasItem("beamer").getCooldown() == 1)){
+                chickenDeath();
+                return;
+            }
         }
 
         switch(commandWord){
@@ -392,6 +401,8 @@ public class GameEngine
                 history.push(command);
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
+            if(player.getCurrentRoom() == basement)
+                chickenWarn();
             if(player.getCurrentRoom().getImageName() != null) {
                 gui.showImage(player.getCurrentRoom().getImageName());
             }
@@ -454,4 +465,15 @@ public class GameEngine
         return;
     }
 
+    private void chickenWarn(){
+        warned = true;
+        gui.println("Affraid by the bird, you step back. It walks towadrs you. You feel in danger and that it could attack you anytime. \nWhat should you do ?");
+        return;
+    }
+
+    private void chickenDeath(){
+        gui.println("The chicken dashes towards you. You panick and try to climb back up the rotten ladder. But as you start climbing, it collapses under your weight. \n Did you really need to eat this much last night ? You regret it now anyway. The chicken clucks in a very scary way. Defenceless, you get poked to death by the giant chaotic chicken. A miserable way to die, you rekon.\n  - You fell into the evil chicken's trap. Be more carefull next time.");
+        endGame();
+        return;
+    }
 }
