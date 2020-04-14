@@ -1,0 +1,2 @@
+7.42 - ajout de l'echec.
+	// insert code : go room + getHistoryLenght(GameEngine) +getWinState (Player)
