@@ -22,6 +22,7 @@ public class Room
 {
     private String description;
     private HashMap <String, Room> exits;
+    private HashMap <String, Door> doors;
     private String imageName;
     //private Collection <Item> items;
     private ItemList items;
@@ -36,6 +37,7 @@ public class Room
     {
         this.description = description;
         exits = new HashMap<String, Room>();
+        doors = new HashMap<String, Door>();
         //items = new ArrayList<Item>();
         items = new ItemList();
         imageName = image;
@@ -93,6 +95,40 @@ public class Room
     public void setExit(String direction, Room neighbor)
     {
         exits.put(direction, neighbor);
+    }
+
+    /**
+     * Tells you whether you can access the direction.
+     * @param direction The direction for new the exit.
+     * @param inventory The player's inventory.
+     * @return A boolean according to your ability to pass.
+     */
+    public boolean canPass(String direction, ItemList inventory)
+    {
+      Door door = doors.get(direction);
+      if (door == null) return true;
+      if (door.canPass(inventory)) return true;
+      return false;
+    }
+
+    /**
+     * Return the door associated to the given direction.
+     * @param direction The direction you wish to go to.
+     * @return the door associated to the given direction.
+     */
+    public Door getDoor(String direction)
+    {
+      return doors.get(direction);
+    }
+
+    /**
+     * Add a door for the given direction for this room.
+     * @param direction The direction for new the exit.
+     * @param door The door to build.
+     */
+    public void setDoor(String direction, Door door)
+    {
+        doors.put(direction, door);
     }
 
     /**

@@ -23,6 +23,13 @@ public class Item
   private Integer buffArmor = 0;
   private Integer buffAttack = 0;
 
+  public Item(){
+  }
+
+  public Item(String name){
+    this.name = name;
+  }
+
   /**
   * Return the name of the item.
   * @return The name of the item.

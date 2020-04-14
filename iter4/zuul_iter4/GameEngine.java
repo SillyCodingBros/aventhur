@@ -101,6 +101,7 @@ public class GameEngine
         storageRoom.setExit("west", pub);
         // fountain exits
         fountain.setExit("north", pub);
+        fountain.setDoor("north", new Door(new Item("Majority"), "Bouncer: You're not looking 18 Kiddo!\nI don't even like booze why would I ever wanna go there anyway!"));
         fountain.setExit("east", entrance);
         fountain.setExit("south", market);
         fountain.setExit("west", farm);
@@ -346,8 +347,10 @@ public class GameEngine
             errorMessage = "There is no door!";
             gui.println(errorMessage);
         }
+        if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
+          gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
+        }
         else {
-
             errorMessage = Integer.toString(getHistoryLenght());
             gui.println(errorMessage);
 
@@ -364,7 +367,7 @@ public class GameEngine
 
             if(!fromBack)
                 history.push(command);
-            
+
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
 

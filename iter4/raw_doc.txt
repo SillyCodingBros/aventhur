@@ -1,2 +1,14 @@
 7.42 - ajout de l'echec.
 	// insert code : go room + getHistoryLenght(GameEngine) +getWinState (Player)
+
+7.43 -
+
+
+7.44 -
+
+
+7.45 - ajout de la classe 'Door'
+
+    Insert Code //Door & Room tout ce qui touche aux portes & GameEngine condition dans goRoom
+
+7.46 -
