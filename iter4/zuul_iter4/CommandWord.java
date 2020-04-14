@@ -9,5 +9,5 @@ public enum CommandWord
     // A value for each command word, plus one for unrecognised
     // commands.
     //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop"
-    GO, QUIT, HELP, LOOK, EAT, BACK, TEST, PICK, DROP, ITEMS, UNKNOWN;
+    GO, QUIT, HELP, LOOK, EAT, BACK, TEST, PICK, DROP, ITEMS, USE, UNKNOWN;
 }

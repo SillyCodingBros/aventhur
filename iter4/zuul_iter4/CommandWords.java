@@ -23,7 +23,7 @@ public class CommandWords
      */
     public CommandWords(String language)
     {
-      //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop"
+      //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop", "use"
       validCommands = new HashMap<String, CommandWord>();
       if (language.equals("en")){
         //English
@@ -37,6 +37,7 @@ public class CommandWords
         validCommands.put("pick", CommandWord.PICK);
         validCommands.put("drop", CommandWord.DROP);
         validCommands.put("items", CommandWord.ITEMS);
+        validCommands.put("use", CommandWord.USE);
       }
       else if (language.equals("fr")) {
         //French
@@ -50,6 +51,8 @@ public class CommandWords
         validCommands.put("prendre", CommandWord.PICK);
         validCommands.put("lacher", CommandWord.DROP);
         validCommands.put("objets", CommandWord.ITEMS);
+        validCommands.put("utiliser", CommandWord.USE);
+
       }
     }
 

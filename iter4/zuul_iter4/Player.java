@@ -15,6 +15,7 @@ public class Player{
     private Room currentRoom;
     private ItemList inventory;
     private Boolean won = false;
+    private Room saveRoom = null;
 
     public Player(){
         inventory = new ItemList();
@@ -132,4 +133,35 @@ public class Player{
         
         return str.toString();
       }
+    
+    /**
+     * Either charges or fires the beamer based on its cooldown value. Upon charge, the current room is saved 
+     * Upon fire, the current room is set the the saved virable and the cooldown is reset for a new charge.
+     * @return Utility String to be displayed by caller
+     */
+    public String useBeamer(){
+        Item beamer = inventory.hasItem("beamer");
+        String retStr = new String("");
+
+        if(beamer != null){
+            // case beamer isnt charged
+            if(beamer.getCooldown() == 0){
+                beamer.setCooldown(1);
+                saveRoom = currentRoom;
+                retStr = "The beamer start emiting a dim blue light. It is now linked to this room.\n";
+                return retStr;
+            }
+            // case beamer is charged  
+            else {
+                beamer.setCooldown(0);
+                currentRoom = saveRoom;
+                retStr = "The beamer emits a big flash of light and you feel a sudden change in your surroundings\n";
+                retStr += currentRoom.getLongDescription();
+                return retStr;
+            }
+        }else{
+            retStr = "Can't use the beamer if I dont have it !\n";
+            return retStr;
+        }
+    }
 }
