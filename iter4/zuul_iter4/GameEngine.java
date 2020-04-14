@@ -101,6 +101,7 @@ public class GameEngine
         storageRoom.setExit("west", pub);
         // fountain exits
         fountain.setExit("north", pub);
+        fountain.setDoor("north", new Door(new Item("Majority"), "Bouncer: You're not looking 18 Kiddo!\nI don't even like booze why would I ever wanna go there anyway!"));
         fountain.setExit("east", entrance);
         fountain.setExit("south", market);
         fountain.setExit("west", farm);
@@ -278,7 +279,7 @@ public class GameEngine
             case USE :
                   if(command.hasSecondWord()){
                     if(command.getSecondWord().equals("beamer")){
-                        history.push(command); 
+                        history.push(command);
                         gui.println(player.useBeamer());
                         if(player.getCurrentRoom().getImageName() != null) {
                             gui.showImage(player.getCurrentRoom().getImageName());
@@ -371,6 +372,9 @@ public class GameEngine
             errorMessage = "There is no door!";
             gui.println(errorMessage);
         }
+        if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
+          gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
+        }
         else {
             if(getHistoryLenght() == 666 && player.getWonState() == false){
                 errorMessage = "As you walk around, you hear a sudden craking sound. Scared, you look around and see a tide of demonic abominations falling on the village. The sky goes dark and the air fills up in villager's screams. \nThere is blood everywhere. By the time you finally understand what is going on, you feel an extreme pain on your stomach.\n";
@@ -383,7 +387,7 @@ public class GameEngine
                 return;
             }
             if(!fromBack)
-                history.push(command); 
+                history.push(command);
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
             if(player.getCurrentRoom().getImageName() != null) {
