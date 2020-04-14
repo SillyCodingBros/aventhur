@@ -1,5 +1,7 @@
 go north //Marché
+pick beamer
 go west //Forge
+use beamer
 back
 go east //Maison abandonné
 go down //Cave
@@ -17,4 +19,5 @@ go east //Remise
 back
 back
 go east //Entrée
+use beamer // retour forge
 quit

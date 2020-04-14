@@ -101,7 +101,6 @@ public class GameEngine
         storageRoom.setExit("west", pub);
         // fountain exits
         fountain.setExit("north", pub);
-        fountain.setDoor("north", new Door(new Item("Majority"), "Bouncer: You're not looking 18 Kiddo!\nI don't even like booze why would I ever wanna go there anyway!"));
         fountain.setExit("east", entrance);
         fountain.setExit("south", market);
         fountain.setExit("west", farm);
@@ -134,7 +133,6 @@ public class GameEngine
         necklace.setName("Necklace");
         necklace.setDescription("It looks magical!\n");
         necklace.setLongDescription("But I ain't no witcher after all!\n");
-        //pigs.addItem(necklace);
         pigs.getItemList().addItem(necklace);
 
         Item cookie = new Item();
@@ -147,6 +145,15 @@ public class GameEngine
         cookie.setDescription("Mom is the best at making cookies.\n");
         cookie.setLongDescription("Maybe I'll get stronger if I eat it ?\n");
         home.getItemList().addItem(cookie);
+
+        Item beamer = new Item();
+        beamer.setWeight(1);
+        beamer.setPrice(0);
+        beamer.setCommment("There is a weird futuristic looking item on the ground.\n");
+        beamer.setName("Beamer");
+        beamer.setDescription("You think you know what this is, it lets you teleport !\n");
+        beamer.setLongDescription("Charge it somewhere, and fire it to go back to this place !\n");
+        market.getItemList().addItem(beamer);
 
         //add them to the roomMap
         roomMap = new HashMap<String, Room>();
@@ -268,6 +275,21 @@ public class GameEngine
             case ITEMS:
                   gui.println(player.getInventory().inventoryToString());
                   return;
+            case USE :
+                  if(command.hasSecondWord()){
+                    if(command.getSecondWord().equals("beamer")){
+                        history.push(command); 
+                        gui.println(player.useBeamer());
+                        if(player.getCurrentRoom().getImageName() != null) {
+                            gui.showImage(player.getCurrentRoom().getImageName());
+                        }
+                        return;
+                    }
+                  } else{
+                    String message = "What should I use ?";
+                    gui.println(message);
+                      return;
+                  }
             default:
                 return;
         }
@@ -297,11 +319,13 @@ public class GameEngine
 
         if(command.hasSecondWord()){
             // the user gave a second word. Not good.
-            errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
+            errorMessage = "You can't go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
             gui.println(errorMessage);
             return;
         }
-        if(history.size() == 0){
+        // no history or use beamer, dont do anyhting.
+        // beamer limits hisotry because otherwise history contains commands that can't be used in the current room
+        if(history.size() == 0 || history.get(history.size()-1).getSecondWord().equals("beamer")){
             // no history
             errorMessage = "Can't go back anymore, you are allready where you started !";
             gui.println(errorMessage);
@@ -347,13 +371,7 @@ public class GameEngine
             errorMessage = "There is no door!";
             gui.println(errorMessage);
         }
-        if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
-          gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
-        }
         else {
-            errorMessage = Integer.toString(getHistoryLenght());
-            gui.println(errorMessage);
-
             if(getHistoryLenght() == 666 && player.getWonState() == false){
                 errorMessage = "As you walk around, you hear a sudden craking sound. Scared, you look around and see a tide of demonic abominations falling on the village. The sky goes dark and the air fills up in villager's screams. \nThere is blood everywhere. By the time you finally understand what is going on, you feel an extreme pain on your stomach.\n";
                 errorMessage += "Instinctively, you place your hand on your stomach, then look at it : it is covered in blood. Your blood. As you look up again, you see a horrible, bearly human face staring at you.\n";
@@ -364,13 +382,10 @@ public class GameEngine
                 endGame();
                 return;
             }
-
             if(!fromBack)
-                history.push(command);
-
+                history.push(command); 
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
-
             if(player.getCurrentRoom().getImageName() != null) {
                 gui.showImage(player.getCurrentRoom().getImageName());
             }

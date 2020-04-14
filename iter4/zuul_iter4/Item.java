@@ -22,6 +22,7 @@ public class Item
   private Integer buffHp = 0;
   private Integer buffArmor = 0;
   private Integer buffAttack = 0;
+  private Integer coolDown = 0;
 
   public Item(){
   }
@@ -115,6 +116,13 @@ public class Item
    */
   public Integer getBuffAttack(){
       return buffAttack;
+  }
+
+  /**
+   * get the cooldown of the item
+   */
+  public Integer getCooldown(){
+      return coolDown;
   }
 
   /**
@@ -213,9 +221,16 @@ public class Item
       buffAttack = buff;
   }
 
+  /**
+   * Set the cooldown of the item
+   * @param the new value of the cooldown
+   */
+  public void setCooldown(Integer cool){
+      coolDown = cool;
+  }
+
   public void setEatable(){
     eatable = true;
   }
-
 
 }
