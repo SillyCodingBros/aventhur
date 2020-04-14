@@ -295,6 +295,7 @@ public class GameEngine
     {
         String errorMessage;
         Command tmp, newCommand;
+
         if(command.hasSecondWord()){
             // the user gave a second word. Not good.
             errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
@@ -348,6 +349,21 @@ public class GameEngine
             gui.println(errorMessage);
         }
         else {
+
+            errorMessage = Integer.toString(getHistoryLenght());
+            gui.println(errorMessage);
+
+            if(getHistoryLenght() == 666 && player.getWonState() == false){
+                errorMessage = "As you walk around, you hear a sudden craking sound. Scared, you look around and see a tide of demonic abominations falling on the village. The sky goes dark and the air fills up in villager's screams. \nThere is blood everywhere. By the time you finally understand what is going on, you feel an extreme pain on your stomach.\n";
+                errorMessage += "Instinctively, you place your hand on your stomach, then look at it : it is covered in blood. Your blood. As you look up again, you see a horrible, bearly human face staring at you.\n";
+                errorMessage += "After what seemed to be an eternity during which the creature seemed to be ejoying the growing pain in your stomach, it turns around and runs towards a new victim. You see Bork, the weaponsmith ferociously fighting two of the demons. \nYou see a third one sneaking up behind him. You want to scream a warning, but no sound comes out of your mouth. All there is is pain.\n";
+                errorMessage += "You fall on your knees, in a growing pound of blood. The screams of the villagers slowly fade away. So does your pain. You feel empty, and tired. Is this even real ? Bork finally losses his fight, taken out by multiple wounds.\nMaybe it is real after all. Maybe the old Elibed's world ending premonitions were correct... Maybe you should have listened.\n\n";
+                errorMessage += " - You took too long to complete the quest, and demons are invading the world. Try not to be so slow next time...\n";
+                gui.println(errorMessage);
+                endGame();
+                return;
+            }
+
             if(!fromBack)
                 history.push(command);
             player.setCurrentRoom(nextRoom);
@@ -384,6 +400,14 @@ public class GameEngine
     }
 
     /**
+     * get the history size
+     * @return history size
+     */
+    public Integer getHistoryLenght(){
+        return history.size();
+    }
+
+    /**
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.
      * @return true, if this command quits the game, false otherwise.
@@ -404,6 +428,7 @@ public class GameEngine
     {
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
+        return;
     }
 
 }

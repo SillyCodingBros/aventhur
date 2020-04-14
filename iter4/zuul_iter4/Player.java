@@ -14,6 +14,7 @@ public class Player{
     private Integer attack = 10;
     private Room currentRoom;
     private ItemList inventory;
+    private Boolean won = false;
 
     public Player(){
         inventory = new ItemList();
@@ -33,7 +34,13 @@ public class Player{
     public ItemList getInventory(){
         return this.inventory;
     }
-
+    /**
+     * return if the player won
+     * @return the winning state
+     */
+    public Boolean getWonState(){
+        return this.won;
+    }
 
     /**
     * Set the current room.
