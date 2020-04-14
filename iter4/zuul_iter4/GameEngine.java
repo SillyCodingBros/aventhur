@@ -278,6 +278,7 @@ public class GameEngine
             case USE :
                   if(command.hasSecondWord()){
                     if(command.getSecondWord().equals("beamer")){
+                        history.push(command); 
                         gui.println(player.useBeamer());
                         if(player.getCurrentRoom().getImageName() != null) {
                             gui.showImage(player.getCurrentRoom().getImageName());
@@ -318,11 +319,13 @@ public class GameEngine
 
         if(command.hasSecondWord()){
             // the user gave a second word. Not good.
-            errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
+            errorMessage = "You can't go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
             gui.println(errorMessage);
             return;
         }
-        if(history.size() == 0){
+        // no history or use beamer, dont do anyhting.
+        // beamer limits hisotry because otherwise history contains commands that can't be used in the current room
+        if(history.size() == 0 || history.get(history.size()-1).getSecondWord().equals("beamer")){
             // no history
             errorMessage = "Can't go back anymore, you are allready where you started !";
             gui.println(errorMessage);
