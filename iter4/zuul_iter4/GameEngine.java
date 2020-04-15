@@ -382,6 +382,7 @@ public class GameEngine
         if (nextRoom == null) {
             errorMessage = "There is no door!";
             gui.println(errorMessage);
+            return;
         }
         if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
           gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
