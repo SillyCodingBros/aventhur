@@ -13,4 +13,7 @@
 
    Insert Code //Door & Room tout ce qui touche aux portes & GameEngine condition dans goRoom
 
-7.46 -
+7.46 - ajout de la possibilité de créer des "transporter rooms"
+
+  Insert Code //TransporterRoom & RoomRandomizer & déclaration d'une transporterRoom dans GameEngine
+

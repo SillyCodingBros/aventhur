@@ -28,7 +28,7 @@ public class GameEngine
     private String language;
     private Boolean warned = false;
     private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
-
+    private TransporterRoom transporter;
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
@@ -86,6 +86,25 @@ public class GameEngine
         abandonnedHouse = new Room("inside a rotting house. For some reason,\nyou feel bad. There is a big, dirty, helmet on the ground.", "pictures/village/abandonnedHouse.jpg");
         basement = new Room("in the house basement. It feels like a dim, red\nlight is coming off the walls, and a huge chicken is staring at you.\nYou can't tell if it's eyes are actually glowing red or if its just reflexion.", "pictures/village/basement.jpg");
 
+        //add them to the roomMap
+        roomMap = new HashMap<String, Room>();
+        roomMap.put("attic", attic);
+        roomMap.put("farm", farm);
+        roomMap.put("pigs", pigs);
+        roomMap.put("pub", pub);
+        roomMap.put("storageRoom", storageRoom);
+        roomMap.put("fountain", fountain);
+        roomMap.put("market", market);
+        roomMap.put("forge", forge);
+        roomMap.put("home", home);
+        roomMap.put("entrance", entrance);
+        roomMap.put("abandonnedHouse", abandonnedHouse);
+        roomMap.put("basement", basement);
+
+        // Transporter Room
+        transporter = new TransporterRoom("in a very strange room.\nWhat that big blue things\nYou can't resist and need to jump in it", "pictures/village/transporterRoom.jpg");
+        transporter.setRoomMap(roomMap);
+
         // initialise room exits
         // attic exits
         attic.setExit("down", farm);
@@ -113,6 +132,9 @@ public class GameEngine
         market.setExit("west", forge);
         // forge exits
         forge.setExit("east", market);
+        forge.setExit("west", transporter);
+        // transporter "exists"
+        transporter.setExit("north", transporter);
         // home exits
         home.setExit("north", market);
         // entrance exits
@@ -154,21 +176,6 @@ public class GameEngine
         beamer.setDescription("You think you know what this is, it lets you teleport !\n");
         beamer.setLongDescription("Charge it somewhere, and fire it to go back to this place !\n");
         market.getItemList().addItem(beamer);
-
-        //add them to the roomMap
-        roomMap = new HashMap<String, Room>();
-        roomMap.put("attic", attic);
-        roomMap.put("farm", farm);
-        roomMap.put("pigs", pigs);
-        roomMap.put("pub", pub);
-        roomMap.put("storageRoom", storageRoom);
-        roomMap.put("fountain", fountain);
-        roomMap.put("market", market);
-        roomMap.put("forge", forge);
-        roomMap.put("home", home);
-        roomMap.put("entrance", entrance);
-        roomMap.put("abandonnedHouse", abandonnedHouse);
-        roomMap.put("basement", basement);
     }
 
     /**
