@@ -12,7 +12,7 @@ public class RoomRandomizer
      * Return a random int betwen 0 included and
      * the given argument
      * @param  nbRoom number of rooms
-     * @return a radom index of room
+     * @return a radom index for a room
      */
     public static int getRoom(int nbRoom)
     {
