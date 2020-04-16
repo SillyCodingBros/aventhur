@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.awt.image.*;
-//import java.lang.Math.round;
 
 /**
  * This class implements a simple graphical user interface with a text entry
