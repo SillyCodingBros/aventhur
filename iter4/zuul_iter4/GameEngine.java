@@ -29,6 +29,7 @@ public class GameEngine
     private Boolean warned;
     private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
     private TransporterRoom transporter;
+    private CommandWords cmdWords;
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
@@ -41,10 +42,14 @@ public class GameEngine
       player = new Player();
       createRooms();
       parser = new Parser(language);
+      cmdWords = new CommandWords(language);
       //history = new Stack<Command>();
     }
 
-
+    /**
+     * Sets the gui and prints le wellcome message
+     * @param userInterface ui object
+     */
     public void setGUI(UserInterface userInterface)
     {
         gui = userInterface;
@@ -56,12 +61,11 @@ public class GameEngine
      */
     private void printWelcome()
     {
-        CommandWords help = new CommandWords(language);
         String welcomeMessage = "\n"+
                                 "Welcome to Aventhür!\n"+
                                 "The Ultimate Adventure Game.\n"+
                                 "\n"+
-                                "Type '"+ help.commandWordToString(CommandWord.HELP)+"' anytime to see commands.\n";
+                                "Type '"+ cmdWords.commandWordToString(CommandWord.HELP)+"' anytime to see commands.\n";
         gui.println(welcomeMessage);
         printLocationInfo();
         gui.showImage(player.getCurrentRoom().getImageName());
@@ -202,133 +206,19 @@ public class GameEngine
             gui.println("I don't know what you mean...");
         } else {
             if(warned && player.getCurrentRoom() == basement){
-                if(!commandLine.equalsIgnoreCase("use beamer") ||
-                   (commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer") == null) || 
-                   (commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer").getCooldown() != 1)){
+                //if(!commandLine.equalsIgnoreCase("use beamer") ||
+                if(!commandLine.equalsIgnoreCase(cmdWords.commandWordToString(CommandWord.USE)+ " beamer") ||
+                    player.getInventory().hasItem("beamer") == null || 
+                    player.getInventory().hasItem("beamer").getCooldown() != 1){
+
+                   //(commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer") == null) || 
+                   //(commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer").getCooldown() != 1)){
                        chickenDeath();
                        return;
                    }
             }
             command.execute(player, this, gui);
         }
-
-        //CommandWord commandWord = command.getCommandWord();
-
-        ////if(command.isUnknown() || commandWord == CommandWord.UNKNOWN) {
-        //  String unknownCommand = "I don't know what you mean...";
-        //  gui.println(unknownCommand);
-        //  return;
-        //}
-
-        // Special basement handler
-        //if(player.getCurrentRoom() == basement && warned){
-            // if user was warned
-            // next command isnt to use the beamer or player doesnt own it. Beamer is charged
-            //if(!(commandWord == CommandWord.USE && command.hasSecondWord() && command.getSecondWord().equals("beamer") && player.getInventory().hasItem(command.getSecondWord()) != null && player.getInventory().hasItem("beamer").getCooldown() == 1)){
-            //    chickenDeath();
-            //    return;
-            //}
-        //}
-        /*
-        switch(commandWord){
-            case HELP:
-                printHelp(); return;
-            case BACK:
-                goBack(command); return;
-            case GO:
-                goRoom(command, false); return;
-            case LOOK:
-                look(); return;
-            case EAT:
-                if(command.hasSecondWord()){
-                    Item toEat = player.getInventory().hasItem(command.getSecondWord());
-                    if(toEat == null){
-                        gui.println("Cant eat something you don't have !");
-                        return;
-                    }
-                    gui.println(player.eat(toEat));
-                }
-                return;
-            case TEST:
-                test_with_script(command); return;
-            case QUIT:
-                if(command.hasSecondWord()) {
-                    String quitMessage = "Quit what?";
-                    gui.println(quitMessage);
-                    return;
-                  }
-                  else {
-                    endGame(); return;
-                  }
-            case PICK:
-                if(command.hasSecondWord()){
-                    Item toPick = player.getCurrentRoom().getItemList().hasItem(command.getSecondWord());
-                    if(toPick == null){
-                        String message = "No such item here...";
-                        gui.println(message);
-                        return;
-                    }
-                    if(player.getCurrentWeight() + toPick.getWeight() > player.getMaxWeight()){
-                        String message = "Can't take it, its too heavy !";
-                        gui.println(message);
-                        return;
-                    }
-                    player.getInventory().addItem(toPick);
-                    player.setCurrentWeight(player.getCurrentWeight() + toPick.getWeight());
-                    player.getCurrentRoom().getItemList().removeItem(toPick);
-                    String message = "You pick up the " + command.getSecondWord() + " and put it in your backpack.";
-                    gui.println(message);
-                    return;
-                  }
-                  else{
-                    String message = "What should I pick up ?";
-                    gui.println(message);
-                    return;
-                  }
-            case DROP:
-                if(command.hasSecondWord()){
-                    Item toDrop = player.getInventory().hasItem(command.getSecondWord());
-                    if(toDrop == null){
-                        String message = "I dont own such a thing...";
-                        gui.println(message);
-                        return;
-                    }
-                    player.getCurrentRoom().getItemList().addItem(toDrop);
-                    player.setCurrentWeight(player.getCurrentWeight() - toDrop.getWeight());
-                    player.getInventory().removeItem(toDrop);
-                    String message = "The " + command.getSecondWord() + " is now on the ground.";
-                    gui.println(message);
-                    return;
-                  }
-                  else{
-                    String message = "What should I drop ?";
-                    gui.println(message);
-                    return;
-                  }
-            case ITEMS:
-                  gui.println(player.getInventory().inventoryToString());
-                  return;
-            case USE :
-                  if(command.hasSecondWord()){
-                    if(command.getSecondWord().equals("beamer")){
-                      history.push(command);
-                      gui.println(player.useBeamer());
-                      if(player.getCurrentRoom().getImageName() != null) {
-                        gui.showImage(player.getCurrentRoom().getImageName());
-                      }
-                      return;
-                    }
-                    return;
-                  }
-                  else{
-                    String message = "What should I use ?";
-                    gui.println(message);
-                    return;
-                  }
-            default:
-                return;
-        }
-        */
     }
 
     // implementations of user commands:
@@ -343,98 +233,6 @@ public class GameEngine
       String helpString = "Your commands are : \n" + parser.showCommands();
       gui.println(helpString);
     }
-
-    /**
-     * Try to go back to the previous room
-     *
-     *
-    private void goBack(Command command)
-    {
-        String errorMessage;
-        Command previousCmd, newCommand;
-
-        if(command.hasSecondWord()){
-            // the user gave a second word. Not good.
-            errorMessage = "You can't go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
-            gui.println(errorMessage);
-            return;
-        }
-        // no history or use beamer, dont do anyhting.
-        // beamer limits hisotry because otherwise history contains commands that can't be used in the current room
-        if(player.isHistoryEmpty() || history.get(history.size()-1).getSecondWord().equals("beamer")){
-            // no history
-            errorMessage = "Can't go back anymore, you are allready where you started !";
-            gui.println(errorMessage);
-            return;
-        }
-        previousCmd = history.get(history.size() - 1);
-        history.pop();
-
-        if(previousCmd.getSecondWord().equals("north"))
-            newCommand = new Command(CommandWord.GO, "south");
-        else if(previousCmd.getSecondWord().equals("south"))
-            newCommand = new Command(CommandWord.GO, "north");
-        else if(previousCmd.getSecondWord().equals("east"))
-            newCommand = new Command(CommandWord.GO, "west");
-        else if(previousCmd.getSecondWord().equals("west"))
-            newCommand = new Command(CommandWord.GO, "east");
-        else if(previousCmd.getSecondWord().equals("up"))
-            newCommand = new Command(CommandWord.GO, "down");
-        else
-            newCommand = new Command(CommandWord.GO, "up");
-        goRoom(newCommand, true);
-    }
-    */
-
-    /**
-     * Try to go to one direction. If there is an exit, enter
-     * the new room, otherwise print an error message.
-     */
-    /*private void goRoom(Command command, Boolean fromBack)
-    {
-        String errorMessage;
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            errorMessage = "Go where?";
-            gui.println(errorMessage);
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = player.getCurrentRoom().getExit(direction);
-
-        if (nextRoom == null) {
-            errorMessage = "There is no door!";
-            gui.println(errorMessage);
-            return;
-        }
-        if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
-          gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
-        }
-        else {
-            if(player.isMaxMovesReached() && player.getWonState() == false){
-                errorMessage = "As you walk around, you hear a sudden craking sound. Scared, you look around and see a tide of demonic abominations falling on the village. The sky goes dark and the air fills up in villager's screams. \nThere is blood everywhere. By the time you finally understand what is going on, you feel an extreme pain on your stomach.\n";
-                errorMessage += "Instinctively, you place your hand on your stomach, then look at it : it is covered in blood. Your blood. As you look up again, you see a horrible, bearly human face staring at you.\n";
-                errorMessage += "After what seemed to be an eternity during which the creature seemed to be ejoying the growing pain in your stomach, it turns around and runs towards a new victim. You see Bork, the weaponsmith ferociously fighting two of the demons. \nYou see a third one sneaking up behind him. You want to scream a warning, but no sound comes out of your mouth. All there is is pain.\n";
-                errorMessage += "You fall on your knees, in a growing pound of blood. The screams of the villagers slowly fade away. So does your pain. You feel empty, and tired. Is this even real ? Bork finally losses his fight, taken out by multiple wounds.\nMaybe it is real after all. Maybe the old Elibed's world ending premonitions were correct... Maybe you should have listened.\n\n";
-                errorMessage += " - You took too long to complete the quest, and demons are invading the world. Try not to be so slow next time...\n";
-                gui.println(errorMessage);
-                endGame();
-                return;
-            }
-            if(!fromBack)
-                //history.push(command);
-            player.setCurrentRoom(nextRoom);
-            printLocationInfo();
-            if(player.getCurrentRoom() == basement)
-                chickenWarn();
-            if(player.getCurrentRoom().getImageName() != null) {
-                gui.showImage(player.getCurrentRoom().getImageName());
-            }
-        }
-    }*/
 
     /**
      * "look" was entered, rewrite to terminal the description of current room
@@ -486,6 +284,9 @@ public class GameEngine
         }
     }
 
+    /**
+     * Displays goodby message
+     */
     public void endGame()
     {
         gui.println("Thank you for playing.  Good bye.");
@@ -493,20 +294,32 @@ public class GameEngine
         return;
     }
 
+    /**
+     * Sets the warning variable and warns user of imminent death from chicken
+     */
     private void chickenWarn(){
         setWarned();
         gui.println("Affraid by the bird, you step back. It walks towadrs you. You feel in danger and that it could attack you anytime. \nWhat should you do ?");
     }
 
+    /**
+     * Killed by chicken, displays death message and ends the game
+     */
     private void chickenDeath(){
         gui.println("The chicken dashes towards you. You panick and try to climb back up the rotten ladder. But as you start climbing, it collapses under your weight. \n Did you really need to eat this much last night ? You regret it now anyway. The chicken clucks in a very scary way. Defenceless, you get poked to death by the giant chaotic chicken. A miserable way to die, you rekon.\n  - You fell into the evil chicken's trap. Be more carefull next time.");
         endGame();
     }
 
+    /**
+     * Sets warning variable to true
+     */
     public void setWarned(){
       warned = true;
     }
 
+    /**
+     * returns the used language
+     */
     public String getLanguage(){
       return language;
     }
