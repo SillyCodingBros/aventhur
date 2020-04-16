@@ -31,6 +31,8 @@ public class Parser
     }
 
     /**
+     * Handles user inputs to transform it to usable Command
+     * @param inputLine text inputed by the user.
      * @return The next command from the user.
      */
     public Command getCommand(String inputLine)
@@ -67,6 +69,7 @@ public class Parser
 
     /**
      * Returns a list of valid command words as String.
+     * @return a list of valid command words as String
      */
     public String showCommands()
     {
