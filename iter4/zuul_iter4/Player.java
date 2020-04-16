@@ -105,6 +105,12 @@ public class Player{
         this.maxWeight = newMaxWeight;
     }
 
+    /**
+     * Eats the item if it can be. Eating adds stats to the player based 
+     * on item attributes.
+     * @param toEat the item to eat
+     * @return String informing the player about applied changes
+     */
     public String eat(Item toEat){
         if(toEat.getEatable() == false){
           return "That wouldn't be so tastefull...";
@@ -171,30 +177,58 @@ public class Player{
         }
     }
 
+    /**
+     * checks if the command history is empty
+     * @return boolean result
+     */
     public boolean isHistoryEmpty(){
       return history.size() == 0;
     }
 
+    /**
+     * Gets the latest command in history
+     * @return the last command entered
+     */
     public Command getLastMove(){
       return history.get(history.size() - 1);
     }
 
+    /**
+     * Adds a command to the history
+     * @param the command to be added
+     */
     public void historyAdd(Command command){
       history.add(command);
     }
 
+    /**
+     * removes the last command from history
+     */
     public void historyPop(){
       history.pop();
     }
 
+    /**
+     * checks if the amount of commands entered is game ending
+     * @return result boolean
+     */
     public boolean isMaxMovesReached(){
       return history.size() == 666;
     }
 
+    /**
+     * Sets the fromback variable (for when movement was done by back command
+     * and not by the user)
+     * @param new boolean value for fromback
+     */
     public void setFromBack(Boolean bool){
       fromBack = bool;
     }
 
+    /**
+     * gets the fromback value
+     * @return fromback
+     */
     public boolean getFromBack(){
       return fromBack;
     }
