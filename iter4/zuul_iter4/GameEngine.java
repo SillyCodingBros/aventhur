@@ -22,11 +22,11 @@ public class GameEngine
 {
     private Parser parser;
     public HashMap <String, Room> roomMap;
-    public Stack <Command> history;
+    //public Stack <Command> history;
     private UserInterface gui;
     private Player player;
     private String language;
-    private Boolean warned = false;
+    private Boolean warned;
     private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
     private TransporterRoom transporter;
     /**
@@ -36,11 +36,12 @@ public class GameEngine
      */
     public GameEngine(String language)
     {
-        player = new Player();
-        createRooms();
-        parser = new Parser(language);
-        history = new Stack<Command>();
-        this.language = language;
+      this.language = language;
+      warned = false;
+      player = new Player();
+      createRooms();
+      parser = new Parser(language);
+      //history = new Stack<Command>();
     }
 
 
@@ -194,26 +195,33 @@ public class GameEngine
     public void interpretCommand(String commandLine)
     {
         gui.println(commandLine);
+
         Command command = parser.getCommand(commandLine);
 
-        CommandWord commandWord = command.getCommandWord();
-
-        if(command.isUnknown() || commandWord == CommandWord.UNKNOWN) {
-          String unknownCommand = "I don't know what you mean...";
-          gui.println(unknownCommand);
-          return;
+        if(command == null) {
+            gui.println("I don't know what you mean...");
+        } else {
+            command.execute(player, this, gui);
         }
+
+        //CommandWord commandWord = command.getCommandWord();
+
+        ////if(command.isUnknown() || commandWord == CommandWord.UNKNOWN) {
+        //  String unknownCommand = "I don't know what you mean...";
+        //  gui.println(unknownCommand);
+        //  return;
+        //}
 
         // Special basement handler
-        if(player.getCurrentRoom() == basement && warned){
+        //if(player.getCurrentRoom() == basement && warned){
             // if user was warned
             // next command isnt to use the beamer or player doesnt own it. Beamer is charged
-            if(!(commandWord == CommandWord.USE && command.hasSecondWord() && command.getSecondWord().equals("beamer") && player.getInventory().hasItem(command.getSecondWord()) != null && player.getInventory().hasItem("beamer").getCooldown() == 1)){
-                chickenDeath();
-                return;
-            }
-        }
-
+            //if(!(commandWord == CommandWord.USE && command.hasSecondWord() && command.getSecondWord().equals("beamer") && player.getInventory().hasItem(command.getSecondWord()) != null && player.getInventory().hasItem("beamer").getCooldown() == 1)){
+            //    chickenDeath();
+            //    return;
+            //}
+        //}
+        /*
         switch(commandWord){
             case HELP:
                 printHelp(); return;
@@ -312,6 +320,7 @@ public class GameEngine
             default:
                 return;
         }
+        */
     }
 
     // implementations of user commands:
@@ -330,11 +339,11 @@ public class GameEngine
     /**
      * Try to go back to the previous room
      *
-     */
+     *
     private void goBack(Command command)
     {
         String errorMessage;
-        Command tmp, newCommand;
+        Command previousCmd, newCommand;
 
         if(command.hasSecondWord()){
             // the user gave a second word. Not good.
@@ -344,29 +353,31 @@ public class GameEngine
         }
         // no history or use beamer, dont do anyhting.
         // beamer limits hisotry because otherwise history contains commands that can't be used in the current room
-        if(history.size() == 0 || history.get(history.size()-1).getSecondWord().equals("beamer")){
+        if(player.isHistoryEmpty() || history.get(history.size()-1).getSecondWord().equals("beamer")){
             // no history
             errorMessage = "Can't go back anymore, you are allready where you started !";
             gui.println(errorMessage);
             return;
         }
-        tmp = history.get(history.size() - 1);
+        previousCmd = history.get(history.size() - 1);
         history.pop();
 
-        if(tmp.getSecondWord().equals("north"))
+        if(previousCmd.getSecondWord().equals("north"))
             newCommand = new Command(CommandWord.GO, "south");
-        else if(tmp.getSecondWord().equals("south"))
+        else if(previousCmd.getSecondWord().equals("south"))
             newCommand = new Command(CommandWord.GO, "north");
-        else if(tmp.getSecondWord().equals("east"))
+        else if(previousCmd.getSecondWord().equals("east"))
             newCommand = new Command(CommandWord.GO, "west");
-        else if(tmp.getSecondWord().equals("west"))
+        else if(previousCmd.getSecondWord().equals("west"))
             newCommand = new Command(CommandWord.GO, "east");
-        else if(tmp.getSecondWord().equals("up"))
+        else if(previousCmd.getSecondWord().equals("up"))
             newCommand = new Command(CommandWord.GO, "down");
         else
             newCommand = new Command(CommandWord.GO, "up");
         goRoom(newCommand, true);
     }
+    */
+
     /**
      * Try to go to one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
@@ -395,7 +406,7 @@ public class GameEngine
           gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
         }
         else {
-            if(getHistoryLenght() == 666 && player.getWonState() == false){
+            if(player.isMaxMovesReached() && player.getWonState() == false){
                 errorMessage = "As you walk around, you hear a sudden craking sound. Scared, you look around and see a tide of demonic abominations falling on the village. The sky goes dark and the air fills up in villager's screams. \nThere is blood everywhere. By the time you finally understand what is going on, you feel an extreme pain on your stomach.\n";
                 errorMessage += "Instinctively, you place your hand on your stomach, then look at it : it is covered in blood. Your blood. As you look up again, you see a horrible, bearly human face staring at you.\n";
                 errorMessage += "After what seemed to be an eternity during which the creature seemed to be ejoying the growing pain in your stomach, it turns around and runs towards a new victim. You see Bork, the weaponsmith ferociously fighting two of the demons. \nYou see a third one sneaking up behind him. You want to scream a warning, but no sound comes out of your mouth. All there is is pain.\n";
@@ -406,7 +417,7 @@ public class GameEngine
                 return;
             }
             if(!fromBack)
-                history.push(command);
+                //history.push(command);
             player.setCurrentRoom(nextRoom);
             printLocationInfo();
             if(player.getCurrentRoom() == basement)
@@ -444,10 +455,11 @@ public class GameEngine
     /**
      * get the history size
      * @return history size
-     */
+     *
     public Integer getHistoryLenght(){
         return history.size();
     }
+    */
 
     /**
      * "Quit" was entered. Check the rest of the command to see
@@ -466,7 +478,7 @@ public class GameEngine
         }
     }
 
-    private void endGame()
+    public void endGame()
     {
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
@@ -483,5 +495,13 @@ public class GameEngine
         gui.println("The chicken dashes towards you. You panick and try to climb back up the rotten ladder. But as you start climbing, it collapses under your weight. \n Did you really need to eat this much last night ? You regret it now anyway. The chicken clucks in a very scary way. Defenceless, you get poked to death by the giant chaotic chicken. A miserable way to die, you rekon.\n  - You fell into the evil chicken's trap. Be more carefull next time.");
         endGame();
         return;
+    }
+
+    public void setWarned(){
+      warned = true;
+    }
+
+    public String getLanguage(){
+      return language;
     }
 }

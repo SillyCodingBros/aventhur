@@ -1,8 +1,10 @@
+import java.util.Stack;
+
 /**
  * Class Player - a player in the game
  *
  * This class represents the global state of the player
- * This includes location, stats, items...  
+ * This includes location, stats, items...
  *
  **/
 
@@ -16,9 +18,13 @@ public class Player{
     private ItemList inventory;
     private Boolean won = false;
     private Room saveRoom = null;
+    private Stack <Command> history;
+    private boolean fromBack;
 
     public Player(){
         inventory = new ItemList();
+        history = new Stack<Command>();
+        fromBack = false;
     }
     /**
     * Return the current room.
@@ -130,12 +136,12 @@ public class Player{
         }
 
         inventory.removeItem(toEat);
-        
+
         return str.toString();
       }
-    
+
     /**
-     * Either charges or fires the beamer based on its cooldown value. Upon charge, the current room is saved 
+     * Either charges or fires the beamer based on its cooldown value. Upon charge, the current room is saved
      * Upon fire, the current room is set the the saved virable and the cooldown is reset for a new charge.
      * @return Utility String to be displayed by caller
      */
@@ -151,7 +157,7 @@ public class Player{
                 retStr = "The beamer start emiting a dim blue light. It is now linked to this room.\n";
                 return retStr;
             }
-            // case beamer is charged  
+            // case beamer is charged
             else {
                 beamer.setCooldown(0);
                 currentRoom = saveRoom;
@@ -163,5 +169,33 @@ public class Player{
             retStr = "Can't use the beamer if I dont have it !\n";
             return retStr;
         }
+    }
+
+    public boolean isHistoryEmpty(){
+      return history.size() == 0;
+    }
+
+    public Command getLastMove(){
+      return history.get(history.size() - 1);
+    }
+
+    public void historyAdd(Command command){
+      history.add(command);
+    }
+
+    public void historyPop(){
+      history.pop();
+    }
+
+    public boolean isMaxMovesReached(){
+      return history.size() == 666;
+    }
+
+    public void setFromBack(Boolean bool){
+      fromBack = bool;
+    }
+
+    public boolean getFromBack(){
+      return fromBack;
     }
 }

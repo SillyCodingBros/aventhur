@@ -17,3 +17,7 @@
 
   Insert Code //TransporterRoom & RoomRandomizer & déclaration d'une transporterRoom dans GameEngine
 
+7.47 - Nouvelle architecture avec Coommand en classe abstraite
+
+  Insert Code //Tout les nouvelles classes commandes (voir commit pour détail ailleurs)
+

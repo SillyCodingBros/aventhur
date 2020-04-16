@@ -37,6 +37,7 @@ public class Parser
     {
         String word1;
         String word2;
+        Command cmd;
 
         // Find up to two words on the line.
         StringTokenizer tokenizer = new StringTokenizer(inputLine);
@@ -55,12 +56,13 @@ public class Parser
 
         // Now check whether this word is known. If so, create a command
         // with it. If not, create a "null" command (for unknown command).
+        cmd = commands.getCommandWord(word1);
         if(commands.isCommand(word1)) {
-            return new Command(commands.getCommandWord(word1), word2);
+          if (word2 != null) {
+            cmd.setSecondWord(word2);
+          }
         }
-        else {
-            return new Command(CommandWord.UNKNOWN, word2);
-        }
+        return cmd;
     }
 
     /**

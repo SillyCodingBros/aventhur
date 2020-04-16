@@ -80,7 +80,7 @@ public class ItemList
     public String inventoryToString()
     {
       if (items.isEmpty()){
-        return "NullPointerExecption: Nothing in the pockets!";
+        return "NullPointerException: Nothing in the pockets!";
       }
       else {
         String inventory;

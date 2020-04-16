@@ -17,9 +17,9 @@
  * @version 2006.03.30
  */
 
-public class Command
+public abstract class Command
 {
-    private CommandWord commandWord;
+    //private CommandWord commandWord;
     private String secondWord;
 
     /**
@@ -29,20 +29,22 @@ public class Command
      *                  was not recognised.
      * @param secondWord The second word of the command. May be null.
      */
-    public Command(CommandWord commandWord, String secondWord)
+    public Command(/*CommandWord commandWord, String secondWord*/)
     {
-      this.commandWord = commandWord;
-      this.secondWord = secondWord;
+      //this.commandWord = commandWord;
+      //this.secondWord = secondWord;
+      this.secondWord = null;
     }
 
     /**
      * Return the command word (the first word) of this command.
      * @return The command word.
-     */
+
     public CommandWord getCommandWord()
     {
         return commandWord;
     }
+    */
 
     /**
      * @return The second word of this command. Returns null if there was no
@@ -54,12 +56,23 @@ public class Command
     }
 
     /**
-     * @return true if this command was not understood.
+     * Define the second word of this command (the word
+     * entered after the command word). Null indicates that
+     * there was no second word.
      */
+    public void setSecondWord(String secondWord)
+    {
+        this.secondWord = secondWord;
+    }
+
+    /**
+     * @return true if this command was not understood.
+
     public boolean isUnknown()
     {
         return (commandWord == CommandWord.UNKNOWN);
     }
+    */
 
     /**
      * @return true if the command has a second word.
@@ -68,5 +81,13 @@ public class Command
     {
         return (secondWord != null);
     }
+
+    /**
+     * Execute this command. A flag is returned indicating whether
+     * the game is over as a result of this command.
+     *
+     *
+     */
+    public abstract void execute(Player player, GameEngine engine, UserInterface gui);
 }
 
