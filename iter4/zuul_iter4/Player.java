@@ -106,7 +106,7 @@ public class Player{
     }
 
     /**
-     * Eats the item if it can be. Eating adds stats to the player based 
+     * Eats the item if it can be. Eating adds stats to the player based
      * on item attributes.
      * @param toEat the item to eat
      * @return String informing the player about applied changes
@@ -195,7 +195,7 @@ public class Player{
 
     /**
      * Adds a command to the history
-     * @param the command to be added
+     * @param command the command to be added
      */
     public void historyAdd(Command command){
       history.add(command);
@@ -219,7 +219,7 @@ public class Player{
     /**
      * Sets the fromback variable (for when movement was done by back command
      * and not by the user)
-     * @param new boolean value for fromback
+     * @param bool new boolean value for fromback
      */
     public void setFromBack(Boolean bool){
       fromBack = bool;
