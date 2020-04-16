@@ -31,6 +31,7 @@ public class Room
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
+     * @param image The image path.
      */
     public Room(String description, String image)
     {
