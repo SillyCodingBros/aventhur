@@ -17,14 +17,13 @@ public class Game
 {
   private UserInterface gui;
   private GameEngine engine;
-  //private Player player;
+
   /**
    * Create the game and initialise its internal map.
    * @param language The language "en" or "fr".
    */
   public Game(String language)
   {
-    //player = new Player();
     engine = new GameEngine(language);
     gui = new UserInterface(engine, language);
     engine.setGUI(gui);
