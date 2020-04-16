@@ -201,6 +201,14 @@ public class GameEngine
         if(command == null) {
             gui.println("I don't know what you mean...");
         } else {
+            if(warned && player.getCurrentRoom() == basement){
+                if(!commandLine.equalsIgnoreCase("use beamer") ||
+                   (commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer") == null) || 
+                   (commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer").getCooldown() != 1)){
+                       chickenDeath();
+                       return;
+                   }
+            }
             command.execute(player, this, gui);
         }
 
