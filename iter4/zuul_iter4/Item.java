@@ -229,6 +229,9 @@ public class Item
       coolDown = cool;
   }
 
+  /**
+   * marks the item as eatable
+   */
   public void setEatable(){
     eatable = true;
   }

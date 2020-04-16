@@ -24,7 +24,6 @@ public class CommandWords
      */
     public CommandWords(String language)
     {
-      //"go", "quit", "help", "look", "eat", "back", "test", "pick", "drop", "use"
       validCommands = new HashMap<String, Command>();
       translations = new HashMap<CommandWord, String>();
       if (language.equals("en")){
