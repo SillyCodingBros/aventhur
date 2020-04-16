@@ -82,10 +82,9 @@ public class CommandWords
     }
 
     /**
-     * Find the CommandWord associated with a command word.
-     * @param commandWord The word to look up.
-     * @return The CommandWord correspondng to commandWord, or UNKNOWN
-     *         if it is not a valid command word.
+     * Find the Command associated with a command word.
+     * @param commandStr The word to look up.
+     * @return The corresponding Command or null.
      */
     public Command getCommandWord(String commandStr)
     {
@@ -100,6 +99,7 @@ public class CommandWords
 
     /**
      * Check whether a given String is a valid command word.
+     * @param aString The string to check for.
      * @return true if it is, false if it isn't.
      */
     public boolean isCommand(String aString)
@@ -123,7 +123,7 @@ public class CommandWords
 
     /**
     * Get String for a CommandWord.
-    * @param cw The CommandWord.
+    * @param cmd The CommandWord.
     * @return String of the given CommandWord.
     */
     public String commandWordToString(CommandWord cmd)
@@ -132,7 +132,7 @@ public class CommandWords
     }
 
     /*
-     * Print all valid commands to System.out.
+     * Return all valid commands as a String.
      */
     public String getAllCommands()
     {
