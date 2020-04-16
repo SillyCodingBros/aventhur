@@ -63,7 +63,6 @@ public class CommandGo extends Command
           if(player.getCurrentRoom() == engine.roomMap.get("basement")){
             engine.setWarned();
             gui.println("Affraid by the bird, you step back. It walks towadrs you. You feel in danger and that it could attack you anytime. \nWhat should you do ?");
-            return;
           }
           if(player.getCurrentRoom().getImageName() != null) {
               gui.showImage(player.getCurrentRoom().getImageName());

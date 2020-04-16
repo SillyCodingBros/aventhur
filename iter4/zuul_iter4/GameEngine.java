@@ -390,7 +390,7 @@ public class GameEngine
      * Try to go to one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    private void goRoom(Command command, Boolean fromBack)
+    /*private void goRoom(Command command, Boolean fromBack)
     {
         String errorMessage;
         if(!command.hasSecondWord()) {
@@ -434,7 +434,7 @@ public class GameEngine
                 gui.showImage(player.getCurrentRoom().getImageName());
             }
         }
-    }
+    }*/
 
     /**
      * "look" was entered, rewrite to terminal the description of current room
@@ -494,15 +494,13 @@ public class GameEngine
     }
 
     private void chickenWarn(){
-        warned = true;
+        setWarned();
         gui.println("Affraid by the bird, you step back. It walks towadrs you. You feel in danger and that it could attack you anytime. \nWhat should you do ?");
-        return;
     }
 
     private void chickenDeath(){
         gui.println("The chicken dashes towards you. You panick and try to climb back up the rotten ladder. But as you start climbing, it collapses under your weight. \n Did you really need to eat this much last night ? You regret it now anyway. The chicken clucks in a very scary way. Defenceless, you get poked to death by the giant chaotic chicken. A miserable way to die, you rekon.\n  - You fell into the evil chicken's trap. Be more carefull next time.");
         endGame();
-        return;
     }
 
     public void setWarned(){

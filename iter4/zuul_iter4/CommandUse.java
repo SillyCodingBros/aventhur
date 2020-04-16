@@ -22,8 +22,10 @@ public class CommandUse extends Command
     {
       if(hasSecondWord()){
         if(getSecondWord().equals("beamer")){
-          player.setFromBack(false);
-          player.historyAdd(this);
+          if(player.getInventory().hasItem("beamer").getCooldown() == 1){
+            player.setFromBack(false);
+            player.historyAdd(this);
+          }
           gui.println(player.useBeamer());
           if(player.getCurrentRoom().getImageName() != null) {
             gui.showImage(player.getCurrentRoom().getImageName());
