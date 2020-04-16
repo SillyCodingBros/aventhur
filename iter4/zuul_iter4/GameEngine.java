@@ -1,10 +1,4 @@
 import java.util.HashMap;
-import java.util.Stack;
-import java.nio.file.Path;
-import java.nio.file.Files;
-import java.nio.file.FileSystems;
-import java.util.stream.Stream;
-import java.io.IOException;
 
 /**
  *  This class is part of the "World of Zuul" application.
@@ -22,7 +16,6 @@ public class GameEngine
 {
     private Parser parser;
     public HashMap <String, Room> roomMap;
-    //public Stack <Command> history;
     private UserInterface gui;
     private Player player;
     private String language;
@@ -30,6 +23,7 @@ public class GameEngine
     private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
     private TransporterRoom transporter;
     private CommandWords cmdWords;
+
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
@@ -43,7 +37,6 @@ public class GameEngine
       createRooms();
       parser = new Parser(language);
       cmdWords = new CommandWords(language);
-      //history = new Stack<Command>();
     }
 
     /**
@@ -67,7 +60,7 @@ public class GameEngine
                                 "\n"+
                                 "Type '"+ cmdWords.commandWordToString(CommandWord.HELP)+"' anytime to see commands.\n";
         gui.println(welcomeMessage);
-        printLocationInfo();
+        gui.println(player.getCurrentRoom().getLongDescription());
         gui.showImage(player.getCurrentRoom().getImageName());
     }
 
@@ -184,14 +177,6 @@ public class GameEngine
     }
 
     /**
-     * Print out room's description and exists.
-     */
-    private void printLocationInfo()
-    {
-      gui.println(player.getCurrentRoom().getLongDescription());
-    }
-
-    /**
      * Given a command, process (that is: execute) the command.
      * @param command The command to be processed.
      * @return true If the command ends the game, false otherwise.
@@ -206,100 +191,26 @@ public class GameEngine
             gui.println("I don't know what you mean...");
         } else {
             if(warned && player.getCurrentRoom() == basement){
-                //if(!commandLine.equalsIgnoreCase("use beamer") ||
                 if(!commandLine.equalsIgnoreCase(cmdWords.commandWordToString(CommandWord.USE)+ " beamer") ||
-                    player.getInventory().hasItem("beamer") == null || 
+                    player.getInventory().hasItem("beamer") == null ||
                     player.getInventory().hasItem("beamer").getCooldown() != 1){
 
-                   //(commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer") == null) || 
-                   //(commandLine.equalsIgnoreCase("use beamer") && player.getInventory().hasItem("beamer").getCooldown() != 1)){
-                       chickenDeath();
-                       return;
-                   }
+                  chickenDeath();
+                  return;
+                }
             }
             command.execute(player, this, gui);
         }
     }
 
-    // implementations of user commands:
-
     /**
-     * Print out some help information.
-     * Here we print some stupid, cryptic message and a list of the
-     * command words.
-     */
-    private void printHelp()
-    {
-      String helpString = "Your commands are : \n" + parser.showCommands();
-      gui.println(helpString);
-    }
-
-    /**
-     * "look" was entered, rewrite to terminal the description of current room
-     */
-    private void look()
-    {
-        gui.println(player.getCurrentRoom().getItemList().looking());
-    }
-
-    /**
-     * Execute command in given script
-     */
-    private void test_with_script(Command command)
-    {
-        Path filePath = FileSystems.getDefault().getPath("scripts", command.getSecondWord());
-        try (Stream<String> lines = Files.lines( filePath ))
-        {
-        	lines.forEachOrdered(item->interpretCommand(item));
-        }
-        catch (IOException e)
-        {
-        	gui.println(e.toString());
-        }
-    }
-
-    /**
-     * get the history size
-     * @return history size
-     *
-    public Integer getHistoryLenght(){
-        return history.size();
-    }
-    */
-
-    /**
-     * "Quit" was entered. Check the rest of the command to see
-     * whether we really quit the game.
-     * @return true, if this command quits the game, false otherwise.
-     */
-    private boolean quit(Command command)
-    {
-        if(command.hasSecondWord()) {
-            String quitMessage = "Quit what?";
-            gui.println(quitMessage);
-            return false;
-        }
-        else {
-            return true;  // signal that we want to quit
-        }
-    }
-
-    /**
-     * Displays goodby message
+     * Displays goodbye message
      */
     public void endGame()
     {
         gui.println("Thank you for playing.  Good bye.");
         gui.enable(false);
         return;
-    }
-
-    /**
-     * Sets the warning variable and warns user of imminent death from chicken
-     */
-    private void chickenWarn(){
-        setWarned();
-        gui.println("Affraid by the bird, you step back. It walks towadrs you. You feel in danger and that it could attack you anytime. \nWhat should you do ?");
     }
 
     /**
