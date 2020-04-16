@@ -37,16 +37,6 @@ public abstract class Command
     }
 
     /**
-     * Return the command word (the first word) of this command.
-     * @return The command word.
-
-    public CommandWord getCommandWord()
-    {
-        return commandWord;
-    }
-    */
-
-    /**
      * @return The second word of this command. Returns null if there was no
      * second word.
      */
@@ -66,15 +56,6 @@ public abstract class Command
     }
 
     /**
-     * @return true if this command was not understood.
-
-    public boolean isUnknown()
-    {
-        return (commandWord == CommandWord.UNKNOWN);
-    }
-    */
-
-    /**
      * @return true if the command has a second word.
      */
     public boolean hasSecondWord()
@@ -85,8 +66,6 @@ public abstract class Command
     /**
      * Execute this command. A flag is returned indicating whether
      * the game is over as a result of this command.
-     *
-     *
      */
     public abstract void execute(Player player, GameEngine engine, UserInterface gui);
 }
