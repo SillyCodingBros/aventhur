@@ -16,6 +16,7 @@ public class TransporterRoom extends Room
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
+     * @param image the path to the room image
      */
     public TransporterRoom(String description, String image)
     {
