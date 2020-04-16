@@ -14,7 +14,7 @@
      * Create a door to door block rooms
      * @param key The room's description.
      */
-    public Door(Item key, String description /*, Boolean trap, Room r1, Room r2, Boolean direction*/){
+    public Door(Item key, String description){
         this.isLocked = true;
         this.unlockItem = key;
         this.description = description;
@@ -38,6 +38,6 @@
      */
     public String getDescription()
     {
-        return description;
+      return description;
     }
  }
