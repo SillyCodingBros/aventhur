@@ -84,8 +84,9 @@ public class ItemList
       }
       else {
         String inventory;
-        StringBuilder sb = new StringBuilder("");
+        StringBuilder sb = new StringBuilder("\n\tInventory:\n");
         for (Item item : items) {
+          sb.append("\t• ");
           sb.append(item.getName());
           sb.append(" ~ ");
           sb.append(item.getWeight());
@@ -93,6 +94,5 @@ public class ItemList
         }
         return sb.toString();
       }
-
     }
 }
