@@ -19,20 +19,13 @@
 
 public abstract class Command
 {
-    //private CommandWord commandWord;
     private String secondWord;
 
     /**
-     * Create a command object. First and second words must be supplied, but
-     * the second may be null.
-     * @param commandWord The CommandWord. UNKNOWN if the command word
-     *                  was not recognised.
-     * @param secondWord The second word of the command. May be null.
+     * Create a command object.
      */
-    public Command(/*CommandWord commandWord, String secondWord*/)
+    public Command()
     {
-      //this.commandWord = commandWord;
-      //this.secondWord = secondWord;
       this.secondWord = null;
     }
 
@@ -64,8 +57,7 @@ public abstract class Command
     }
 
     /**
-     * Execute this command. A flag is returned indicating whether
-     * the game is over as a result of this command.
+     * Run this function to execute the command.
      */
     public abstract void execute(Player player, GameEngine engine, UserInterface gui);
 }
