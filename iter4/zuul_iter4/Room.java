@@ -24,7 +24,6 @@ public class Room
     private HashMap <String, Room> exits;
     private HashMap <String, Door> doors;
     private String imageName;
-    //private Collection <Item> items;
     private ItemList items;
 
     /**
@@ -38,20 +37,9 @@ public class Room
         this.description = description;
         exits = new HashMap<String, Room>();
         doors = new HashMap<String, Door>();
-        //items = new ArrayList<Item>();
         items = new ItemList();
         imageName = image;
     }
-
-
-
-    /**
-    * Adds an item to the room
-    * @param item The item to be added.
-    */
-    //public void addItem(Item item){
-    //  items.add(item);
-    //}
 
     /**
      * return the room's itemlist
@@ -151,26 +139,6 @@ public class Room
     {
       return "You are " + description + ".\n" + getExitString();
     }
-
-    /**
-     * Return your feeling after inspection of the room.
-     * @return Unusal things who might notice in a string.
-     */
-    /*public String looking()
-    {
-      if (items.isEmpty()){
-        return "Nothing particular in here";
-      }
-      else {
-        String found;
-        StringBuilder sb = new StringBuilder("");
-        for (Item item : items) {
-          sb.append(item.getComment());
-          sb.append(item.getLongDescription());
-        }
-        return sb.toString();
-      }
-    }*/
 
     /**
      * Return a string describing the room's image name
