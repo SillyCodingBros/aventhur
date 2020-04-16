@@ -12,7 +12,8 @@
 
     /**
      * Create a door to door block rooms
-     * @param key The room's description.
+     * @param key The unlocking item.
+     * @param description The room's description.
      */
     public Door(Item key, String description){
         this.isLocked = true;
