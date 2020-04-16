@@ -22,7 +22,6 @@ public class GameEngine
 {
     private Parser parser;
     public HashMap <String, Room> roomMap;
-    //public Stack <Command> history;
     private UserInterface gui;
     private Player player;
     private String language;
@@ -30,6 +29,7 @@ public class GameEngine
     private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
     private TransporterRoom transporter;
     private CommandWords cmdWords;
+
     /**
      * Constructor for objects of class GameEngine
      * Create the game and initialise its internal map.
@@ -43,7 +43,6 @@ public class GameEngine
       createRooms();
       parser = new Parser(language);
       cmdWords = new CommandWords(language);
-      //history = new Stack<Command>();
     }
 
     /**
