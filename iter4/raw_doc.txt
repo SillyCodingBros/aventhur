@@ -33,6 +33,9 @@
 
 7.54 - Le jeu peut être lancé sans BlueJ "javac Game.java && java Game"
 
-7.58 -
+7.58 - La création du jar et son lancement
+
+  "jar cfm aventhür.jar MANIFEST Game.class pkg_command/*.class pkg_game_logic/*.class pkg_game_entities/*.class pictures/* scripts/*"
+  "java -jar aventhür.jar"
 
 7.59 -
