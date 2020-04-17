@@ -29,9 +29,9 @@
 
 7.47.1 - Répartition des Classes en package
 
-7.53 -
+7.53 - Ajout d'un main dans la classe Game
 
-7.54 -
+7.54 - Le jeu peut être lancé sans BlueJ "javac Game.java && java Game"
 
 7.58 -
 

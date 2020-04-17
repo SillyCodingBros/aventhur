@@ -195,7 +195,7 @@ public class GameEngine
      */
     public void interpretCommand(String commandLine)
     {
-        gui.println(commandLine);
+        gui.println("\n> " + commandLine + "\n");
 
         Command command = parser.getCommand(commandLine);
 
@@ -229,7 +229,7 @@ public class GameEngine
      * Killed by chicken, displays death message and ends the game
      */
     private void chickenDeath(){
-        gui.println("The chicken dashes towards you. You panick and try to climb back up the rotten ladder. But as you start climbing, it collapses under your weight. \n Did you really need to eat this much last night ? You regret it now anyway. The chicken clucks in a very scary way. Defenceless, you get poked to death by the giant chaotic chicken. A miserable way to die, you rekon.\n  - You fell into the evil chicken's trap. Be more carefull next time.");
+        gui.println("The chicken dashes towards you. You panick and try to climb back up the rotten ladder.\n But as you start climbing, it collapses under your weight. \n Did you really need to eat this much last night ? You regret it now anyway.\n The chicken clucks in a very scary way. Defenceless, you get poked to death by the giant chaotic chicken.\n A miserable way to die, you rekon.\n You fell into the evil chicken's trap. Be more carefull next time.");
         endGame();
     }
 

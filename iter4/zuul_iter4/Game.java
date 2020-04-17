@@ -1,3 +1,7 @@
+import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
+
 import pkg_game_logic.UserInterface;
 import pkg_game_logic.GameEngine;
 
@@ -31,4 +35,36 @@ public class Game
     gui = new UserInterface(engine, language);
     engine.setGUI(gui);
   }
+
+  public static void main(String[] args) {
+    System.out.println("Choose a language\n\t(1) English\n\t(2) Français\n");
+    Scanner scan = new Scanner(System.in);
+    int number;
+    while (true){
+      System.out.print("Enter the Number: ");
+      if (scan.hasNextInt()) {
+        number = scan.nextInt() ;
+        if (number > 0 && number < 3) {
+          break;
+        }
+        else {
+          scan.nextLine();
+          System.out.println("Input has to be a valid number!\n");
+        }
+      }
+      else {
+        scan.nextLine();
+        System.out.println("Input has to be a number!\n");
+      }
+    }
+    if (number == 1) {
+      new Game("en");
+    }
+    else{
+      new Game("fr");
+    }
+  }
 }
+
+
+
