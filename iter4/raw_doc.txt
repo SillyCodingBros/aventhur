@@ -13,11 +13,26 @@
 
    Insert Code //Door & Room tout ce qui touche aux portes & GameEngine condition dans goRoom
 
+7.45.1 -
+
 7.46 - ajout de la possibilité de créer des "transporter rooms"
 
   Insert Code //TransporterRoom & RoomRandomizer & déclaration d'une transporterRoom dans GameEngine
+
+4.46.2 -
+
+7.46.3 -
 
 7.47 - Nouvelle architecture avec Coommand en classe abstraite
 
   Insert Code //Tout les nouvelles classes commandes (voir commit pour détail ailleurs)
 
+7.47.1 -
+
+7.53 -
+
+7.54 -
+
+7.58 -
+
+7.59 -
