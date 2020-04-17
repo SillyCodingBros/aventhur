@@ -27,7 +27,7 @@
 
   Insert Code //Tout les nouvelles classes commandes (voir commit pour détail ailleurs)
 
-7.47.1 -
+7.47.1 - Répartition des Clases en package
 
 7.53 -
 

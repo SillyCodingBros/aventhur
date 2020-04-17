@@ -1,3 +1,5 @@
+package pkg_game_entities;
+
 /**
  * Door class - a door separating two rooms
  *

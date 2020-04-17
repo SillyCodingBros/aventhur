@@ -1,3 +1,5 @@
+package pkg_game_entities;
+
 import java.util.Random;
 
 /**

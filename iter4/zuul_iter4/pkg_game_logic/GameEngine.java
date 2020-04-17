@@ -1,4 +1,16 @@
+package pkg_game_logic;
+
 import java.util.HashMap;
+
+import pkg_game_logic.Parser;
+import pkg_command.Command;
+import pkg_command.CommandWord;
+import pkg_command.CommandWords;
+import pkg_game_entities.Player;
+import pkg_game_entities.Door;
+import pkg_game_entities.Item;
+import pkg_game_entities.Room;
+import pkg_game_entities.TransporterRoom;
 
 /**
  *  This class is part of the "World of Zuul" application.

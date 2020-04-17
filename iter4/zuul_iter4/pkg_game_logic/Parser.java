@@ -1,4 +1,9 @@
+package pkg_game_logic;
+
 import java.util.StringTokenizer;
+
+import pkg_command.Command;
+import pkg_command.CommandWords;
 
 /**
  * This class is part of the "World of Zuul" application.

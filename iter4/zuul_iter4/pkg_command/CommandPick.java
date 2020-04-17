@@ -1,3 +1,10 @@
+package pkg_command;
+
+import pkg_game_logic.UserInterface;
+import pkg_game_logic.GameEngine;
+import pkg_game_entities.Player;
+import pkg_game_entities.Item;
+
 
 /**
  * Implementation of the 'pick' user command.

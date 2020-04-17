@@ -1,4 +1,8 @@
+package pkg_game_entities;
+
 import java.util.Stack;
+
+import pkg_command.Command;
 
 /**
  * Class Player - a player in the game

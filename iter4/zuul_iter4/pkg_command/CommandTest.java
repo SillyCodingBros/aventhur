@@ -1,8 +1,14 @@
+package pkg_command;
+
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.FileSystems;
 import java.util.stream.Stream;
 import java.io.IOException;
+
+import pkg_game_logic.UserInterface;
+import pkg_game_logic.GameEngine;
+import pkg_game_entities.Player;
 
 /**
  * Implementation of the 'test' user command.

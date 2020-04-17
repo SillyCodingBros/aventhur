@@ -1,3 +1,9 @@
+package pkg_command;
+
+import pkg_game_logic.UserInterface;
+import pkg_game_logic.GameEngine;
+import pkg_game_entities.Player;
+
 /**
  * This class is part of the "World of Zuul" application.
  * "World of Zuul" is a very simple, text based adventure game.

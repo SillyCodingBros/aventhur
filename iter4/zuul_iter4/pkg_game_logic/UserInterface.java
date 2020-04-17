@@ -1,8 +1,13 @@
+package pkg_game_logic;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.awt.image.*;
+
+import pkg_command.CommandWord;
+import pkg_command.CommandWords;
 
 /**
  * This class implements a simple graphical user interface with a text entry

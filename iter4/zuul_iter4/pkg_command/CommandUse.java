@@ -1,3 +1,9 @@
+package pkg_command;
+
+import pkg_game_logic.UserInterface;
+import pkg_game_logic.GameEngine;
+import pkg_game_entities.Player;
+
 
 /**
  * Implementation of the 'use' user command.

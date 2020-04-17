@@ -1,3 +1,5 @@
+package pkg_command;
+
 /**
  * Representations for all the valid command words for the game.
  *

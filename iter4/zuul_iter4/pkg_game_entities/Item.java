@@ -1,3 +1,5 @@
+package pkg_game_entities;
+
 /**
  * Class Item - an item in the game
  *
