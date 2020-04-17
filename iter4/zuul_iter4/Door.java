@@ -3,6 +3,8 @@
  *
  * This class represents doors
  *
+ * @author ORNIACKI Thomas
+ * @version 2020.04
  **/
 
  public class Door {

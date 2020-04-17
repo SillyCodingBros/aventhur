@@ -6,6 +6,8 @@ import java.util.Stack;
  * This class represents the global state of the player
  * This includes location, stats, items...
  *
+ * @author LEGOUEIX Nicolas and ORNIACKI Thomas
+ * @version 2020.04
  **/
 
 public class Player{

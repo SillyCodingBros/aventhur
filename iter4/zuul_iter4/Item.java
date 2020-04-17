@@ -5,6 +5,8 @@
  * it could have a description, a long description,
  * a weight, a price. Value set -1 if not used.
  *
+ * @author  LEGOUEIX Nicolas
+ * @version 2020.04
  **/
 
 public class Item

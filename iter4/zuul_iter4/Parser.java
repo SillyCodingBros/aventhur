@@ -33,7 +33,7 @@ public class Parser
     /**
      * Handles user inputs to transform it to usable Command
      * @param inputLine text inputed by the user.
-     * @return The next command from the user.
+     * @return The next Command from the user.
      */
     public Command getCommand(String inputLine)
     {

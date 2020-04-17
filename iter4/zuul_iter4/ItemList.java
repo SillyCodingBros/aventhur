@@ -4,8 +4,8 @@ import java.util.ArrayList;
 /**
  * Gestion de liste d'Item
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author ORNIACKI Thomas
+ * @version 2020.04
  */
 public class ItemList
 {
