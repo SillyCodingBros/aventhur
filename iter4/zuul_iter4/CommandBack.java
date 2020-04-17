@@ -1,9 +1,9 @@
 
 /**
- * Décrivez votre classe CommandBack ici.
+ * Implementation of the 'back' user command.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author LEGOUEIX Nicolas
+ * @version 2020.04
  */
 public class CommandBack extends Command
 {
@@ -15,8 +15,7 @@ public class CommandBack extends Command
     }
 
     /**
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message. Returns always 'false'.
+     * Try to go to back to the previous room.
      */
     public void execute(Player player, GameEngine engine, UserInterface gui)
     {

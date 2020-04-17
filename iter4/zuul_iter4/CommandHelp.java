@@ -1,20 +1,13 @@
 
 /**
- * Décrivez votre classe CommandHelp ici.
+ * Implementation of the 'help' user command.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author ORNIACKI Thomas
+ * @version 2020.04
  */
 public class CommandHelp extends Command
 {
     private CommandWords words;
-
-    /**
-     * Constructeur d'objets de classe CommandHelp
-     */
-    public CommandHelp()
-    {
-    }
 
     /**
      * Constructeur d'objets de classe CommandHelp
@@ -25,8 +18,7 @@ public class CommandHelp extends Command
     }
 
     /**
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message. Returns always 'false'.
+     * Displays all game commands in previously choosen language.
      */
     public void execute(Player player, GameEngine engine, UserInterface gui)
     {

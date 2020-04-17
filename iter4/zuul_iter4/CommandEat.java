@@ -1,9 +1,9 @@
 
 /**
- * Décrivez votre classe CommandEat ici.
+ * Implementation of the 'eat' user command.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author LEGOUEIX Nicolas
+ * @version 2020.04
  */
 public class CommandEat extends Command
 {
@@ -15,8 +15,7 @@ public class CommandEat extends Command
     }
 
     /**
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message. Returns always 'false'.
+     * Try to eat a consumable from player's inventory.
      */
     public void execute(Player player, GameEngine engine, UserInterface gui)
     {

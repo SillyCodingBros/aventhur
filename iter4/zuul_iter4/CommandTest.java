@@ -5,10 +5,10 @@ import java.util.stream.Stream;
 import java.io.IOException;
 
 /**
- * Décrivez votre classe CommandTest ici.
+ * Implementation of the 'test' user command.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author ORNIACKI Thomas
+ * @version 2020.04
  */
 public class CommandTest extends Command
 {
@@ -20,8 +20,7 @@ public class CommandTest extends Command
     }
 
     /**
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message. Returns always 'false'.
+     * Runs the given script by interpretting it line by line.
      */
     public void execute(Player player, GameEngine engine, UserInterface gui)
     {

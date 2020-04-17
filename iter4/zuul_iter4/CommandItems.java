@@ -1,9 +1,9 @@
 
 /**
- * Décrivez votre classe CommandItems ici.
+ * Implementation of the 'items' user command.
  *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
+ * @author LEGOUEIX Nicolas and ORNIACKI Thomas
+ * @version 2020.04
  */
 public class CommandItems extends Command
 {
@@ -15,8 +15,7 @@ public class CommandItems extends Command
     }
 
     /**
-     * Try to go to one direction. If there is an exit, enter the new
-     * room, otherwise print an error message. Returns always 'false'.
+     * Displays every items of player's inventory.
      */
     public void execute(Player player, GameEngine engine, UserInterface gui)
     {
