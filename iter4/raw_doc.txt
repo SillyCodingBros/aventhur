@@ -23,11 +23,11 @@
 
 7.46.3 - Commentaire mis à jour -ish
 
-7.47 - Nouvelle architecture avec Coommand en classe abstraite
+7.47 - Nouvelle architecture avec Command en classe abstraite
 
   Insert Code //Tout les nouvelles classes commandes (voir commit pour détail ailleurs)
 
-7.47.1 - Répartition des Clases en package
+7.47.1 - Répartition des Classes en package
 
 7.53 -
 
