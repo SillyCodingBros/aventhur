@@ -1,6 +1,7 @@
 package pkg_game_logic;
 
 import java.util.HashMap;
+import java.util.Stack;
 
 import pkg_game_logic.Parser;
 import pkg_command.Command;
@@ -35,6 +36,7 @@ public class GameEngine
     private Room attic, farm, pigs, pub, storageRoom, fountain, market, forge, home, entrance, abandonnedHouse, basement;
     private TransporterRoom transporter;
     private CommandWords cmdWords;
+    private Stack <String> history;
 
     /**
      * Constructor for objects of class GameEngine
@@ -49,6 +51,7 @@ public class GameEngine
       createRooms();
       parser = new Parser(language);
       cmdWords = new CommandWords(language);
+      history = new Stack<String>();
     }
 
     /**
@@ -70,7 +73,8 @@ public class GameEngine
                                 "Welcome to Aventhür!\n"+
                                 "The Ultimate Adventure Game.\n"+
                                 "\n"+
-                                "Type '"+ cmdWords.commandWordToString(CommandWord.HELP)+"' anytime to see commands.\n";
+                                "Type '"+ cmdWords.commandWordToString(CommandWord.HELP)+"' anytime to see commands.\n"+
+                                "\n /!\\ If you want to load a save do it before anything else! /!\\\n";
         gui.println(welcomeMessage);
         gui.println(player.getCurrentRoom().getLongDescription());
         gui.showImage(player.getCurrentRoom().getImageName());
@@ -211,6 +215,15 @@ public class GameEngine
                   return;
                 }
             }
+            if (!commandLine.startsWith(cmdWords.commandWordToString(CommandWord.SAVE))
+                && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOAD))
+                && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.HELP))
+                && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.ITEMS))
+                && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.TEST))
+                && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOOK))) {
+
+              history.add(commandLine);
+            }
             command.execute(player, this, gui);
         }
     }
@@ -245,5 +258,12 @@ public class GameEngine
      */
     public String getLanguage(){
       return language;
+    }
+
+    /**
+     * returns the command history
+     */
+    public Stack<String> getHistory(){
+      return history;
     }
 }

@@ -41,4 +41,7 @@
   "jar cfm aventhür.jar MANIFEST Game.class pkg_command/*.class pkg_game_logic/*.class pkg_game_entities/*.class pictures/* scripts/*"
   "java -jar aventhür.jar"
 
-7.59 -
+7.59 - Add Save & Load
+
+  Insert Code //CoomandSave & CommandLoad & CommandWord & CommandWords & GameEngine: interpretCommand()
+  voir commit pour le détail

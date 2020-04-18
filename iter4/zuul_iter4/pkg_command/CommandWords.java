@@ -41,6 +41,8 @@ public class CommandWords
         translations.put(CommandWord.DROP, "drop");
         translations.put(CommandWord.ITEMS, "items");
         translations.put(CommandWord.USE, "use");
+        translations.put(CommandWord.SAVE, "save");
+        translations.put(CommandWord.LOAD, "load");
 
         validCommands.put("go", new CommandGo());
         validCommands.put("quit", new CommandQuit());
@@ -53,6 +55,8 @@ public class CommandWords
         validCommands.put("drop", new CommandDrop());
         validCommands.put("items", new CommandItems());
         validCommands.put("use", new CommandUse());
+        validCommands.put("save", new CommandSave(this));
+        validCommands.put("load", new CommandLoad());
       }
       else if (language.equals("fr")) {
         //French
@@ -67,6 +71,8 @@ public class CommandWords
         translations.put(CommandWord.DROP, "lacher");
         translations.put(CommandWord.ITEMS, "objets");
         translations.put(CommandWord.USE, "utiliser");
+        translations.put(CommandWord.SAVE, "sauvegarder");
+        translations.put(CommandWord.LOAD, "charger");
 
         validCommands.put("aller", new CommandGo());
         validCommands.put("quitter", new CommandQuit());
@@ -79,6 +85,8 @@ public class CommandWords
         validCommands.put("lacher", new CommandDrop());
         validCommands.put("objets", new CommandItems());
         validCommands.put("utiliser", new CommandUse());
+        validCommands.put("sauvegarder", new CommandSave(this));
+        validCommands.put("charger", new CommandLoad());
 
       }
     }
