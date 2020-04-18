@@ -31,7 +31,10 @@
 
 7.53 - Ajout d'un main dans la classe Game
 
-7.54 - Le jeu peut être lancé sans BlueJ "javac Game.java && java Game"
+7.54 - Le jeu peut être lancé sans BlueJ
+
+    "javac Game.java pkg_command/*.java pkg_game_logic/*.java pkg_game_entities/*.java"
+    "java Game"
 
 7.58 - La création du jar et son lancement
 
