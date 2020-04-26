@@ -18,7 +18,7 @@
     stringstyle=\color{red}, % string color
     breaklines=true
 }
-\author{LEGOUEIX Nicolas - ORNIACKI Thomas\\ COTREZ Leo - QUERIC Yann\\~\\ Groupe 3\\~\\Ecrit par LEGOUEIX Nicolas}
+\author{LEGOUEIX Nicolas - ORNIACKI Thomas\\ COTREZ Leo - QUERIC Yann\\~\\ Groupe 3\\~\\Écrit par LEGOUEIX Nicolas}
 \title{Jeu d'aventure BlueJ - itération 4}
 \begin{document}
 \maketitle
@@ -26,18 +26,18 @@
 \chapter{Itération 1}
 \section{Notre jeu}
 \paragraph{Intrigue}
-Notre jeu d'aventure se déroule dans un monde fantastique dont le nom reste a déterminer. Le jeu commence dans un village, chez ses parents. Sa mère lui fais alors part de l'inquétante disparition du grand père Meurlin. Le vieillard se serait encore enfui de la maison de retraite en hurlant que la fin était proche. Le protagoniste est donc chargé de retrouver son grand père. Il s'averera que ce dernier est en fait le légendaire magicien Khöskîk et qu'il a besoin de votre aide dans le mont Knee pour refermer le portail démonique qui menace de faire déferler les légions du mal sur notre monde.\\~\\
-\paragraph{Quetes secondaires}
-Deux quètes secondaires sont pour le moment prévues : Dans le village, le vieux Elibed a vu toutes ses poules prendre la fuite. On doit alors retrouver 5 poules a travers le vilage, dont une ayant été appercue proche de cette maison dont il émane quelque chose d'inquiétant...
+Notre jeu d'aventure se déroule dans un monde fantastique dont le nom reste a déterminer. Le jeu commence dans un village, chez ses parents. Sa mère lui fais alors part de l’inquiétante disparition du grand père Meurlin. Le vieillard se serait encore enfui de la maison de retraite en hurlant que la fin était proche. Le protagoniste est donc chargé de retrouver son grand père. Il s’avérera que ce dernier est en fait le légendaire magicien Khöskîk et qu'il a besoin de votre aide dans le mont Knee pour refermer le portail démonique qui menace de faire déferler les légions du mal sur notre monde.\\~\\
+\paragraph{Quêtes secondaires}
+Deux quêtes secondaires sont pour le moment prévues : Dans le village, le vieux Elibed a vu toutes ses poules prendre la fuite. On doit alors retrouver 5 poules a travers le village, dont une ayant été aperçue proche de cette maison dont il émane quelque chose d'inquiétant...
 \paragraph{}
 A l'entrée du village, le garde vous propose également d'aller retrouver une flèche magique dans le mont Knee. Cette flèche serait la même qui l'a blessé des années plus tôt, le condamnant a boiter de la jambe gauche pour le reste de sa vie.
-\paragraph{Fonctionalités prévues}
+\paragraph{Fonctionnalités prévues}
 \begin{itemize}
 \item Combat
 \item Inventaire
-\item Stats et bonus (apportées par certains objets et inmpactant le gameplay)
+\item Stats et bonus (apportées par certains objets et impactant le gameplay)
 \item Points de vie
-\item Energie (un déplacement coute de l'énergie, le joueur doit se reposer)
+\item Énergie (un déplacement coûte de l'énergie, le joueur doit se reposer)
 \item Pièges (par trigger et pourcentage de chance de s'activer)
 \item Sales cachées
 \item Commerce
@@ -46,13 +46,13 @@ A l'entrée du village, le garde vous propose également d'aller retrouver une f
 Nous avons pour l'instant 3 zones de jeu : le village, les plaines, et le Mont Knee dont voici les plans (faits via genMyModel)
 \centerline{\includegraphics[scale=0.55]{../../village.png}}
 \paragraph{Le Village}
-En vert figurent les endroits où on peut trouver des quêtes. En rouge figurent les potentielles zones dangereuses, c'est à dire les combats. Certains sont évitables, d'autres non. Les rectangles blancs décrivent les éléments des salles. On peut voir les 5 poules dont une servira d'introduction au combat : la poule du chaos dans la maison abandonnée. Quelques objets sont répartis pour encourager à l'exploration. Le forgeron proposera des armes et armures a vendre, et le barman des objets permetant de regenerer de la vie. Le grenier est en hauteur par raport a la ferme, et la cave inquiétante sous la maison.
+En vert figurent les endroits où on peut trouver des quêtes. En rouge figurent les potentielles zones dangereuses, c'est à dire les combats. Certains sont évitables, d'autres non. Les rectangles blancs décrivent les éléments des salles. On peut voir les 5 poules dont une servira d'introduction au combat : la poule du chaos dans la maison abandonnée. Quelques objets sont répartis pour encourager à l'exploration. Le forgeron proposera des armes et armures a vendre, et le barman des objets permettant de régénérer de la vie. Le grenier est en hauteur par raport a la ferme, et la cave inquiétante sous la maison.
 \centerline{\includegraphics[scale=0.5]{../../plaines.png}}
 \paragraph{Les Plaines}
-Comme pour le village, en rouge figurent les dangers : un camp de bandits occupé, des ronces qui risquent de vous lacérer les pieds a chaque visite de cette salle (probabilité a determiner) ou un Troll qui essaye de vous racketer (perte d'un objet au choix ou combat difficile). Les losanges représentent les choix qui s'offrent au joueur a certains endroits. Il peut ici se baigner dans la rivière pour se regenerer de la vie (peut etre à changer pour des points d'énergie). Il peut aussi, si il est assez malin trouver le bouton dans la grotte des bandits pour découvrir une pièce secrete renfermant du butin utile par exemple pour se battre contre le troll plus loin...
+Comme pour le village, en rouge figurent les dangers : un camp de bandits occupé, des ronces qui risquent de vous lacérer les pieds a chaque visite de cette salle (probabilité a determiner) ou un Troll qui essaye de vous racketter (perte d'un objet au choix ou combat difficile). Les losanges représentent les choix qui s'offrent au joueur a certains endroits. Il peut ici se baigner dans la rivière pour se régénérer de la vie (peut être à changer pour des points d'énergie). Il peut aussi, si il est assez malin trouver le bouton dans la grotte des bandits pour découvrir une pièce secrete renfermant du butin utile par exemple pour se battre contre le troll plus loin...
 \centerline{\includegraphics[scale=0.5]{../../knee.png}}
 \paragraph{Le mont Knee}
-Notre "donjon". Encore une fois, le rouge représente les dangers : une salle où habitent des gobelins, un autre Troll (celon le résultat de la rencontre avec le précédent, celui ci aura un comportement différent), un escalier glissant et obscur (chance de tomber à déterminer et qui diminue si le joueur a ramassé la torche), un orc et le Boss. En vert figure l'objet de quete pour le garde. En losange figurent les salles qui s'ouvrent sous certaines conditions.
+Notre "donjon". Encore une fois, le rouge représente les dangers : une salle où habitent des gobelins, un autre Troll (selon le résultat de la rencontre avec le précédent, celui ci aura un comportement différent), un escalier glissant et obscur (chance de tomber à déterminer et qui diminue si le joueur a ramassé la torche), un orc et le Boss. En vert figure l'objet de quête pour le garde. En losange figurent les salles qui s'ouvrent sous certaines conditions.
 
 \section{Autres questions}
 \paragraph{7.1 - What does this application do?}
@@ -80,12 +80,12 @@ Carte :\\
 
 \end{itemize}
 \paragraph{7.17 - Adding commands}
-Une nouvelle commande ne demande plus aucune modification hormis l'ajout dans le tableau dans CommandWords et l'action correspondant dans Game. C'est parceque les appels necessaire sont faits par le parser qui appelle le listing des commandes dans CommandWords
+Une nouvelle commande ne demande plus aucune modification hormis l'ajout dans le tableau dans CommandWords et l'action correspondant dans Game. C'est parce que les appels nécessaire sont faits par le parser qui appelle le listing des commandes dans CommandWords
 
 \chapter{Itération 2}
 \section{Questions}
 \paragraph{7.18}
-La liste des commandes est maintenant returnée dans une String.
+La liste des commandes est maintenant retournée dans une String.
 \begin{lstlisting}[language = java]
 public String getCommandList()
     {
@@ -124,8 +124,8 @@ public String getCommandList()
 \paragraph{7.18.1}
 Il n'y a plus d'affichage direct : les affichages sont maintenant encapsulés dans des 'String'.
 \begin{lstlisting}[language = java]
-errorMessage = "Can't go back anymore, 
-	you are allready where you started !";
+errorMessage = "Can't go back anymore,
+	you are already where you started !";
 gui.println(errorMessage);
 \end{lstlisting}
 
@@ -224,14 +224,14 @@ Ajout d'une 'HashMap' contenant chaque 'Room'.
 On passe à une nouvelle architecture avec les nouveau fichiers GameEngine et UserInterface.
 
 \paragraph{7.18.7}
-actionPerformed () se contente d'appeller processCommand().
+actionPerformed () se contente d'appeler processCommand().
 Cette dernière pourra, a priori, capturer du texte dans une zone de texte puis envoyer ce dernier au moteur du jeu.\\
 
 addActionListener() est une fonction de la classe JTextField qui ajoute
     un eventListener à la liste des eventListeners.
     Son paramètre est l'eventLsitener qu'on souhaite ajouter,
     et elle s'applique à un élément textfield.
-    
+
 \paragraph{7.18.8}
 \begin{lstlisting}
     private JButton lookBtn;
@@ -243,14 +243,14 @@ addActionListener() est une fonction de la classe JTextField qui ajoute
             processCommand("look");
         }
     });
-\end{lstlisting}    
+\end{lstlisting}
 
 \paragraph{7.19.1}
-Nous n'avons pas vu l'interet de cette implémentation avec l'architecture actuelle...
+Nous n'avons pas vu l’intérêt de cette implémentation avec l'architecture actuelle...
 
 \paragraph{7.19.2}
 Chaque room a désormais son image (qui redimensionne toute la fenêtre au lieu de s'adapter à celle ci).
-\newpage 
+\newpage
 \begin{lstlisting}
     [dans GameEngine, methode goRoom()]
     if(currentRoom.getImageName() != null) {
@@ -336,11 +336,11 @@ Le booléen permet de ne pas re push la commande dans la stack (on back, on a do
 \section{Questions}
 
 \paragraph{7.28.1}
-On peut stoquer une liste de commandes dans un fichier test lu lors d'une entrée utilisateur. On ajoute alors un mot clé "test" dans les mots supportés par le jeu, qui prend comme deuxième argument le nom du fichier script a executer (classe CommandWords). Puis, dans GameEngine, on peut faire une fonction test executée lors de l'entrée du mot clé. Cette dernière peut lire le script ligne par ligne et interpreter ces dernières. Alors, une ligne = une commande.
+On peut stoquer une liste de commandes dans un fichier test lu lors d'une entrée utilisateur. On ajoute alors un mot clé "test" dans les mots supportés par le jeu, qui prend comme deuxième argument le nom du fichier script a exécuter (classe CommandWords). Puis, dans GameEngine, on peut faire une fonction test exécutée lors de l'entrée du mot clé. Cette dernière peut lire le script ligne par ligne et interpreter ces dernières. Alors, une ligne = une commande.
 \begin{lstlisting}
     private void test_with_script(Command command)
     {
-        Path filePath = FileSystems.getDefault().getPath("scripts", 
+        Path filePath = FileSystems.getDefault().getPath("scripts",
         	command.getSecondWord());
         try (Stream<String> lines = Files.lines( filePath ))
         {
@@ -358,7 +358,7 @@ Nous n'avons pas encore de script permettant de gagner étant donné que pour ga
 go north //Marche
 go west //Forge
 back
-go east //Maison abandonnee
+go east //Maison abandonnée
 go down //Cave
 back
 back
@@ -378,10 +378,10 @@ quit
 \end{lstlisting}
 
 \paragraph{7.29}
-La nouvelle classe player contient la currentRoom, et les informations sur les statistiques du joueur : poids actuel et maximum, points de vie et d'armure, points d'attaque et inventaire. On y retrouver tous les getters et setters pour ces champs, et une fonction eat qui altère ces valeurs lors de l'utilisation d'objets commestibles.
+La nouvelle classe player contient la currentRoom, et les informations sur les statistiques du joueur : poids actuel et maximum, points de vie et d'armure, points d'attaque et inventaire. On y retrouver tous les getters et setters pour ces champs, et une fonction eat qui altère ces valeurs lors de l'utilisation d'objets comestibles.
 
 \paragraph{7.30 à 7.31.1}
-Chaque room possède sa propre liste d'objets, a la manière d'un inventaire pour le joueur. Ces listes sont des objets de la classe ItemList et représentées par des ArrayList. Lors de l'utilisation de la commande "pick objet", on vérifie dans un premier temps si la room où se trouve le joueur contient un objet ayant ce nom. Si oui, on verifie que le poids de l'objet permet au joueur de le ramasser, puis il est ajouté a la liste d'objets du joueur et retiré de celle de la room. On fait l'inverse de cette manoeuvre pour la commande "drop objet".
+Chaque room possède sa propre liste d'objets, a la manière d'un inventaire pour le joueur. Ces listes sont des objets de la classe ItemList et représentées par des ArrayList. Lors de l'utilisation de la commande "pick objet", on vérifie dans un premier temps si la room où se trouve le joueur contient un objet ayant ce nom. Si oui, on vérifie que le poids de l'objet permet au joueur de le ramasser, puis il est ajouté a la liste d'objets du joueur et retiré de celle de la room. On fait l'inverse de cette manœuvre pour la commande "drop objet".
 \begin{lstlisting}
 if(command.hasSecondWord()){
     Item toPick = player.getCurrentRoom().getItemList()
@@ -389,12 +389,12 @@ if(command.hasSecondWord()){
     if(toPick == null){
         // informe le joueur de l'abscence de cet objet puis retour
     }
-    if(player.getCurrentWeight() + toPick.getWeight() 
+    if(player.getCurrentWeight() + toPick.getWeight()
     	> player.getMaxWeight()){
         // informe que l'objet est trop lourd puis retour
     }
     player.getInventory().addItem(toPick);
-    player.setCurrentWeight(player.getCurrentWeight() + 
+    player.setCurrentWeight(player.getCurrentWeight() +
     	toPick.getWeight());
     player.getCurrentRoom().getItemList().removeItem(toPick);
     // informe du ramassage de l'objet
@@ -405,7 +405,7 @@ else{
 \end{lstlisting}
 
 \paragraph{7.32}
-Le poids maximum est ajouté dans les variables du player. Les objets ne peuvent alors etre ramassés que si la somme du poids actuellement transporté et de celui de l'objet est inférieure ou égale a cette valeur. La vérification est faite dans le moteur de jeu lors de l'utilisation du mot clé pick.
+Le poids maximum est ajouté dans les variables du player. Les objets ne peuvent alors être ramassés que si la somme du poids actuellement transporté et de celui de l'objet est inférieure ou égale a cette valeur. La vérification est faite dans le moteur de jeu lors de l'utilisation du mot clé pick.
 
 \paragraph{7.33}
 La commande "items" fournis un résumé des objets transportés par le joueur, sous la forme d'une suite de couples nom / poids (plus si besoin).
@@ -427,7 +427,7 @@ else {
 \end{lstlisting}
 
 \paragraph{7.34 \& 7.34.1}
-Le magic cookie est déposé dans la zone de spawn et se comporte comme un objet quelconque. Il a simplment un attribut "eatable" qui permet au joueur de le consommer apres l'avoir ramassé. Quand il est consommé, la fonction eat(item) met a jour les attributs du joueur celon les bonus qu'octroie l'objet commestible. Le moteur se charge de vérifier la présence de l'objet dans l'inventaire du joueur...
+Le magic cookie est déposé dans la zone de spawn et se comporte comme un objet quelconque. Il a simplement un attribut "eatable" qui permet au joueur de le consommer après l'avoir ramassé. Quand il est consommé, la fonction eat(item) met a jour les attributs du joueur selon les bonus qu'octroie l'objet comestible. Le moteur se charge de vérifier la présence de l'objet dans l'inventaire du joueur...
 \begin{lstlisting}
 if(command.hasSecondWord()){
     Item toEat = player.getInventory().hasItem(command.getSecondWord());
@@ -456,13 +456,13 @@ StringBuilder str =  new StringBuilder("");
    if(toEat.getBuffAttack() > 0){
        // set la valeur d'attaque et informe
    }
-   inventory.removeItem(toEat);   
+   inventory.removeItem(toEat);
    return str.toString();
 }
 \end{lstlisting}
 
 \paragraph{7.35 à 7.35.2}
-La classe CommandWord est simplement un enum de tous les mots connus : go, help, quit, look, eat, back, test, pick, drop, items... La classe CommandWords fait alors le lien entre la chaine de caractères qui correspond et l'enum. GameEngine peut alors simplement tester le type de CommandWord qu'a la commande, et réagis en conséquense.
+La classe CommandWord est simplement un enum de tous les mots connus : go, help, quit, look, eat, back, test, pick, drop, items... La classe CommandWords fait alors le lien entre la chaîne de caractères qui correspond et l'enum. GameEngine peut alors simplement tester le type de CommandWord qu'a la commande, et réagis en conséquence.
 \begin{lstlisting}
 /* le enum */
 public enum CommandWord
@@ -501,7 +501,7 @@ private void look()
     gui.println(player.getCurrentRoom().getItemList().looking());
 }
 \end{lstlisting}
-Cette fonction parcours la itemList et construit une chaine de caractères contenant les noms et poids de chaque objet.
+Cette fonction parcours la itemList et construit une chaîne de caractères contenant les noms et poids de chaque objet.
 \begin{lstlisting}
 public String looking()
 {
@@ -523,7 +523,7 @@ public String looking()
 \end{lstlisting}
 
 \paragraph{7.37}
-Dans command words, il suffit de changer l'attribution des chaines de caractères aux types de CommandWord celon la variable entrée par l'utilisateur au début. Il faudra quand même ajouter un argument a
+Dans command words, il suffit de changer l'attribution des chaînes de caractères aux types de CommandWord selon la variable entrée par l'utilisateur au début. Il faudra quand même ajouter un argument a
 \begin{lstlisting}
 public CommandWords(String language)
 {
@@ -542,7 +542,7 @@ public CommandWords(String language)
 A noter que du coup, seules les commandes sont traduites, pas les descriptions et autres elements textuels du jeu. Les directions ne sont pas traduites non plus.
 
 \paragraph{7.38}
-Le message de bienvenue qui dit à l'utilisateur d'entrer la commande d'aide si besoin ne traduit pas le mot clé celon le language. Idem pour le bouton "look" qui n'est pas traduit.
+Le message de bienvenue qui dit à l'utilisateur d'entrer la commande d'aide si besoin ne traduit pas le mot clé selon le language. Idem pour le bouton "look" qui n'est pas traduit.
 \begin{lstlisting}
 /* dans printWellcome de GameEngine
 private void printWelcome()
@@ -573,7 +573,7 @@ lookBtn.addActionListener(new ActionListener(){
 \section{Questions}
 
 \paragraph{7.42}
-Si le joueur a fait 666 mouvements, et si la partie n'est pas encore dans un état gagnant, un sénario catastrophe se déclenche. Le nombre de mouvements est obtenu par le calcul de la longueur de l'historique. \\
+Si le joueur a fait 666 mouvements, et si la partie n'est pas encore dans un état gagnant, un scénario catastrophe se déclenche. Le nombre de mouvements est obtenu par le calcul de la longueur de l'historique. \\
 Dans CommandGo :
 \begin{lstlisting}
 if(player.isMaxMovesReached() && player.getWonState() == false){
@@ -595,7 +595,7 @@ public Boolean getWonState(){
 \end{lstlisting}
 
 \paragraph{7.43}
-L'architecture initiale permet dejà naturellement d'avoir des trap door : Lors des setExit() pendant la création des pièces, il suffit de faire une exit vers la pièce piège mais pas d'exit depuis la pièce piège vers l'autre pièce. On a donc une "porte" a sens unique. \\
+L'architecture initiale permet déjà naturellement d'avoir des trap door : Lors des setExit() pendant la création des pièces, il suffit de faire une exit vers la pièce piège mais pas d'exit depuis la pièce piège vers l'autre pièce. On a donc une "porte" a sens unique. \\
 Exemple :\\
 Room A, RoomB // avec A au sud de B\\
 A.setexit("north", B)\\
@@ -605,7 +605,7 @@ abandonnedHouse.setExit("down", basement);
 \end{lstlisting}
 
 \paragraph{7.44}
-Le beamer est situé dans le marché. Pour représenter son état, nous avons ajouté une variable cooldown à la classe Item. Dans le cas du beamer elle n'est modifiée que par son utilisation (première modification : charge, deuxèime utilisation : tir) mais cela permettera d'avoir des objets avec un temps de rechage qui diminuera a chaque tour par exemple. On ajout aussi dans la classe Player une variable saveRoom qui permet de stoquer la room où a été utilisé le beamer.\\
+Le beamer est situé dans le marché. Pour représenter son état, nous avons ajouté une variable cooldown à la classe Item. Dans le cas du beamer elle n'est modifiée que par son utilisation (première modification : charge, deuxième utilisation : tir) mais cela permettra d'avoir des objets avec un temps de réchage qui diminuera a chaque tour par exemple. On ajout aussi dans la classe Player une variable saveRoom qui permet de stoquer la room où a été utilisé le beamer.\\
 Dans commandUse :
 \begin{lstlisting}
 if(getSecondWord().equals("beamer")){
@@ -619,7 +619,7 @@ if(getSecondWord().equals("beamer")){
     }
 }
 \end{lstlisting}
-Le premier if injecte l'utilisation du beamer dans l'historique si son utiisation correspond au tir. Cela permet d'éviter les soucis liés à l'utilisation de la commande back après une téléportation. \\
+Le premier if injecte l'utilisation du beamer dans l'historique si son utilisation correspond au tir. Cela permet d'éviter les soucis liés à l'utilisation de la commande back après une téléportation. \\
 Dans Player :
 \begin{lstlisting}
 public String useBeamer(){
@@ -646,7 +646,7 @@ public String useBeamer(){
     }
 }
 \end{lstlisting}
-Si le cooldown du beamer est a 0, c'est qu'il n'est pas encore chargé. On le set à 1 et on sauvegarde la room actuelle. Sinon, c'est qu'il est déja chargé et qu'on veut se téléporter. On set donc la currentRoom sur la room savegardée puis on affiche sa description. Le cooldown revient à 0.
+Si le cooldown du beamer est a 0, c'est qu'il n'est pas encore chargé. On le set à 1 et on sauvegarde la room actuelle. Sinon, c'est qu'il est déjà chargé et qu'on veut se téléporter. On set donc la currentRoom sur la room sauvegardée puis on affiche sa description. Le cooldown revient à 0.
 
 \paragraph{7.45}
 Création de la classe Door :
@@ -682,7 +682,7 @@ public void setDoor(String direction, Door door)
     doors.put(direction, door);
 }
 \end{lstlisting}
-Dans CommandGo - methode execute() :
+Dans CommandGo - méthode execute() :
 \begin{lstlisting}
 if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
     gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
@@ -699,7 +699,7 @@ public static int getRoom(int nbRoom)
     return rand.nextInt(nbRoom);
 }
 \end{lstlisting}
-Recupère un numéro de room aléatoire.\\
+Récupère un numéro de room aléatoire.\\
 Dans TransporterRoom :
 \begin{lstlisting}
 public void setRoomMap(HashMap <String, Room> roomMap)
@@ -714,7 +714,7 @@ public Room getExit(String direction)
 }
 \end{lstlisting}
 
-Récupère une Room aléatoire parmis les Room de la carte. getExit surcharge la méthode de la classe Room et, au lieu de renvoyer la room qui correspond a la direction choisie parmis les exit de la room courante, renvoie une room aléatoire parmis les room qui figurent dans la roomMap.\\
+Récupère une Room aléatoire parmi les Room de la carte. getExit surcharge la méthode de la classe Room et, au lieu de renvoyer la room qui correspond a la direction choisie parmi les exit de la room courante, renvoie une room aléatoire parmi les room qui figurent dans la roomMap.\\
 Dans GameEngine (avec les déclarations de Room) :
 \begin{lstlisting}
 transporter = new TransporterRoom("in a very strange room.\nWhat's that big blue thing ?\nYou can't resist and need to jump in it", "pictures/village/transporterRoom.jpg");
@@ -724,7 +724,7 @@ forge.setExit("west", transporter);
 \end{lstlisting}
 
 \paragraph{7.47}
-Toutes les commandes sont séparées dans des classes uniques et séparées. GameEngine est débarassé du switch au profit d'un seul appel à la méthode execute. Celon la commande cette méthode abstraite a un comportement différent.\\
+Toutes les commandes sont séparées dans des classes uniques et séparées. GameEngine est débarrassé du switch au profit d'un seul appel à la méthode execute. Selon la commande cette méthode abstraite a un comportement différent.\\
 Dans GameEngine, méthode interpretCommand :
 \begin{lstlisting}
 public void interpretCommand(String commandLine)
@@ -753,7 +753,7 @@ public void interpretCommand(String commandLine)
     }
 }
 \end{lstlisting}
-Hors traitement spécial, simplement executer la commande. Le traitement spécifique pour le piège et chickenDeath() est effectué ici bien que cela aille a l'encontre des moficiations apportées mais il est nécessaire que la commande ne soit pas executée. On ajoute la commande a l'historique de sauvegarde si la commande est une commande ayant de l'incidence sur l'état du jeu.
+Hors traitement spécial, simplement exécuter la commande. Le traitement spécifique pour le piège et chickenDeath() est effectué ici bien que cela aille a l'encontre des modifications apportées mais il est nécessaire que la commande ne soit pas exécutée. On ajoute la commande a l'historique de sauvegarde si la commande est une commande ayant de l'incidence sur l'état du jeu.
 
 \paragraph{7.47.1}
 \begin{itemize}
@@ -800,7 +800,7 @@ public static void main(String[] args) {
 On demande un nombre correspondant à un des languages supportés à l'utilisateur, puis on démarre le jeu avec la langue choisie si l'entrée utilisateur est valide, et on redemande une entrée sinon.
 
 \paragraph{7.54}
-Le jeu peut etre lancé sans l'aide de BlueJ avec les deux commandes suivantes :
+Le jeu peut être lancé sans l'aide de BlueJ avec les deux commandes suivantes :
 \begin{itemize}
 \item javac Game.java pkg\_command/*.java pkg\_game\_logic/*.java pkg\_game\_entities/*.java
 \item java Game
@@ -817,7 +817,7 @@ Puis l'éxécuter :
 \end{itemize}
 
 \paragraph{7.59}
-Nous avons choisi d'utiliser la deuxième méthode qui consiste à enregistrer toutes les commandes entrées ayant un impact sur le jeu dans un historique au moment de leur execution. Dans GameEngine, méthode interpretCommand, une fois la commande parsée et valide : 
+Nous avons choisi d'utiliser la deuxième méthode qui consiste à enregistrer toutes les commandes entrées ayant un impact sur le jeu dans un historique au moment de leur execution. Dans GameEngine, méthode interpretCommand, une fois la commande parsée et valide :
 \begin{lstlisting}
 if (!commandLine.startsWith(cmdWords.commandWordToString(CommandWord.SAVE))
     && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOAD))
@@ -829,7 +829,7 @@ if (!commandLine.startsWith(cmdWords.commandWordToString(CommandWord.SAVE))
 }
 command.execute(player, this, gui);
 \end{lstlisting}
-A l'exeption de SAVE, LOAD, HELP, ITEMS, TEST et LOOK qui sont des commandes neutres (pas d'incidence sur l'état du jeu, ses objets...), la commande est ajoutée à un historique.\\
+A l'exception de SAVE, LOAD, HELP, ITEMS, TEST et LOOK qui sont des commandes neutres (pas d'incidence sur l'état du jeu, ses objets...), la commande est ajoutée à un historique.\\
 On ajoute également un getter pour cet historique.\\
 Ensuite, dans CommandSave :
 \begin{lstlisting}
@@ -854,7 +854,7 @@ public void execute(Player player, GameEngine engine, UserInterface gui)
     }
 }
 \end{lstlisting}
-Lors de l'éxécution de la commande save, on créé un nouveau fichier au nom qui a été entré en deuxième argument de la commande. Chaque commande de l'historique y est écrite, puis on avertis l'utilisateur de la manière dont il peut restaurer sa session.\\
+Lors de l'exécution de la commande save, on créé un nouveau fichier au nom qui a été entré en deuxième argument de la commande. Chaque commande de l'historique y est écrite, puis on avertis l'utilisateur de la manière dont il peut restaurer sa session.\\
 Enfin, pour charger une sauvegarde :
 \begin{lstlisting}
 public void execute(Player player, GameEngine engine, UserInterface gui)
@@ -878,5 +878,5 @@ public void execute(Player player, GameEngine engine, UserInterface gui)
     }
 }
 \end{lstlisting}
-On ne peut charger une sauvegarde que si aucune action n'a été effectuée pour eviter les conflits. On vérifie ensuite qu'un nom de sauvegarde a été renseigné par l'utilisateur, puis ce fichier est ouvert, et chaque ligne correspondant à une commande est éxécutée. On recréé donc la session telle que décrite par la suite d'actions du fichier.
+On ne peut charger une sauvegarde que si aucune action n'a été effectuée pour éviter les conflits. On vérifie ensuite qu'un nom de sauvegarde a été renseigné par l'utilisateur, puis ce fichier est ouvert, et chaque ligne correspondant à une commande est exécutée. On recréé donc la session telle que décrite par la suite d'actions du fichier.
 \end{document}
