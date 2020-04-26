@@ -595,17 +595,17 @@ public Boolean getWonState(){
 \end{lstlisting}
 
 \paragraph{7.43}
-L'architecture initiale permet déjà naturellement d'avoir des trap door : Lors des setExit() pendant la création des pièces, il suffit de faire une exit vers la pièce piège mais pas d'exit depuis la pièce piège vers l'autre pièce. On a donc une "porte" a sens unique. \\
+L'architecture initiale permet déjà naturellement d'avoir des trap doors : Lors des setExit() pendant la création des pièces, il suffit de faire une exit vers la pièce piège mais pas d'exit depuis la pièce piège vers l'autre pièce. On a donc une "porte" a sens unique. \\
 Exemple :\\
 Room A, RoomB // avec A au sud de B\\
-A.setexit("north", B)\\
+A.setExit("north", B)\\
 On peut ainsi aller de A vers B mais pas de B vers A.
 \begin{lstlisting}
 abandonnedHouse.setExit("down", basement);
 \end{lstlisting}
 
 \paragraph{7.44}
-Le beamer est situé dans le marché. Pour représenter son état, nous avons ajouté une variable cooldown à la classe Item. Dans le cas du beamer elle n'est modifiée que par son utilisation (première modification : charge, deuxième utilisation : tir) mais cela permettra d'avoir des objets avec un temps de réchage qui diminuera a chaque tour par exemple. On ajout aussi dans la classe Player une variable saveRoom qui permet de stoquer la room où a été utilisé le beamer.\\
+Le beamer est situé dans le marché. Pour représenter son état, nous avons ajouté une variable cooldown à la classe Item. Dans le cas du beamer elle n'est modifiée que par son utilisation (première modification : charge, deuxième utilisation : tir) mais cela permettra d'avoir des objets avec un temps de recharge qui diminuera a chaque tour par exemple. On ajout aussi dans la classe Player une variable saveRoom qui permet de stoquer la room où a été utilisé le beamer.\\
 Dans commandUse :
 \begin{lstlisting}
 if(getSecondWord().equals("beamer")){
