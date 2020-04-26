@@ -1,0 +1,882 @@
+\documentclass[11pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{listings}
+\lstset{
+    frame=tb, % draw a frame at the top and bottom of the code block
+    tabsize=4, % tab space width
+    showstringspaces=false, % don't mark spaces in strings
+    numbers=left, % display line numbers on the left
+    commentstyle=\color{green}, % comment color
+    keywordstyle=\color{blue}, % keyword color
+    stringstyle=\color{red}, % string color
+    breaklines=true
+}
+\author{LEGOUEIX Nicolas - ORNIACKI Thomas\\ COTREZ Leo - QUERIC Yann\\~\\ Groupe 3\\~\\Ecrit par LEGOUEIX Nicolas}
+\title{Jeu d'aventure BlueJ - itération 4}
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{Itération 1}
+\section{Notre jeu}
+\paragraph{Intrigue}
+Notre jeu d'aventure se déroule dans un monde fantastique dont le nom reste a déterminer. Le jeu commence dans un village, chez ses parents. Sa mère lui fais alors part de l'inquétante disparition du grand père Meurlin. Le vieillard se serait encore enfui de la maison de retraite en hurlant que la fin était proche. Le protagoniste est donc chargé de retrouver son grand père. Il s'averera que ce dernier est en fait le légendaire magicien Khöskîk et qu'il a besoin de votre aide dans le mont Knee pour refermer le portail démonique qui menace de faire déferler les légions du mal sur notre monde.\\~\\
+\paragraph{Quetes secondaires}
+Deux quètes secondaires sont pour le moment prévues : Dans le village, le vieux Elibed a vu toutes ses poules prendre la fuite. On doit alors retrouver 5 poules a travers le vilage, dont une ayant été appercue proche de cette maison dont il émane quelque chose d'inquiétant...
+\paragraph{}
+A l'entrée du village, le garde vous propose également d'aller retrouver une flèche magique dans le mont Knee. Cette flèche serait la même qui l'a blessé des années plus tôt, le condamnant a boiter de la jambe gauche pour le reste de sa vie.
+\paragraph{Fonctionalités prévues}
+\begin{itemize}
+\item Combat
+\item Inventaire
+\item Stats et bonus (apportées par certains objets et inmpactant le gameplay)
+\item Points de vie
+\item Energie (un déplacement coute de l'énergie, le joueur doit se reposer)
+\item Pièges (par trigger et pourcentage de chance de s'activer)
+\item Sales cachées
+\item Commerce
+\end{itemize}
+\paragraph{Carte de la zone de jeu}
+Nous avons pour l'instant 3 zones de jeu : le village, les plaines, et le Mont Knee dont voici les plans (faits via genMyModel)
+\centerline{\includegraphics[scale=0.55]{../../village.png}}
+\paragraph{Le Village}
+En vert figurent les endroits où on peut trouver des quêtes. En rouge figurent les potentielles zones dangereuses, c'est à dire les combats. Certains sont évitables, d'autres non. Les rectangles blancs décrivent les éléments des salles. On peut voir les 5 poules dont une servira d'introduction au combat : la poule du chaos dans la maison abandonnée. Quelques objets sont répartis pour encourager à l'exploration. Le forgeron proposera des armes et armures a vendre, et le barman des objets permetant de regenerer de la vie. Le grenier est en hauteur par raport a la ferme, et la cave inquiétante sous la maison.
+\centerline{\includegraphics[scale=0.5]{../../plaines.png}}
+\paragraph{Les Plaines}
+Comme pour le village, en rouge figurent les dangers : un camp de bandits occupé, des ronces qui risquent de vous lacérer les pieds a chaque visite de cette salle (probabilité a determiner) ou un Troll qui essaye de vous racketer (perte d'un objet au choix ou combat difficile). Les losanges représentent les choix qui s'offrent au joueur a certains endroits. Il peut ici se baigner dans la rivière pour se regenerer de la vie (peut etre à changer pour des points d'énergie). Il peut aussi, si il est assez malin trouver le bouton dans la grotte des bandits pour découvrir une pièce secrete renfermant du butin utile par exemple pour se battre contre le troll plus loin...
+\centerline{\includegraphics[scale=0.5]{../../knee.png}}
+\paragraph{Le mont Knee}
+Notre "donjon". Encore une fois, le rouge représente les dangers : une salle où habitent des gobelins, un autre Troll (celon le résultat de la rencontre avec le précédent, celui ci aura un comportement différent), un escalier glissant et obscur (chance de tomber à déterminer et qui diminue si le joueur a ramassé la torche), un orc et le Boss. En vert figure l'objet de quete pour le garde. En losange figurent les salles qui s'ouvrent sous certaines conditions.
+
+\section{Autres questions}
+\paragraph{7.1 - What does this application do?}
+L'application ouvre un terminal dans lequel il est possible d'entrer différentes commandes afin d'effectuer certaines actions dans le jeu.
+\paragraph{    - What commands does the game accept?}
+\begin{itemize}
+\item go	:	Pour se déplacer à completer avec un argument (north, east, west, south).
+\item quit	:	Pour quitter le jeu.
+\item help	:	Pour obtenir la liste des commandes.
+\end{itemize}
+\paragraph{    - How many rooms are in the scenario?}
+Il y a 5 localités dans l'histoire.
+\paragraph{    - Carte du jeu et directions}
+Directions :\\
+\centerline{\includegraphics[scale=0.8]{../../dir.png}}
+Carte :\\
+\centerline{\includegraphics[scale=0.8]{../../old_map.png}}
+\paragraph{7.2 - Write down for each class the purpose of the class.}
+\begin{itemize}
+\item Command				:		Vérifie la sémantique de la commande.
+\item CommandWords		:		Vérifie la syntaxe de la commande.
+\item Game				:		Créer et initiale les autres classes ainsi que les localités et le 'Parser' puis démarre le jeu. Évalue et exécute les commandes retournées par le 'Parser'.
+\item Parser				:		Découpe l'entrée utilisateur pour la passer à 'Command' et retourner le résultat.
+\item Room				:		Représente les informations d'une localité (description, voisins).
+
+\end{itemize}
+\paragraph{7.17 - Adding commands}
+Une nouvelle commande ne demande plus aucune modification hormis l'ajout dans le tableau dans CommandWords et l'action correspondant dans Game. C'est parceque les appels necessaire sont faits par le parser qui appelle le listing des commandes dans CommandWords
+
+\chapter{Itération 2}
+\section{Questions}
+\paragraph{7.18}
+La liste des commandes est maintenant returnée dans une String.
+\begin{lstlisting}[language = java]
+public String getCommandList()
+    {
+      /*
+      StringBuilder sb = new StringBuilder();
+      for (String s : hugeArray) {
+          sb.append(s);
+      }
+      String result = sb.toString();
+      */
+      StringBuilder sb = new StringBuilder("");
+      //String commandList = "";
+        for(String command : validCommands) {
+          //commandList += (command + " ");
+          sb.append(command);
+          sb.append(" ");
+          //System.out.print(command + " ");
+        }
+        //return commandList;
+        return sb.toString();
+        //System.out.println();
+    }
+\end{lstlisting}
+
+\begin{lstlisting} [language = java]
+    /**
+     * Returns a list of valid command words as String.
+     */
+    public String showCommands()
+    {
+    return commands.getCommandList();
+
+    }
+\end{lstlisting}
+
+\paragraph{7.18.1}
+Il n'y a plus d'affichage direct : les affichages sont maintenant encapsulés dans des 'String'.
+\begin{lstlisting}[language = java]
+errorMessage = "Can't go back anymore, 
+	you are allready where you started !";
+gui.println(errorMessage);
+\end{lstlisting}
+
+\paragraph{7.18.2}
+Utilisation de 'StringBuilder' à la place des boucles de concaténation de 'String'.
+\begin{lstlisting}
+   /**
+    * Return a description of the room's exits,
+    * for example, "Exits: north west".
+    * @return A description of the available exits.
+    */
+    public String getExitString()
+    {
+        StringBuilder sb = new StringBuilder("Exits:");
+        //String returnString = "Exits:";
+        Set<String> keys = exits.keySet();
+        for(String exit : keys ) {
+            sb.append(" ");
+            sb.append(exit);
+            //returnString += " " + exit;
+        }
+        //return returnString;
+        return sb.toString();
+    }
+\end{lstlisting}
+\begin{lstlisting}
+   /**
+     * Return all valid commands as a String.
+     */
+    public String getCommandList()
+    {
+      StringBuilder sb = new StringBuilder("");
+      //String commandList = "";
+        for(String command : validCommands) {
+          //commandList += (command + " ");
+          sb.append(command);
+          sb.append(" ");
+          //System.out.print(command + " ");
+        }
+        //return commandList;
+        return sb.toString();
+        //System.out.println();
+    }
+\end{lstlisting}
+
+\paragraph{7.18.4}
+Changement du message d’accueil.
+\begin{lstlisting}
+/**
+     * Print out the opening message for the player.
+     */
+    private void printWelcome()
+    {
+        String welcomeMessage = "\n"+
+                                "Welcome to Aventhur !\n"+
+                                "The Ultimate Adventure Game.\n"+
+                                "\n"+
+                                "Type 'help' if you need help.\n"+
+                                "\n";
+        gui.println(welcomeMessage);
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println("");
+        //System.out.println();
+        printLocationInfo();
+        gui.showImage(currentRoom.getImageName());
+        /*
+        System.out.println("You are " + currentRoom.getDescription());
+        System.out.print("Exits: ");
+        if(currentRoom.northExit != null)
+            System.out.print("north ");
+        if(currentRoom.eastExit != null)
+            System.out.print("east ");
+        if(currentRoom.southExit != null)
+            System.out.print("south ");
+        if(currentRoom.westExit != null)
+            System.out.print("west ");
+        System.out.println();
+        */
+    }
+\end{lstlisting}
+
+\paragraph{7.18.5}
+Ajout d'une 'HashMap' contenant chaque 'Room'.
+
+\begin{lstlisting}
+    public HashMap <String, Room> roomMap;
+    	...
+    roomMap = new HashMap<String, Room>();
+    roomMap.put("attic", attic);
+	[idem pour les autres room...]
+\end{lstlisting}
+
+\paragraph{7.18.6}
+
+On passe à une nouvelle architecture avec les nouveau fichiers GameEngine et UserInterface.
+
+\paragraph{7.18.7}
+actionPerformed () se contente d'appeller processCommand().
+Cette dernière pourra, a priori, capturer du texte dans une zone de texte puis envoyer ce dernier au moteur du jeu.\\
+
+addActionListener() est une fonction de la classe JTextField qui ajoute
+    un eventListener à la liste des eventListeners.
+    Son paramètre est l'eventLsitener qu'on souhaite ajouter,
+    et elle s'applique à un élément textfield.
+    
+\paragraph{7.18.8}
+\begin{lstlisting}
+    private JButton lookBtn;
+	[puis, dans createGUI()]
+    lookBtn = new JButton("Look around");
+    btn_panel.add(lookBtn, BorderLayout.CENTER);
+    lookBtn.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            processCommand("look");
+        }
+    });
+\end{lstlisting}    
+
+\paragraph{7.19.1}
+Nous n'avons pas vu l'interet de cette implémentation avec l'architecture actuelle...
+
+\paragraph{7.19.2}
+Chaque room a désormais son image (qui redimensionne toute la fenêtre au lieu de s'adapter à celle ci).
+\newpage 
+\begin{lstlisting}
+    [dans GameEngine, methode goRoom()]
+    if(currentRoom.getImageName() != null) {
+    	gui.showImage(currentRoom.getImageName());
+    }
+    [dans UserInterface]
+    public void showImage(String imageName)
+    {
+        URL imageURL = this.getClass().getClassLoader()
+        		.getResource(imageName);
+        if(imageURL == null)
+            System.out.println("image not found");
+        else {
+            ImageIcon icon = new ImageIcon(imageURL);
+            image.setIcon(icon);
+            myFrame.pack();
+        }
+    }
+\end{lstlisting}
+
+\paragraph{7.20 \& 7.21}
+Ajout de la classe Item qui permet d'ajouter des objets, et ajout d'un objet dans une pièce (dans l'enclos à cochons)
+\begin{lstlisting}
+    [dans GameEngine, methode createRooms()]
+    Item necklace;
+    necklace = new Item();
+    necklace.setPrice(50);
+    necklace.setDescription("It looks magical!\n");
+    necklace.setLongDescription("But I ain't no witcher after all!\n");
+    necklace.setCommment("Oh! What's shining over there?\n");
+    pigs.addItem(necklace);
+\end{lstlisting}
+
+\paragraph{7.22}
+
+Ajout de la 'Collection' pour les items d'une 'Room'
+\begin{lstlisting}
+    [dans Room]
+    private Collection <Item> items;
+    [dans le constructeur Room()]
+    items = new ArrayList<Item>();
+		...
+    public void addItem(Item item){
+      items.add(item);
+    }
+\end{lstlisting}
+
+\paragraph{7.23 à  7.26}
+goRoom(), quand elle appelée normalement (donc par l'utilisateur directement) push dans une Stack la commande entrée.\\
+Ensuite, la commande "back" est ajoutée comme toutes les autres commandes, et elle appelle goBack(). Cette dernière se charge de vérifier que la commande a été entrée sans second argument et que l'on essaye de de revenir en arrière sans avoir d'historique.
+\begin{lstlisting}
+private void goBack(Command command)
+    {
+        String errorMessage;
+        Command tmp, newCommand;
+        if(command.hasSecondWord()){
+            // the user gave a second word. Not good.
+            errorMessage = "You can go back here, friend ! If you want to go here, dont go back and just go ! Try only \"back\"...";
+            gui.println(errorMessage);
+            return;
+        }
+        if(history.size() == 0){
+            // no history
+            errorMessage = "Can't go back anymore, you are allready where you started !";
+            gui.println(errorMessage);
+            return;
+        }
+\end{lstlisting}
+Ensuite, on prend la dernière commande qui a été push dans la pile, et on "l'inverse", c'est à dire qu'une commande "go north" est convertie en "go south" etc. Cette commande est pop de la pile puis on appelle goRoom avec la commande ainsi formée.
+\begin{lstlisting}
+    tmp = history.get(history.size() - 1);
+    history.pop();
+    if(tmp.getSecondWord().equals("north"))
+        newCommand = new Command("go", "south");
+    else if(tmp.getSecondWord().equals("south"))
+        newCommand = new Command("go", "north");
+    [etc]
+    goRoom(newCommand, true);
+\end{lstlisting}
+Le booléen permet de ne pas re push la commande dans la stack (on back, on a donc pas besoin de garder ces commandes en historique).
+
+\chapter{Itération 3}
+\section{Questions}
+
+\paragraph{7.28.1}
+On peut stoquer une liste de commandes dans un fichier test lu lors d'une entrée utilisateur. On ajoute alors un mot clé "test" dans les mots supportés par le jeu, qui prend comme deuxième argument le nom du fichier script a executer (classe CommandWords). Puis, dans GameEngine, on peut faire une fonction test executée lors de l'entrée du mot clé. Cette dernière peut lire le script ligne par ligne et interpreter ces dernières. Alors, une ligne = une commande.
+\begin{lstlisting}
+    private void test_with_script(Command command)
+    {
+        Path filePath = FileSystems.getDefault().getPath("scripts", 
+        	command.getSecondWord());
+        try (Stream<String> lines = Files.lines( filePath ))
+        {
+        	lines.forEachOrdered(item->interpretCommand(item));
+        }
+        catch (IOException e)
+        {
+        	gui.println(e.toString());
+        }
+    }
+\end{lstlisting}
+\paragraph{7.28.2}
+Nous n'avons pas encore de script permettant de gagner étant donné que pour gagner du temps nous n'avons pas implémenté tout le jeu que nous avons imaginé. De même, nous n'avons pas implémenté tout le monde (seulement le village, voire carte plus haut dans l'itération 1). Nous avons donc seulement fait un script explorant tout le village.
+\begin{lstlisting}
+go north //Marche
+go west //Forge
+back
+go east //Maison abandonnee
+go down //Cave
+back
+back
+go north //Fontaine
+go west //Grange
+go up //Grenier
+back
+go south  //Enclos
+back
+back
+go north  //Pub
+go east //Remise
+back
+back
+go east //Entree
+quit
+\end{lstlisting}
+
+\paragraph{7.29}
+La nouvelle classe player contient la currentRoom, et les informations sur les statistiques du joueur : poids actuel et maximum, points de vie et d'armure, points d'attaque et inventaire. On y retrouver tous les getters et setters pour ces champs, et une fonction eat qui altère ces valeurs lors de l'utilisation d'objets commestibles.
+
+\paragraph{7.30 à 7.31.1}
+Chaque room possède sa propre liste d'objets, a la manière d'un inventaire pour le joueur. Ces listes sont des objets de la classe ItemList et représentées par des ArrayList. Lors de l'utilisation de la commande "pick objet", on vérifie dans un premier temps si la room où se trouve le joueur contient un objet ayant ce nom. Si oui, on verifie que le poids de l'objet permet au joueur de le ramasser, puis il est ajouté a la liste d'objets du joueur et retiré de celle de la room. On fait l'inverse de cette manoeuvre pour la commande "drop objet".
+\begin{lstlisting}
+if(command.hasSecondWord()){
+    Item toPick = player.getCurrentRoom().getItemList()
+    	.hasItem(command.getSecondWord());
+    if(toPick == null){
+        // informe le joueur de l'abscence de cet objet puis retour
+    }
+    if(player.getCurrentWeight() + toPick.getWeight() 
+    	> player.getMaxWeight()){
+        // informe que l'objet est trop lourd puis retour
+    }
+    player.getInventory().addItem(toPick);
+    player.setCurrentWeight(player.getCurrentWeight() + 
+    	toPick.getWeight());
+    player.getCurrentRoom().getItemList().removeItem(toPick);
+    // informe du ramassage de l'objet
+}
+else{
+    // demande un deuxieme argument
+}
+\end{lstlisting}
+
+\paragraph{7.32}
+Le poids maximum est ajouté dans les variables du player. Les objets ne peuvent alors etre ramassés que si la somme du poids actuellement transporté et de celui de l'objet est inférieure ou égale a cette valeur. La vérification est faite dans le moteur de jeu lors de l'utilisation du mot clé pick.
+
+\paragraph{7.33}
+La commande "items" fournis un résumé des objets transportés par le joueur, sous la forme d'une suite de couples nom / poids (plus si besoin).
+\begin{lstlisting}
+if (items.isEmpty()){
+    return "NullPointerExecption: Nothing in the pockets!";
+}
+else {
+    String inventory;
+    StringBuilder sb = new StringBuilder("");
+    for (Item item : items) {
+      sb.append(item.getName());
+      sb.append(" - ");
+      sb.append(item.getWeight());
+      sb.append(" kg\n");
+    }
+    return sb.toString();
+}
+\end{lstlisting}
+
+\paragraph{7.34 \& 7.34.1}
+Le magic cookie est déposé dans la zone de spawn et se comporte comme un objet quelconque. Il a simplment un attribut "eatable" qui permet au joueur de le consommer apres l'avoir ramassé. Quand il est consommé, la fonction eat(item) met a jour les attributs du joueur celon les bonus qu'octroie l'objet commestible. Le moteur se charge de vérifier la présence de l'objet dans l'inventaire du joueur...
+\begin{lstlisting}
+if(command.hasSecondWord()){
+    Item toEat = player.getInventory().hasItem(command.getSecondWord());
+    if(toEat == null){
+        gui.println("Cant eat something you don't have !");
+        return;
+    }
+    gui.println(player.eat(toEat));
+}
+\end{lstlisting}
+Puis la fonction eat de Player prends le relais.
+\begin{lstlisting}
+if(toEat.getEatable() == false){
+    return "That wouldn't be so tastefull...";
+}
+StringBuilder str =  new StringBuilder("");
+   if(toEat.getBuffWeight() > 0){
+       // set le nouveau poids maxi en informe du bonus
+   }
+   if(toEat.getBuffHp() > 0){
+       // set le nouvea nb de PV maxi et informe
+   }
+   if(toEat.getBuffArmor() > 0){
+       // set la valeur d'armure et informe
+   }
+   if(toEat.getBuffAttack() > 0){
+       // set la valeur d'attaque et informe
+   }
+   inventory.removeItem(toEat);   
+   return str.toString();
+}
+\end{lstlisting}
+
+\paragraph{7.35 à 7.35.2}
+La classe CommandWord est simplement un enum de tous les mots connus : go, help, quit, look, eat, back, test, pick, drop, items... La classe CommandWords fait alors le lien entre la chaine de caractères qui correspond et l'enum. GameEngine peut alors simplement tester le type de CommandWord qu'a la commande, et réagis en conséquense.
+\begin{lstlisting}
+/* le enum */
+public enum CommandWord
+{
+    // A value for each command word, plus one for unrecognised
+    GO, QUIT, HELP, LOOK, EAT, BACK, TEST, PICK, DROP, ITEMS, UNKNOWN;
+}
+/* fin enum */
+/* exemple de declaration dans CommandWords */
+validCommands.put("go", CommandWord.GO);
+validCommands.put("look", CommandWord.LOOK);
+/* fin commandwords */
+/* exemple de verification dans GameEngine */
+if(commandWord == HELP){
+    printHelp();
+    return;
+}
+/* puis remplace par un switch */
+switch(commandWord){
+    case HELP:
+        printHelp(); return;
+    case BACK:
+        goBack(command); return;
+    case GO:
+        goRoom(command, false); return;
+    // ...
+/* fin gameEngine */
+
+\end{lstlisting}
+
+\paragraph{7.36}
+Question déjà réalisée plus tôt. Dans game engine, on appelle une fonction de description des objets sur la liste des objets de la room où le joueur se trouve.
+\begin{lstlisting}
+private void look()
+{
+    gui.println(player.getCurrentRoom().getItemList().looking());
+}
+\end{lstlisting}
+Cette fonction parcours la itemList et construit une chaine de caractères contenant les noms et poids de chaque objet.
+\begin{lstlisting}
+public String looking()
+{
+  if (items.isEmpty()){
+    return "Nothing particular in here";
+  }
+  else {
+    String found;
+    StringBuilder sb = new StringBuilder("");
+    for (Item item : items) {
+      sb.append(item.getComment());
+      sb.append(item.getName());
+      sb.append("\n");
+      sb.append(item.getLongDescription());
+    }
+    return sb.toString();
+  }
+}
+\end{lstlisting}
+
+\paragraph{7.37}
+Dans command words, il suffit de changer l'attribution des chaines de caractères aux types de CommandWord celon la variable entrée par l'utilisateur au début. Il faudra quand même ajouter un argument a
+\begin{lstlisting}
+public CommandWords(String language)
+{
+    validCommands = new HashMap<String, CommandWord>();
+    if (language.equals("en")){
+       //English
+       validCommands.put("go", CommandWord.GO);
+	   // ...
+    }
+    else if (language.equals("fr")) {
+        //French
+        validCommands.put("aller", CommandWord.GO);
+    }
+}
+\end{lstlisting}
+A noter que du coup, seules les commandes sont traduites, pas les descriptions et autres elements textuels du jeu. Les directions ne sont pas traduites non plus.
+
+\paragraph{7.38}
+Le message de bienvenue qui dit à l'utilisateur d'entrer la commande d'aide si besoin ne traduit pas le mot clé celon le language. Idem pour le bouton "look" qui n'est pas traduit.
+\begin{lstlisting}
+/* dans printWellcome de GameEngine
+private void printWelcome()
+{
+   CommandWords help = new CommandWords(language);
+   String welcomeMessage = "\n"+
+       "Welcome to Aventhur!\n"+
+       "The Ultimate Adventure Game.\n"+
+       "\n"+
+       "Type '"+ help.commandWordToString(CommandWord.HELP)+
+       // au lieu de "Type 'help'"
+       "' anytime to see commands.\n";
+   gui.println(welcomeMessage);
+   printLocationInfo();
+   gui.showImage(player.getCurrentRoom().getImageName());
+}
+/* dans createGUI de UserInterface */
+lookBtn.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent e){
+        processCommand(cmdWord.commandWordToString(CommandWord.LOOK));
+        // au lieu de processCommand("look");
+    }
+});
+\end{lstlisting}
+
+
+\chapter{Itération 4}
+\section{Questions}
+
+\paragraph{7.42}
+Si le joueur a fait 666 mouvements, et si la partie n'est pas encore dans un état gagnant, un sénario catastrophe se déclenche. Le nombre de mouvements est obtenu par le calcul de la longueur de l'historique. \\
+Dans CommandGo :
+\begin{lstlisting}
+if(player.isMaxMovesReached() && player.getWonState() == false){
+    (...build end of world string...)
+    gui.println(errorMessage);
+    engine.endGame();
+    return;
+}
+\end{lstlisting}
+Dans Player :\\
+\begin{lstlisting}
+public boolean isMaxMovesReached(){
+  return history.size() == 666;
+}
+
+public Boolean getWonState(){
+    return this.won;
+}
+\end{lstlisting}
+
+\paragraph{7.43}
+L'architecture initiale permet dejà naturellement d'avoir des trap door : Lors des setExit() pendant la création des pièces, il suffit de faire une exit vers la pièce piège mais pas d'exit depuis la pièce piège vers l'autre pièce. On a donc une "porte" a sens unique. \\
+Exemple :\\
+Room A, RoomB // avec A au sud de B\\
+A.setexit("north", B)\\
+On peut ainsi aller de A vers B mais pas de B vers A.
+\begin{lstlisting}
+abandonnedHouse.setExit("down", basement);
+\end{lstlisting}
+
+\paragraph{7.44}
+Le beamer est situé dans le marché. Pour représenter son état, nous avons ajouté une variable cooldown à la classe Item. Dans le cas du beamer elle n'est modifiée que par son utilisation (première modification : charge, deuxèime utilisation : tir) mais cela permettera d'avoir des objets avec un temps de rechage qui diminuera a chaque tour par exemple. On ajout aussi dans la classe Player une variable saveRoom qui permet de stoquer la room où a été utilisé le beamer.\\
+Dans commandUse :
+\begin{lstlisting}
+if(getSecondWord().equals("beamer")){
+    if(player.getInventory().hasItem("beamer").getCooldown() == 1){
+         player.setFromBack(false);
+         player.historyAdd(this);
+    }
+    gui.println(player.useBeamer());
+    if(player.getCurrentRoom().getImageName() != null) {
+        gui.showImage(player.getCurrentRoom().getImageName());
+    }
+}
+\end{lstlisting}
+Le premier if injecte l'utilisation du beamer dans l'historique si son utiisation correspond au tir. Cela permet d'éviter les soucis liés à l'utilisation de la commande back après une téléportation. \\
+Dans Player :
+\begin{lstlisting}
+public String useBeamer(){
+    Item beamer = inventory.hasItem("beamer");
+    String retStr = new String("");
+    if(beamer != null){
+        // case beamer isnt charged
+        if(beamer.getCooldown() == 0){
+            beamer.setCooldown(1);
+            saveRoom = currentRoom;
+            retStr = "The beamer start emiting a dim blue light. It is now linked to this room.\n";
+            return retStr;
+        }
+        // case beamer is charged
+        else {
+            beamer.setCooldown(0);
+            currentRoom = saveRoom;
+            (string avec utilisation du beamer + description de la nouvelle piece)
+            return retStr;
+        }
+    }else{
+        retStr = "Can't use the beamer if I dont have it !\n";
+        return retStr;
+    }
+}
+\end{lstlisting}
+Si le cooldown du beamer est a 0, c'est qu'il n'est pas encore chargé. On le set à 1 et on sauvegarde la room actuelle. Sinon, c'est qu'il est déja chargé et qu'on veut se téléporter. On set donc la currentRoom sur la room savegardée puis on affiche sa description. Le cooldown revient à 0.
+
+\paragraph{7.45}
+Création de la classe Door :
+\begin{lstlisting}
+private Boolean isLocked;
+private Item unlockItem;
+private String description;
+
+public boolean canPass(ItemList inventory){
+    if (!isLocked) return true;
+    if (inventory.hasItem(unlockItem.getName()) == null) return false;
+    else isLocked = false;
+    return true;
+}
+\end{lstlisting}
+Dans Room :
+\begin{lstlisting}
+public boolean canPass(String direction, ItemList inventory)
+{
+    Door door = doors.get(direction);
+    if (door == null) return true;
+    if (door.canPass(inventory)) return true;
+    return false;
+}
+
+public Door getDoor(String direction)
+{
+    return doors.get(direction);
+}
+
+public void setDoor(String direction, Door door)
+{
+    doors.put(direction, door);
+}
+\end{lstlisting}
+Dans CommandGo - methode execute() :
+\begin{lstlisting}
+if (!player.getCurrentRoom().canPass(direction, player.getInventory())) {
+    gui.println(player.getCurrentRoom().getDoor(direction).getDescription());
+}
+\end{lstlisting}
+Si le joueur ne peut pas passer la porte avec son inventaire actuel, afficher la description de la porte, c'est à dire le message de refus de passage.
+
+\paragraph{7.46}
+Classe RoomRandomizer :
+\begin{lstlisting}
+public static int getRoom(int nbRoom)
+{
+    Random rand = new Random(System.currentTimeMillis());
+    return rand.nextInt(nbRoom);
+}
+\end{lstlisting}
+Recupère un numéro de room aléatoire.\\
+Dans TransporterRoom :
+\begin{lstlisting}
+public void setRoomMap(HashMap <String, Room> roomMap)
+{
+    this.roomMap = roomMap;
+}
+
+public Room getExit(String direction)
+{
+    int index = RoomRandomizer.getRoom(roomMap.size());
+    return roomMap.get(roomMap.keySet().toArray()[index]);
+}
+\end{lstlisting}
+
+Récupère une Room aléatoire parmis les Room de la carte. getExit surcharge la méthode de la classe Room et, au lieu de renvoyer la room qui correspond a la direction choisie parmis les exit de la room courante, renvoie une room aléatoire parmis les room qui figurent dans la roomMap.\\
+Dans GameEngine (avec les déclarations de Room) :
+\begin{lstlisting}
+transporter = new TransporterRoom("in a very strange room.\nWhat's that big blue thing ?\nYou can't resist and need to jump in it", "pictures/village/transporterRoom.jpg");
+transporter.setRoomMap(roomMap);
+(...)
+forge.setExit("west", transporter);
+\end{lstlisting}
+
+\paragraph{7.47}
+Toutes les commandes sont séparées dans des classes uniques et séparées. GameEngine est débarassé du switch au profit d'un seul appel à la méthode execute. Celon la commande cette méthode abstraite a un comportement différent.\\
+Dans GameEngine, méthode interpretCommand :
+\begin{lstlisting}
+public void interpretCommand(String commandLine)
+{
+    Command command = parser.getCommand(commandLine);
+    if(command == null) {
+        gui.println("I don't know what you mean...");
+    } else {
+        if(warned && player.getCurrentRoom() == basement){
+            if(!commandLine.equalsIgnoreCase(cmdWords.commandWordToString(CommandWord.USE)+ " beamer") ||
+                player.getInventory().hasItem("beamer") == null ||
+                player.getInventory().hasItem("beamer").getCooldown() != 1){
+                chickenDeath();
+                return;
+            }
+        }
+        if (!commandLine.startsWith(cmdWords.commandWordToString(CommandWord.SAVE))
+            && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOAD))
+            && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.HELP))
+            && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.ITEMS))
+            && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.TEST))
+            && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOOK))) {
+            history.add(commandLine);
+        }
+        command.execute(player, this, gui);
+    }
+}
+\end{lstlisting}
+Hors traitement spécial, simplement executer la commande. Le traitement spécifique pour le piège et chickenDeath() est effectué ici bien que cela aille a l'encontre des moficiations apportées mais il est nécessaire que la commande ne soit pas executée. On ajoute la commande a l'historique de sauvegarde si la commande est une commande ayant de l'incidence sur l'état du jeu.
+
+\paragraph{7.47.1}
+\begin{itemize}
+\item 3 Packages :
+\begin{itemize}
+\item Command : regroupe tous les fichiers qui décrivent les comportements des commandes et la classe abstraite Command.
+\item Game Entities : regroupe les entités du jeu avec lesquelles le joueur interagis : Item \& Itemlist, Door, Room, Player...
+\item Game Logic  : regroupe le moteur du jeu, le Parser et le GUI.
+\end{itemize}
+\end{itemize}
+
+\paragraph{7.53}
+Ajout d'une méthode main dans la classe Game :
+\begin{lstlisting}
+public static void main(String[] args) {
+  System.out.println("Choose a language\n\t(1) English\n\t(2) Francais\n");
+  Scanner scan = new Scanner(System.in);
+  int number;
+  while (true){
+    System.out.print("Enter the Number: ");
+    if (scan.hasNextInt()) {
+      number = scan.nextInt() ;
+      if (number > 0 && number < 3) {
+        break;
+      }
+      else {
+        scan.nextLine();
+        System.out.println("Input has to be a valid number!\n");
+      }
+    }
+    else {
+      scan.nextLine();
+      System.out.println("Input has to be a number!\n");
+    }
+  }
+  if (number == 1) {
+    new Game("en");
+  }
+  else{
+    new Game("fr");
+  }
+}
+\end{lstlisting}
+On demande un nombre correspondant à un des languages supportés à l'utilisateur, puis on démarre le jeu avec la langue choisie si l'entrée utilisateur est valide, et on redemande une entrée sinon.
+
+\paragraph{7.54}
+Le jeu peut etre lancé sans l'aide de BlueJ avec les deux commandes suivantes :
+\begin{itemize}
+\item javac Game.java pkg\_command/*.java pkg\_game\_logic/*.java pkg\_game\_entities/*.java
+\item java Game
+\end{itemize}
+
+\paragraph{7.58}
+Pour fabriquer le .jar du projet :
+\begin{itemize}
+\item jar cfm aventhür.jar MANIFEST Game.class pkg\_command/*.class pkg\_game\_logic/*.class pkg\_game\_entities/*.class pictures/* scripts/*
+\end{itemize}
+Puis l'éxécuter :
+\begin{itemize}
+\item java -jar aventhür.jar
+\end{itemize}
+
+\paragraph{7.59}
+Nous avons choisi d'utiliser la deuxième méthode qui consiste à enregistrer toutes les commandes entrées ayant un impact sur le jeu dans un historique au moment de leur execution. Dans GameEngine, méthode interpretCommand, une fois la commande parsée et valide : 
+\begin{lstlisting}
+if (!commandLine.startsWith(cmdWords.commandWordToString(CommandWord.SAVE))
+    && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOAD))
+    && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.HELP))
+    && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.ITEMS))
+    && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.TEST))
+    && !commandLine.startsWith(cmdWords.commandWordToString(CommandWord.LOOK))) {
+        history.add(commandLine);
+}
+command.execute(player, this, gui);
+\end{lstlisting}
+A l'exeption de SAVE, LOAD, HELP, ITEMS, TEST et LOOK qui sont des commandes neutres (pas d'incidence sur l'état du jeu, ses objets...), la commande est ajoutée à un historique.\\
+On ajoute également un getter pour cet historique.\\
+Ensuite, dans CommandSave :
+\begin{lstlisting}
+public void execute(Player player, GameEngine engine, UserInterface gui)
+{
+    if (hasSecondWord()){
+        try {
+            FileWriter fw = new FileWriter("saves/" + getSecondWord(), true);
+            PrintWriter out = new PrintWriter(fw);
+            for (String cmd : engine.getHistory()) {
+                out.println(cmd);
+            }
+            out.close();
+            gui.println("Game Saved!\nLoad it with '"+ words.commandWordToString(CommandWord.LOAD) + " "+ getSecondWord() +"' after any startup");
+        }
+        catch (IOException e){
+            gui.println("Error!");
+        }
+    }
+    else {
+        gui.println("Add name for your save");
+    }
+}
+\end{lstlisting}
+Lors de l'éxécution de la commande save, on créé un nouveau fichier au nom qui a été entré en deuxième argument de la commande. Chaque commande de l'historique y est écrite, puis on avertis l'utilisateur de la manière dont il peut restaurer sa session.\\
+Enfin, pour charger une sauvegarde :
+\begin{lstlisting}
+public void execute(Player player, GameEngine engine, UserInterface gui)
+{
+    if (engine.getHistory().size() != 0) {
+        gui.println("You can only load at startup!");
+        return;
+    }
+    if (!hasSecondWord()) {
+        gui.println("Add save's name!");
+        return;
+    }
+    Path filePath = FileSystems.getDefault().getPath("saves", getSecondWord());
+    try (Stream<String> lines = Files.lines(filePath))
+    {
+        lines.forEachOrdered(item->engine.interpretCommand(item));
+    }
+    catch (IOException e)
+    {
+        gui.println(e.toString());
+    }
+}
+\end{lstlisting}
+On ne peut charger une sauvegarde que si aucune action n'a été effectuée pour eviter les conflits. On vérifie ensuite qu'un nom de sauvegarde a été renseigné par l'utilisateur, puis ce fichier est ouvert, et chaque ligne correspondant à une commande est éxécutée. On recréé donc la session telle que décrite par la suite d'actions du fichier.
+\end{document}
